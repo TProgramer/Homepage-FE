@@ -2,16 +2,17 @@ import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const MODALBOX_ANIMATION = keyframes`
-  0%{
-    background-color: rgba(0,0,0,0);
-  }
-  100%{
-    background-color: rgba(0,0,0,0.2);
-  }
-`
+    0%{
+      opacity: 0;
+    }
+    100%{
+      background-color: rgba(0,0,0,0.25);
+    }
+  `
+
 export const ModalBox = styled('div')`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,27 +22,27 @@ export const ModalBox = styled('div')`
   bottom: 0;
   left: 0;
   right: 0;
-  animation: ${MODALBOX_ANIMATION} 0.3s linear forwards;
-`
+  animation: ${MODALBOX_ANIMATION} 0.2s linear forwards;
+  `
 const MODAL_ANIMATION = keyframes`
-  0%{
-    transform: translateY(1000px);
-  }
-  100%{
-    transform: translateY(0);
-  }
-`
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+  `
 export const Modal = styled('div')`
-  width: 500px;
+  width: 470px;
   height: 650px;
   display: grid;
   grid-template-rows: auto auto;
   background-color: whitesmoke;
   border-radius: 20px;
-  animation: ${MODAL_ANIMATION} 0.3s linear forwards;
+  animation: ${MODAL_ANIMATION} 0.2s linear forwards;
 `
 export const PictureBox = styled('div')`
-  width: 500px;
+  width: 470px;
   display: flex;
   justify-content: center;
   align-items: center;

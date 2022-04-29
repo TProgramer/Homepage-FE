@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-export const Wrapper2 = styled('div')`
+export const Wrapper = styled('div')`
   width: 100vw;
   min-width: 550px;
   min-height: 100vh;
@@ -7,7 +7,7 @@ export const Wrapper2 = styled('div')`
   display: flex;
   justify-content: center;
   align-items: center;
-`//나중에 _app.tsx 기본 레이아웃 요구사항
+`//아직 레이아웃이 적용되지 않아 임시로 만듬
 export const Masonry = styled('div')`
   width: 800px;
   padding: 10px;
@@ -15,7 +15,7 @@ export const Masonry = styled('div')`
   grid-template-rows: repeat(3,210px);
   grid-template-columns: repeat(3,1fr);
   grid-auto-rows: 100px;
-  @media(max-width: 850px) {
+  @media(max-width: 550px) { //반응형 픽셀기준 550px으로 변경했습니다.
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,7 +48,7 @@ export const Block = styled('div')`
   &:nth-of-type(7) {
     grid-column: span 2;
   }
-  @media(max-width:850px) {
+  @media(max-width:550px) { //반응형 픽셀기준 550px으로 변경했습니다.
     width: 400px;
     height: 200px;
     display: flex;
