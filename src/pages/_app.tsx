@@ -4,6 +4,7 @@ import reset from "../styles/Global";
 import { Global, css } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";//MUI
 
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>

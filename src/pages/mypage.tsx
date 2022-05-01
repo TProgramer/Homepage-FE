@@ -1,4 +1,4 @@
-import MyProfile from "../components/myPage/Header";
+import MyProfile from "../components/myPage/Pofile";
 import { Wrapper } from "../styles/MyPage/myPage";
 const MyPage = () => {
   return (

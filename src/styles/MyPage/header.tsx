@@ -1,15 +1,17 @@
-import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-export const ProfileBox = styled('div')`
+import { SportsRugbySharp } from "@mui/icons-material";
+export const ProfileBox = styled('div') <{ onoff: boolean }>`
   width: 850px;
-  height: 480px;
+  height: ${props => !props.onoff ? 320 : 350};
   margin-top: 10px;
-  padding: 20px;
+  padding: 15px;
   display: flex;
+  justify-content: space-around;
   box-shadow: rgba(0, 0, 0, 0.13) 0px 5px 25px;
   border-radius: 10px;
   @media (max-width:850px) {
     width: 480px;
+    height: 660px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -21,15 +23,7 @@ export const Profile = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 20px 0 0;
-`
-const TEXT_ANIMATION = keyframes`
-  0%, 100%{
-    background-position: 200% 0%;
-  }
-  50%{
-    background-position: 0% 200%;
-  }
+  margin: 0 20px 0 10px;
 `
 export const ProfileImg_unset = styled('div')`
   width: 260px;
@@ -42,22 +36,11 @@ export const ProfileImg_unset = styled('div')`
   border-radius: 50%;
   font-weight: 600;
   font-size: 15px;
-  line-height:65px;
-  letter-spacing: 10px;
-  text-align: center;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: 400%;
-  animation: ${TEXT_ANIMATION} 5s ease infinite;
-  background-image: linear-gradient( 68.7deg,  rgba(29,173,235,1) 13.2%, rgba(137,149,250,1) 29.8%, rgba(229,109,212,1) 48.9%, rgba(255,68,128,1) 68.2%, rgba(255,94,0,1) 86.4% );
 `
 export const ProfileImg = styled('img')`
   width: 260px;
   height: 260px;
   margin: 0 0 7px 0;
-  background-color: rgba(0,0,0,0.2);
   border-radius: 50%;
   `
 export const TypeText = styled('span')`
@@ -66,27 +49,101 @@ export const TypeText = styled('span')`
   color: #9c88ff; 
   font-weight: 600;
 `
-export const DataBox = styled('div')`
-  width: 440px;
-  height: auto;
+export const Information = styled('div')`
+  width: 550px;
+  height: 100%;
+  margin: 0 10px 0 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  @media (max-width: 850px) {
-    align-items: center;
-    margin: 0 0 10px 0;
+  @media (max-width:850px) {
+  width: 480px;
+  }
+`
+export const ProfileHeader = styled('div')`
+  width: 550px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 15px 0;
+    @media (max-width:850px) {
+    width: 480px;
+    justify-content: space-around;
   }
 `
 export const NameBox = styled('div')`
   width: auto;
 `
-export const NickName = styled('span')`
+export const Name = styled('span')`
   color: #9c88ff;
   font-size: 28px;
   font-weight: 600;
 `
-export const Name = styled('span')`
+export const Info = styled('span')`
   opacity: 0.4;
-  font-size: 18px;
+  font-size: 15px;
   margin: 0 0 0 3px;
+`
+export const DefaultInfo = styled('form')`
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  @media (max-width:850px) {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 0 15px;
+    width: 95%;
+  }
+`
+export const ContactBox = styled('div')`
+  width: 100%;
+  @media (max-width: 850px) {
+    margin: 0 0 20px 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  `
+export const Bio = styled('p') <{ onoff: boolean }>`
+  width: 65%;
+  min-height: 30px;
+  color: rgba(0,0,0,0.6);
+  margin: 0 0 15px 0;
+  padding: 0 0 10px 0;
+`
+export const Contact = styled('div')`
+color: rgba(0, 0, 0, 0.3);
+width: auto;
+margin: 0 0 7px 0;
+display: flex;
+align-items: center;
+`
+export const BioInput = styled('input')`
+display: block;
+word-wrap: break-word;
+width: 270px;
+height: 120px;
+border: 2px solid rgba(0, 0, 0, 0.3);
+border-radius: 20px;
+transition: all 0.1s linear;
+color: rgba(0, 0, 0, 0.7);
+  &:focus{
+  outline: none;
+  border: 2px solid #9C88FF;
+}
+`
+export const Input = styled('input')`
+width: 140px;
+height: 25px;
+border: none;
+border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+transition: all 0.1s linear;
+color: rgba(0, 0, 0, 0.7);
+  &:focus{
+  outline: none;
+  border-bottom: 2px solid #9C88FF;
+  width: 150px;
+}
 `
