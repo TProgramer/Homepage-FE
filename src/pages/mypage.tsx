@@ -1,9 +1,11 @@
 import MyProfile from "../components/myPage/Pofile";
+import ActivityLog from '../components/myPage/ActivityLog';
 import { Wrapper } from "../styles/MyPage/myPage";
 const MyPage = () => {
   return (
     <Wrapper>
       <MyProfile />
+      <ActivityLog />
     </Wrapper>
   )
 }

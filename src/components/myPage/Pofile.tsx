@@ -56,79 +56,83 @@ const MyProfile = () => {
     setTeam(e.target.value);
   };
   return (
-    <ProfileBox onoff={onoff}>
-      <Profile>
-        {
-          personalData[0].profileImg !== ''
-            ? <ProfileImg src={personalData[0].profileImg} />
-            : <ProfileImg_unset>Add your Avatar</ProfileImg_unset>
-        }
-        <TypeText>{`<\ ${personalData[0]?.type} / >`}</TypeText>
-      </Profile>
-      <Information>
-        <ProfileHeader>
-          <NameBox>
-            <Name>{personalData[0].name}</Name>
-            <Info>{`${personalData[0].major} ${personalData[0].grade}학년`}</Info>
-          </NameBox>
-        </ProfileHeader>
-        <ContactBox onSubmit={onSubmit}>
-          <Bio>
-            {
-              onoff
-                ? (
-                  <BioInput type='textarea' onChange={changeBio} value={bio} />
-                )
-                : bio
-            }
-          </Bio>
-          <Contact><EmailOutlinedIcon sx={iconStyle} />
-            {
-              onoff
-                ? (
-                  <Input type='email' onChange={changeMail} value={mail} />
-                )
-                : mail
-            }
-          </Contact>
-          <Contact><CallOutlinedIcon sx={iconStyle} />
-            {
-              onoff
-                ? (
-                  <Input type='text' onChange={changeNumber} value={number} />
-                )
-                : number
-            }
-          </Contact>
-          <Contact><InsertLinkOutlinedIcon sx={iconStyle} />
-            {
-              onoff
-                ? (
-                  <Input type='url' onChange={changeLink} value={link} />
-                )
-                : <a href={link} target='_blank'>{link}</a>
-            }
-          </Contact>
-          <Contact><GroupsOutlinedIcon sx={iconStyle} />
-            {
-              onoff
-                ? (
-                  <Input type='text' onChange={changeTeam} value={team} />
-                )
-                : team
-            }
-          </Contact>
-          <Button
-            onClick={onClick}
-            type={!onoff ? 'button' : 'submit'}
-          >
-            {
-              !onoff ? <CreateIcon /> : <CheckIcon />
-            }
-          </Button>
-        </ContactBox>
-      </Information>
-    </ProfileBox >
+    <>
+      <ProfileBox onoff={onoff}>
+        <Profile>
+          {
+            onoff
+              ? <ProfileImg_unset><AddBoxIcon sx={{ fontSize: 35, color: 'black', opacity: 0.3 }} /></ProfileImg_unset>
+              : (personalData[0].profileImg !== ''
+                ? <ProfileImg src={personalData[0].profileImg} />
+                : <ProfileImg_unset>Add your Avatar</ProfileImg_unset>)
+          }
+          <TypeText>{`<\ ${personalData[0]?.type} / >`}</TypeText>
+        </Profile>
+        <Information>
+          <ProfileHeader>
+            <NameBox>
+              <Name>{personalData[0].name}</Name>
+              <Info>{`${personalData[0].major} ${personalData[0].grade}학년`}</Info>
+            </NameBox>
+          </ProfileHeader>
+          <ContactBox onSubmit={onSubmit}>
+            <Bio>
+              {
+                onoff
+                  ? (
+                    <BioInput type='textarea' onChange={changeBio} value={bio} />
+                  )
+                  : bio
+              }
+            </Bio>
+            <Contact><EmailOutlinedIcon sx={iconStyle} />
+              {
+                onoff
+                  ? (
+                    <Input type='email' onChange={changeMail} value={mail} />
+                  )
+                  : mail
+              }
+            </Contact>
+            <Contact><CallOutlinedIcon sx={iconStyle} />
+              {
+                onoff
+                  ? (
+                    <Input type='text' onChange={changeNumber} value={number} />
+                  )
+                  : number
+              }
+            </Contact>
+            <Contact><InsertLinkOutlinedIcon sx={iconStyle} />
+              {
+                onoff
+                  ? (
+                    <Input type='url' onChange={changeLink} value={link} />
+                  )
+                  : <a href={link} target='_blank'>{link}</a>
+              }
+            </Contact>
+            <Contact><GroupsOutlinedIcon sx={iconStyle} />
+              {
+                onoff
+                  ? (
+                    <Input type='text' onChange={changeTeam} value={team} />
+                  )
+                  : team
+              }
+            </Contact>
+            <Button
+              onClick={onClick}
+              type={!onoff ? 'button' : 'submit'}
+            >
+              {
+                !onoff ? <CreateIcon /> : <CheckIcon />
+              }
+            </Button>
+          </ContactBox>
+        </Information>
+      </ProfileBox >
+    </>
   )
 }
 export default MyProfile;
