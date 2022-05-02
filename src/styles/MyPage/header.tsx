@@ -1,17 +1,16 @@
 import styled from "@emotion/styled";
-import { SportsRugbySharp } from "@mui/icons-material";
 export const ProfileBox = styled('div') <{ onoff: boolean }>`
   width: 850px;
   height: ${props => !props.onoff ? 320 : 350};
-  margin-top: 10px;
   padding: 15px;
   display: flex;
   justify-content: space-around;
   box-shadow: rgba(0, 0, 0, 0.13) 0px 5px 25px;
   border-radius: 10px;
+  position: relative;
   @media (max-width:850px) {
     width: 480px;
-    height: 660px;
+    height: 680px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -58,6 +57,7 @@ export const Information = styled('div')`
   align-items: flex-start;
   @media (max-width:850px) {
   width: 480px;
+  align-items: center;
   }
 `
 export const ProfileHeader = styled('div')`
@@ -85,7 +85,7 @@ export const Info = styled('span')`
   font-size: 15px;
   margin: 0 0 0 3px;
 `
-export const DefaultInfo = styled('form')`
+export const DefaultInfo = styled('div')`
   width: 100%;
   height: auto;
   display: flex;
@@ -98,7 +98,7 @@ export const DefaultInfo = styled('form')`
     width: 95%;
   }
 `
-export const ContactBox = styled('div')`
+export const ContactBox = styled('form')`
   width: 100%;
   @media (max-width: 850px) {
     margin: 0 0 20px 200px;
@@ -106,7 +106,7 @@ export const ContactBox = styled('div')`
     flex-direction: column;
   }
   `
-export const Bio = styled('p') <{ onoff: boolean }>`
+export const Bio = styled('p')`
   width: 65%;
   min-height: 30px;
   color: rgba(0,0,0,0.6);
@@ -135,7 +135,7 @@ color: rgba(0, 0, 0, 0.7);
 }
 `
 export const Input = styled('input')`
-width: 140px;
+width: 240px;
 height: 25px;
 border: none;
 border-bottom: 2px solid rgba(0, 0, 0, 0.3);
@@ -144,6 +144,23 @@ color: rgba(0, 0, 0, 0.7);
   &:focus{
   outline: none;
   border-bottom: 2px solid #9C88FF;
-  width: 150px;
 }
+`
+export const Button = styled('button')`
+  width: 80px;
+  height: 40px;
+  background-color: #9c88ff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  position: absolute;
+  top: 86.5%;
+  left: 90%;
+  &:hover {
+    background-color: #8c7ae6;
+  }
+  @media (max-width: 850px) {
+    top: 93%;
+    left: 82%;
+  }
 `

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 import CheckIcon from '@mui/icons-material/Check';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -7,76 +6,54 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
-import { ProfileBox, Profile, ProfileImg, TypeText, Information, ProfileHeader, Name, Info, NameBox, ProfileImg_unset, DefaultInfo, Bio, Contact, Input, BioInput, ContactBox } from '../../styles/MyPage/header';
+import { ProfileBox, Profile, ProfileImg, TypeText, Information, ProfileHeader, Name, Info, NameBox, ProfileImg_unset, DefaultInfo, Bio, Contact, Input, BioInput, ContactBox, Button } from '../../styles/MyPage/header';
 
 interface IPersonalType {
-  id: number;
-  name: string;
-  major: string;
+  readonly id: number;
+  readonly name: string;
+  readonly major: string;
+  type: 'FrontEnd' | 'BackEnd' | 'DevOps'
   grade: number;
-  type: string;
   profileImg: string;
-  team: string;
-  bio: string;
-  contact: {
-    email: string;
-    number: string;
-    link: string;
-  }
-  activity: string[];
 }
 const personalData: IPersonalType[] = [
   {
     id: 0,
     name: '박인재',
     major: '건축공학과',
+    type: 'FrontEnd',
     grade: 2,
-    type: 'Front-End',//Front-End, Back-End, DevOps, etc
-    profileImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdkVemYyTTjjwW8ax1aJ-kHvwR6aK1VTPKRSbvlnIlMs340p0iFzcs_u878365DmbZvI&usqp=CAU',
-    team: 'NL Homepage-FE Team',
-    bio: 'This is Bio Container\nThis is Bio Container\nThis is Bio Container\nThis is Bio Container\nThis is Bio Container',
-    contact: {
-      email: 'qkrdlswo98@gmail.com',
-      number: '010-3393-9410',
-      link: 'https://wakatime.com/dashboard'
-    },
-    activity: []
+    profileImg: '',//https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdkVemYyTTjjwW8ax1aJ-kHvwR6aK1VTPKRSbvlnIlMs340p0iFzcs_u878365DmbZvI&usqp=CAU
   },
 ]
-
+const iconStyle: { fontSize: number; marginRight: number; } = { fontSize: 20, marginRight: 1 };
 const MyProfile = () => {
   const [onoff, setOnoff] = useState<boolean>(false);
   const onClick = () => {
     setOnoff(!onoff);
   };
-  const onSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // 왜 작동안하는지 알아보고 해결하기
-    setOnoff(!onoff);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   }
-  const [bio, setBio] = useState<string>();
-  const [mail, setMail] = useState<string>();
-  const [number, setNumber] = useState<string>();
-  const [link, setLink] = useState<string>();
-  const [team, setTeam] = useState<string>();
-  const changeBio = (e: React.FormEvent<HTMLInputElement>) => {
-    setBio(e.currentTarget.value);
-    personalData[0].bio = bio; // 타입문제 해결하기
+  const [bio, setBio] = useState<string>('This is Bio Container\nThis is Bio Container\nThis is Bio Container\nThis is Bio Container\nThis is Bio Container');
+  const [mail, setMail] = useState<string>('qkrdlswo98@gmail.com');
+  const [number, setNumber] = useState<string>('010-3393-9410');
+  const [link, setLink] = useState<string>('https://wakatime.com/dashboard');
+  const [team, setTeam] = useState<string>('NL Homepage-FE Team');
+  const changeBio = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBio(e.target.value);
   };
   const changeMail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMail(e.currentTarget.value);
-    personalData[0].contact.email = mail; // 타입문제 해결하기
+    setMail(e.target.value);
   };
   const changeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNumber(e.currentTarget.value);
-    personalData[0].contact.number = number; // 타입문제 해결하기
+    setNumber(e.target.value);
   };
   const changeLink = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLink(e.currentTarget.value);
-    personalData[0].contact.link = link; // 타입문제 해결하기
+    setLink(e.target.value);
   };
   const changeTeam = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTeam(e.currentTarget.value);
-    personalData[0].team = team; // 타입문제 해결하기
+    setTeam(e.target.value);
   };
   return (
     <ProfileBox onoff={onoff}>
@@ -95,71 +72,61 @@ const MyProfile = () => {
             <Info>{`${personalData[0].major} ${personalData[0].grade}학년`}</Info>
           </NameBox>
         </ProfileHeader>
-        <DefaultInfo>
-          <ContactBox>
-            <Bio onoff={onoff}>
-              {
-                onoff
-                  ? (
-                    <BioInput type='textarea' required onChange={changeBio} placeholder={personalData[0].bio} />
-                  )
-                  : personalData[0].bio
-              }
-            </Bio>
-            <Contact><EmailOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
-              {
-                onoff
-                  ? (
-                    <Input type='email' required onChange={changeMail} placeholder={personalData[0].contact.email} />
-                  )
-                  : personalData[0].contact.email
-              }
-            </Contact>
-            <Contact><CallOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
-              {
-                onoff
-                  ? (
-                    <Input type='text' required onChange={changeNumber} placeholder={personalData[0].contact.number} />
-                  )
-                  : personalData[0].contact.number
-              }
-            </Contact>
-            <Contact><InsertLinkOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
-              {
-                onoff
-                  ? (
-                    <Input type='url' onChange={changeLink} placeholder={personalData[0].contact.link} />
-                  )
-                  : <a href={personalData[0].contact.link} target='_blank'>{personalData[0].contact.link}</a>
-              }
-            </Contact>
-            <Contact><GroupsOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
-              {
-                onoff
-                  ? (
-                    <Input type='text' onChange={changeTeam} placeholder={personalData[0].team} />
-                  )
-                  : personalData[0].team
-              }
-            </Contact>
-          </ContactBox>
+        <ContactBox onSubmit={onSubmit}>
+          <Bio>
+            {
+              onoff
+                ? (
+                  <BioInput type='textarea' onChange={changeBio} value={bio} />
+                )
+                : bio
+            }
+          </Bio>
+          <Contact><EmailOutlinedIcon sx={iconStyle} />
+            {
+              onoff
+                ? (
+                  <Input type='email' onChange={changeMail} value={mail} />
+                )
+                : mail
+            }
+          </Contact>
+          <Contact><CallOutlinedIcon sx={iconStyle} />
+            {
+              onoff
+                ? (
+                  <Input type='text' onChange={changeNumber} value={number} />
+                )
+                : number
+            }
+          </Contact>
+          <Contact><InsertLinkOutlinedIcon sx={iconStyle} />
+            {
+              onoff
+                ? (
+                  <Input type='url' onChange={changeLink} value={link} />
+                )
+                : <a href={link} target='_blank'>{link}</a>
+            }
+          </Contact>
+          <Contact><GroupsOutlinedIcon sx={iconStyle} />
+            {
+              onoff
+                ? (
+                  <Input type='text' onChange={changeTeam} value={team} />
+                )
+                : team
+            }
+          </Contact>
           <Button
             onClick={onClick}
-            onSubmit={onSubmit}
-            type='submit'
-            sx={{
-              width: 80,
-              height: 40,
-              backgroundColor: '#9c88ff',
-              ":hover": {
-                backgroundColor: '#8c7ae6'
-              }
-            }} variant="contained">
+            type={!onoff ? 'button' : 'submit'}
+          >
             {
               !onoff ? <CreateIcon /> : <CheckIcon />
             }
           </Button>
-        </DefaultInfo>
+        </ContactBox>
       </Information>
     </ProfileBox >
   )
