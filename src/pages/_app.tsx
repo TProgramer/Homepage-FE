@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import reset from "../styles/Global";
 import { Global, css } from "@emotion/react";
-import CssBaseline from "@mui/material/CssBaseline";//MUI
+import CssBaseline from "@mui/material/CssBaseline";
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Global styles={css`
         ${reset}
       `} />
-      <CssBaseline />{/*MUI사용을 위해 추가했습니다*/}
+      <CssBaseline />
       <Component {...pageProps} />
     </>
   )

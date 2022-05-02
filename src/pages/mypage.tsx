@@ -1,4 +1,4 @@
-import MyProfile from "../components/myPage/Pofile";
+import MyProfile from "../components/myPage/Profile";
 import ActivityLog from '../components/myPage/ActivityLog';
 import { Wrapper } from "../styles/MyPage/myPage";
 const MyPage = () => {
