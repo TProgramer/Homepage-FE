@@ -1,5 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
-import { CloseBtn, Modal, ModalBox, Picture, DescriptionBox, DescTitle, Description, PictureBox } from '../../styles/Activity/activity_modal';
+import {
+  CloseBtn,
+  Modal,
+  ModalBox,
+  Picture,
+  DescriptionBox,
+  DescTitle,
+  Description,
+  PictureBox
+} from '../../styles/activity/activityModal';
 
 interface IModalProps {
   modal: boolean;

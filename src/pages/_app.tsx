@@ -1,8 +1,9 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import Link from "next/link";
 import reset from "../styles/Global";
 import { Global, css } from "@emotion/react";
+import CssBaseline from "@mui/material/CssBaseline";
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Global styles={css`
         ${reset}
       `} />
+      <CssBaseline />
       <Component {...pageProps} />
     </>
   )

@@ -1,11 +1,11 @@
-import { Wrapper2 } from '../styles/Activity/activity';
+import { Wrapper } from '../styles/activity/activity';
 import MasonryBox from '../components/activity/Masonry';
 
 const Activity = () => {
   return (
-    <Wrapper2>
+    <Wrapper>
       <MasonryBox />
-    </Wrapper2>
+    </Wrapper>
   )
 }
 
