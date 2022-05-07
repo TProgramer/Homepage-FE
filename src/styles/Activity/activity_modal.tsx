@@ -1,6 +1,6 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-
+const MODAL_SIZE = '450px';
 const MODALBOX_ANIMATION = keyframes`
     0%{
       opacity: 0;
@@ -33,7 +33,7 @@ const MODAL_ANIMATION = keyframes`
     }
   `
 export const Modal = styled('div')`
-  width: 470px;
+  width: ${MODAL_SIZE};
   height: 650px;
   display: grid;
   grid-template-rows: auto auto;
@@ -42,7 +42,7 @@ export const Modal = styled('div')`
   animation: ${MODAL_ANIMATION} 0.2s linear forwards;
 `
 export const PictureBox = styled('div')`
-  width: 470px;
+  width: ${MODAL_SIZE};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,12 +56,11 @@ export const Picture = styled('img')`
   top: 0;
 `
 export const DescriptionBox = styled('div')`
-width: 100%;
-width: auto;
-display: flex;
-flex-direction: column;
-/* border-top: 1px solid rgba(0,0,0,0.3); */
-position: relative;
+  width: 100%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 `
 export const DescTitle = styled('span')`
   display: block;
@@ -73,7 +72,7 @@ export const Description = styled('div')`
   height: 100%;
   padding: 0 6px 6px 6px;
   font-size: 15px;
-  color: rgba(0,0,0,0.4);//임의색상
+  color: rgba(0,0,0,0.4);
 `
 export const CloseBtn = styled('button')`
   position: absolute;

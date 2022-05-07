@@ -6,7 +6,24 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
-import { ProfileBox, Profile, ProfileImg, TypeText, Information, ProfileHeader, Name, Info, NameBox, ProfileImg_unset, DefaultInfo, Bio, Contact, Input, BioInput, ContactBox, Button } from '../../styles/MyPage/header';
+import {
+  ProfileBox,
+  Profile,
+  ProfileImg,
+  TypeText,
+  Information,
+  ProfileHeader,
+  Name,
+  Info,
+  NameBox,
+  ProfileImg_unset,
+  Bio,
+  Contact,
+  Input,
+  BioInput,
+  ContactBox,
+  Button
+} from '../../styles/MyPage/header';
 
 interface IPersonalType {
   readonly id: number;
@@ -61,7 +78,7 @@ const MyProfile = () => {
         <Profile>
           {
             onoff
-              ? <ProfileImg_unset><AddBoxIcon sx={{ fontSize: 35, color: 'black', opacity: 0.3 }} /></ProfileImg_unset>
+              ? <ProfileImg_unset><AddBoxIcon sx={{ fontSize: 35, color: 'black', opacity: 0.3, cursor: 'pointer' }} /></ProfileImg_unset>
               : (personalData[0].profileImg !== ''
                 ? <ProfileImg src={personalData[0].profileImg} />
                 : <ProfileImg_unset>Add your Avatar</ProfileImg_unset>)

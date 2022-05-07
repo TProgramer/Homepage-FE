@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { Masonry, Block, Img, Description } from '../../styles/Activity/activity';
+import {
+  Masonry,
+  Block,
+  Img,
+  Description
+} from '../../styles/Activity/activity';
 import ModalWindow from './Masonry_modal';
 
 interface IImageSrc {

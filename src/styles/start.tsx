@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 export const Start = styled.h1`
   font-size: 100px;
-`;//삭제가능
+`

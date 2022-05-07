@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+const REACTIVE_HEADER_PIXEL = '850px';
+
 export const ProfileBox = styled('div') <{ onoff: boolean }>`
   width: 850px;
   height: ${props => !props.onoff ? 320 : 350};
@@ -8,7 +10,7 @@ export const ProfileBox = styled('div') <{ onoff: boolean }>`
   box-shadow: rgba(0, 0, 0, 0.13) 0px 5px 25px;
   border-radius: 10px;
   position: relative;
-  @media (max-width:850px) {
+  @media (max-width: ${REACTIVE_HEADER_PIXEL}) {
     width: 480px;
     height: 680px;
     flex-direction: column;
@@ -55,9 +57,9 @@ export const Information = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  @media (max-width:850px) {
-  width: 480px;
-  align-items: center;
+  @media (max-width: ${REACTIVE_HEADER_PIXEL}) {
+    width: 480px;
+    align-items: center;
   }
 `
 export const ProfileHeader = styled('div')`
@@ -67,7 +69,7 @@ export const ProfileHeader = styled('div')`
   justify-content: space-between;
   align-items: center;
   margin: 0 0 15px 0;
-    @media (max-width:850px) {
+    @media (max-width:${REACTIVE_HEADER_PIXEL}) {
     width: 480px;
     justify-content: space-around;
   }
@@ -91,7 +93,7 @@ export const DefaultInfo = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  @media (max-width:850px) {
+  @media (max-width: ${REACTIVE_HEADER_PIXEL}) {
     flex-direction: column;
     align-items: center;
     margin: 0 0 0 15px;
@@ -100,7 +102,7 @@ export const DefaultInfo = styled('div')`
 `
 export const ContactBox = styled('form')`
   width: 100%;
-  @media (max-width: 850px) {
+  @media (max-width: ${REACTIVE_HEADER_PIXEL}) {
     margin: 0 0 20px 200px;
     display: flex;
     flex-direction: column;
@@ -114,36 +116,36 @@ export const Bio = styled('p')`
   padding: 0 0 10px 0;
 `
 export const Contact = styled('div')`
-color: rgba(0, 0, 0, 0.3);
-width: auto;
-margin: 0 0 7px 0;
-display: flex;
-align-items: center;
+  color: rgba(0, 0, 0, 0.3);
+  width: auto;
+  margin: 0 0 7px 0;
+  display: flex;
+  align-items: center;
 `
 export const BioInput = styled('input')`
-display: block;
-word-wrap: break-word;
-width: 270px;
-height: 120px;
-border: 2px solid rgba(0, 0, 0, 0.3);
-border-radius: 20px;
-transition: all 0.1s linear;
-color: rgba(0, 0, 0, 0.7);
+  display: block;
+  word-wrap: break-word;
+  width: 270px;
+  height: 120px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  transition: all 0.1s linear;
+  color: rgba(0, 0, 0, 0.7);
   &:focus{
-  outline: none;
-  border: 2px solid #9C88FF;
+    outline: none;
+    border: 2px solid #9C88FF;
 }
 `
 export const Input = styled('input')`
-width: 240px;
-height: 25px;
-border: none;
-border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-transition: all 0.1s linear;
-color: rgba(0, 0, 0, 0.7);
+  width: 240px;
+  height: 25px;
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  transition: all 0.1s linear;
+  color: rgba(0, 0, 0, 0.7);
   &:focus{
-  outline: none;
-  border-bottom: 2px solid #9C88FF;
+    outline: none;
+    border-bottom: 2px solid #9C88FF;
 }
 `
 export const Button = styled('button')`
@@ -159,7 +161,7 @@ export const Button = styled('button')`
   &:hover {
     background-color: #8c7ae6;
   }
-  @media (max-width: 850px) {
+  @media (max-width: ${REACTIVE_HEADER_PIXEL}) {
     top: 93%;
     left: 82%;
   }
