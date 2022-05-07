@@ -1,4 +1,4 @@
-import { Wrapper } from '../styles/Activity/activity';
+import { Wrapper } from '../styles/activity/activity';
 import MasonryBox from '../components/activity/Masonry';
 
 const Activity = () => {

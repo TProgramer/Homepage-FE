@@ -23,7 +23,7 @@ import {
   BioInput,
   ContactBox,
   Button
-} from '../../styles/MyPage/header';
+} from '../../styles/myPage/header';
 
 interface IPersonalType {
   readonly id: number;
@@ -43,7 +43,14 @@ const personalData: IPersonalType[] = [
     profileImg: '',//https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdkVemYyTTjjwW8ax1aJ-kHvwR6aK1VTPKRSbvlnIlMs340p0iFzcs_u878365DmbZvI&usqp=CAU
   },
 ]
-const iconStyle: { fontSize: number; marginRight: number; } = { fontSize: 20, marginRight: 1 };
+const iconStyle: {
+  fontSize: number;
+  marginRight: number;
+} = {
+  fontSize: 20,
+  marginRight: 1
+};
+
 const MyProfile = () => {
   const [onoff, setOnoff] = useState<boolean>(false);
   const onClick = () => {

@@ -8,7 +8,7 @@ import {
   DescTitle,
   Description,
   PictureBox
-} from '../../styles/Activity/activity_modal';
+} from '../../styles/activity/activityModal';
 
 interface IModalProps {
   modal: boolean;
