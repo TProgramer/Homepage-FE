@@ -101,15 +101,14 @@ export const DefaultInfo = styled('div')`
   }
 `
 export const ContactBox = styled('form')`
-  width: 100%;
+  width: 300px;
   @media (max-width: ${REACTIVE_HEADER_PIXEL}) {
-    margin: 0 0 20px 200px;
     display: flex;
     flex-direction: column;
   }
   `
 export const Bio = styled('p')`
-  width: 65%;
+  width: 100%;
   min-height: 30px;
   color: rgba(0,0,0,0.6);
   margin: 0 0 15px 0;
