@@ -1,80 +1,132 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Masonry,
-  Block,
-  Img,
-  Description
+  Image
 } from '../../styles/activity/activity';
-import ModalWindow from './MasonryModal';
-
 interface IImageSrc {
-  url: string[];
+  img: string;
   title: string;
   description: string;
 }
+const itemData: IImageSrc[] = [
+  {
+    img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+    title: 'Breakfast',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+    title: 'Burger',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+    title: 'Camera',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+    title: 'Coffee',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+    title: 'Hats',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+    title: 'Honey',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+    title: 'Basketball',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+    title: 'Fern',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
+    title: 'Mushrooms',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
+    title: 'Tomato basil',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
+    title: 'Sea star',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
+    title: 'Bike',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+    title: 'Breakfast',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+    title: 'Burger',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+    title: 'Camera',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+    title: 'Coffee',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+    title: 'Hats',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+    title: 'Honey',
+    description: 'this is discruption'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+    title: 'Basketball',
+    description: 'this is discruption'
+  },
+];
 
-const imgSrc: IImageSrc[] = [
-  {
-    url: ['https://w0.peakpx.com/wallpaper/76/665/HD-wallpaper-wernigerode-wohltaeterbrunnen-beautiful-square-german-city-cityscape-saxony-anhalt-germany.jpg'],
-    title: 'Hello?',
-    description: 'this is description: blah blah'
-  },
-  {
-    url: ['https://images.unsplash.com/photo-1526512340740-9217d0159da9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dmVydGljYWx8ZW58MHx8MHx8&w=1000&q=80'],
-    title: 'We',
-    description: 'this is description: blah blah'
-  },
-  {
-    url: ['https://i.pinimg.com/originals/d7/1c/52/d71c521ccd7baf5bd076c27ecdf769a2.jpg'],
-    title: 'Welcome',
-    description: 'this is description: blah blah'
-  },
-  {
-    url: ['https://images.unsplash.com/photo-1537884944318-390069bb8665?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw5NzY4Njc0fHxlbnwwfHx8fA%3D%3D&w=1000&q=80'],
-    title: 'Network Leader!',
-    description: 'this is description: blah blah'
-  },
-  {
-    url: ['https://c0.wallpaperflare.com/preview/1/703/828/fighter-jet-airshow.jpg'],
-    title: 'Are',
-    description: 'this is description: blah blah'
-  },
-  {
-    url: ['https://wallpaper.dog/large/20471540.jpg'],
-    title: 'To be',
-    description: 'this is description: blah blah'
-  },
-  {
-    url: ['https://i.pinimg.com/736x/84/af/c3/84afc369022cf56f1d8957aac5bb4aa0.jpg'],
-    title: 'Here',
-    description: 'this is description'
-  }
-]//이미지소스 데이터, 나중에 데어터 폴더생기면 분리예정, 이미지는 landscape(horizontalrectangular)형식권장.
 
 const MasonryBox = () => {
-  const [modal, setModal] = useState(false);
-  const [src, setSrc] = useState<IImageSrc>();
+  const size = window.innerWidth;
+  const [windowWidth, setWindowWidth] = useState<number>(size);
+  useEffect(() => {
+    return window.addEventListener('resize', () => { setWindowWidth(size) });
+  }, [windowWidth])//실시간 윈도우 너비 수정하기
   return (
-    <Masonry>
+    <Masonry windowWidth={windowWidth} >
       {
-        imgSrc.map((item, index) => (
-          <>
-            <Block key={index} onClick={() => {
-              setSrc(item);
-              setModal(!modal);
-            }}>
-              <Img src={item.url[0]} />
-              <Description>{item.title}</Description>
-            </Block>
-          </>
+        itemData.map(item => (
+          <div key={item.img}>
+            {/* <Image
+            src={item.img}
+            alt={item.title}
+          /> */}
+          </div>
         ))
       }
-      {
-        modal
-          ? <ModalWindow modal={modal} setModal={setModal} item={src} />
-          : null
-      }
-    </Masonry>
+    </Masonry >
+
   )
 }
 export default MasonryBox;

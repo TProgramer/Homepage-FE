@@ -1,67 +1,53 @@
 import styled from "@emotion/styled";
-const REACTIVE_MASONRY_PIXEL = '550px';
 
 export const Wrapper = styled('div')`
   width: 100vw;
-  min-width: 550px;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+`//임시
+export const Masonry = styled('div') <{ windowWidth: number }>`
+  width: ${props =>
+    props.windowWidth >= 930
+      ? '930px'
+      : props.windowWidth
+  };
   height: auto;
+  margin: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
-`//임시 LAYOUT
-export const Masonry = styled('div')`
-  width: 800px;
-  padding: 10px;
-  display: grid;
-  grid-template-rows: repeat(3,210px);
-  grid-template-columns: repeat(3,1fr);
-  grid-auto-rows: 100px;
-  @media(max-width: ${REACTIVE_MASONRY_PIXEL}) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-`
-export const Block = styled('div')`
-  margin: 5px;
-  border-radius: 10px;
-  background-position: center;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  color: rgba(0,0,0,0);
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  transition: all 0.2s linear;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.7;
-    color: whitesmoke;
-    &:nth-of-type(4) {
-      color: #04E148;
+  flex-wrap: wrap;
+  div {
+    background-color: rgba(0,0,0,0.3);
+    aspect-ratio: 1 / 1;
+    width: 290px;
+    margin: 10px;
+    @media (max-width: 930px) {
+      width: 30%;
+    }
+    @media (max-width: 600px) {
+      width: 165px;
+      margin:0.3px;
     }
   }
-  &:nth-of-type(1) {
-    grid-column: span 2;
-  }
-  &:nth-of-type(7) {
-    grid-column: span 2;
-  }
-  @media(max-width: ${REACTIVE_MASONRY_PIXEL}) {
-    width: 400px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 `
-export const Img = styled('img')`
-  width: 150%;
+export const Image = styled('img')`
+
 `
-export const Description = styled('h2')`
-  position: absolute;
-  font-size: 27px;
-`
+// width: ${
+//   props =>
+//   props.windowWidth >= 930
+//     ? '290px'
+//     : `${(29 / 93) * props.windowWidth}px`
+// };
+// height: ${
+//   props =>
+//   props.windowWidth >= 930
+//     ? '290px'
+//     : `${(29 / 93) * props.windowWidth}px`
+// };
+// margin: ${
+//   props =>
+//   props.windowWidth >= 930
+//     ? '10px'
+//     : `${((props.windowWidth / 3) - ((29 / 93) * props.windowWidth)) / 2}px`
+// };
