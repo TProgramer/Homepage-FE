@@ -1,9 +1,5 @@
-import { Start, Wrapper } from "../styles/start";
+import ActivityGallery from "../components/home/ActivityGallery";
 
 export default function Home() {
-  return (
-    <Wrapper>
-      <Start>Let's Start!</Start>
-    </Wrapper>//example
-  )
+  return <ActivityGallery />;
 }
