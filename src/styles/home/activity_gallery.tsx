@@ -41,11 +41,18 @@ const SlideSwapper = styled("button")`
   border: none;
   width: 10%;
   height: 100%;
-  background: none;
+  cursor: pointer;
+  background: black;
 
   color: white;
   font-size: 20px;
   text-align: center;
+
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 export const SlideLeftSwapper = styled(SlideSwapper)`
