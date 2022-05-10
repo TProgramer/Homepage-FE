@@ -21,14 +21,14 @@ export const Masonry = styled('div') <{ windowWidth: number }>`
     aspect-ratio: 1 / 1;
     width: 290px;
     margin: 10px;
-    @media (max-width: 930px) {
-      width: 30%;
+    @media (max-width: 929px) {
+      //여기서 꺠짐. 수정필요!!!
     }
-    @media (max-width: 600px) {
-      width: 165px;
-      margin:0.3px;
+    @media (max-width: 599px) {
+      width: 166px;
+      margin: ${props => `${10 - ((600 - props.windowWidth) * 0.097)}px`};
     }
-  }
+  }//전체적으로 Masonry안의 중앙정렬이 안됨. 수정필요!!
 `
 export const Image = styled('img')`
 

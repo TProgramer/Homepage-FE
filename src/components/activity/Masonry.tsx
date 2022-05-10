@@ -108,11 +108,24 @@ const itemData: IImageSrc[] = [
 
 
 const MasonryBox = () => {
-  const size = window.innerWidth;
-  const [windowWidth, setWindowWidth] = useState<number>(size);
+  // const size = window.innerWidth;
+  const [windowWidth, setWindowWidth] = useState<number>(0);
   useEffect(() => {
-    return window.addEventListener('resize', () => { setWindowWidth(size) });
-  }, [windowWidth])//실시간 윈도우 너비 수정하기
+    if (typeof window !== 'undefined') {
+      // function handleResize() {
+      //   setWindowWidth(window.innerWidth);
+      // }
+      window.addEventListener('resize', () => {
+        setWindowWidth(window.innerWidth);
+      });
+      (() => {
+        () => {
+          setWindowWidth(window.innerWidth);
+        }
+      })();
+      return () => window.removeEventListener('resize', () => { setWindowWidth(window.innerWidth); });
+    }
+  }, [])//실시간 윈도우 너비 수정하기
   return (
     <Masonry windowWidth={windowWidth} >
       {
