@@ -1,5 +1,14 @@
-import { Dispatch, SetStateAction } from 'react';
-import { CloseBtn, Modal, ModalBox, Picture, DescriptionBox, DescTitle, Description, PictureBox } from '../../styles/Activity/activity_modal';
+import { Dispatch, SetStateAction } from "react";
+import {
+  CloseBtn,
+  Modal,
+  ModalBox,
+  Picture,
+  DescriptionBox,
+  DescTitle,
+  Description,
+  PictureBox,
+} from "../../styles/activity/activity_modal";
 
 interface IModalProps {
   modal: boolean;
@@ -8,18 +17,18 @@ interface IModalProps {
     url: string[];
     title: string;
     description: string;
-  }
+  };
 }
 
 const ModalWindow = (props: IModalProps) => {
   const onClick = () => {
-    props.setModal(!props.modal)
-  }
+    props.setModal(!props.modal);
+  };
   return (
     <ModalBox>
       <Modal>
         <PictureBox>
-          <Picture src={props.item?.url[0]} alt='활동사진' />
+          <Picture src={props.item?.url[0]} alt="활동사진" />
         </PictureBox>
         <DescriptionBox>
           <CloseBtn onClick={onClick}>Exit</CloseBtn>
@@ -28,6 +37,6 @@ const ModalWindow = (props: IModalProps) => {
         </DescriptionBox>
       </Modal>
     </ModalBox>
-  )
-}
+  );
+};
 export default ModalWindow;

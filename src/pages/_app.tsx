@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import reset from "../styles/Global";
 import { Global, css } from "@emotion/react";
+import Header from "../components/common/header/Header";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -10,10 +11,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>boilerplate</title>
       </Head>
-      <Global styles={css`
-        ${reset}
-      `} />
+      <Global
+        styles={css`
+          ${reset}
+        `}
+      />
+      <Header />
       <Component {...pageProps} />
     </>
-  )
+  );
 }
