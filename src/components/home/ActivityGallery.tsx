@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useInterval from "../../hooks/useInterval";
 import {
   GalleryContainer,
   SlideContainer,
@@ -80,25 +81,18 @@ const imgSrc: IImageSrc[] = [
 const ActivityGallery = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const leftSwapperHandler = () => swapLeft();
-  const rightSwapperHandler = () => swapRight();
-
-  const swapLeft = () => showSlide(activeImageIndex - 1);
-  const swapRight = () => showSlide(activeImageIndex + 1);
-
-  const showSlide = (slideNumber: number) => {
-    slideNumber %= imgSrc.length;
-    if (slideNumber < 0) {
-      slideNumber += imgSrc.length;
-    }
-    setActiveImageIndex(slideNumber);
-  };
+  const swapLeft = () =>
+    setActiveImageIndex(
+      (current) => (current - 1 + imgSrc.length) % imgSrc.length
+    );
+  const swapRight = () =>
+    setActiveImageIndex((current) => (current + 1) % imgSrc.length);
 
   const leftSwapper = (
-    <SlideLeftSwapper onClick={leftSwapperHandler}>{"<<"}</SlideLeftSwapper>
+    <SlideLeftSwapper onClick={swapLeft}>{"<<"}</SlideLeftSwapper>
   );
   const rightSwapper = (
-    <SlideRightSwapper onClick={rightSwapperHandler}>{">>"}</SlideRightSwapper>
+    <SlideRightSwapper onClick={swapRight}>{">>"}</SlideRightSwapper>
   );
 
   const slides = imgSrc.map((value, index) => (
@@ -125,6 +119,8 @@ const ActivityGallery = () => {
       post={isPostedThumbnail(index, activeImageIndex)}
     />
   ));
+
+  useInterval(swapRight, 3000);
 
   return (
     <GalleryContainer>
