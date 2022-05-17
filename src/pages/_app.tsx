@@ -5,7 +5,7 @@ import reset from "../styles/Global";
 import { Global, css } from "@emotion/react";
 import Header from "../components/common/header/Header";
 import CssBaseline from "@mui/material/CssBaseline";
-import Footer from "../components/common/Footer";
+import Footer from "../components/common/footer/Footer";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
