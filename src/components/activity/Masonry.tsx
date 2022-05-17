@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   Masonry,
-  Image
+  Image,
+  Hover
 } from '../../styles/activity/activity';
 interface IImageSrc {
   img: string;
@@ -98,23 +99,14 @@ const itemData: IImageSrc[] = [
     img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
     title: 'Honey',
     description: 'this is discruption'
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-    title: 'Basketball',
-    description: 'this is discruption'
-  },
+  }
 ];
 
 
 const MasonryBox = () => {
-  // const size = window.innerWidth;
   const [windowWidth, setWindowWidth] = useState<number>(0);
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // function handleResize() {
-      //   setWindowWidth(window.innerWidth);
-      // }
       window.addEventListener('resize', () => {
         setWindowWidth(window.innerWidth);
       });
@@ -125,21 +117,22 @@ const MasonryBox = () => {
       })();
       return () => window.removeEventListener('resize', () => { setWindowWidth(window.innerWidth); });
     }
-  }, [])//실시간 윈도우 너비 수정하기
+  }, [])
+
   return (
     <Masonry windowWidth={windowWidth} >
       {
         itemData.map(item => (
           <div key={item.img}>
-            {/* <Image
-            src={item.img}
-            alt={item.title}
-          /> */}
+            <Hover></Hover>
+            <Image
+              src={item.img}
+              alt={item.title}
+            />
           </div>
         ))
       }
     </Masonry >
-
   )
 }
 export default MasonryBox;

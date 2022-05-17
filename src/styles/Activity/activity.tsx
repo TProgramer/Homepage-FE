@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { MOBILE_STANDARD, TABLET_STANDARD } from "../Global";
 
 export const Wrapper = styled('div')`
   width: 100vw;
@@ -8,46 +9,50 @@ export const Wrapper = styled('div')`
 `//임시
 export const Masonry = styled('div') <{ windowWidth: number }>`
   width: ${props =>
-    props.windowWidth >= 930
-      ? '930px'
-      : props.windowWidth
+    props.windowWidth <= MOBILE_STANDARD
+      ? `${props.windowWidth}px`
+      : props.windowWidth <= TABLET_STANDARD && props.windowWidth > MOBILE_STANDARD
+        ? `${MOBILE_STANDARD}px`
+        : '930px'
   };
   height: auto;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   div {
-    background-color: rgba(0,0,0,0.3);
     aspect-ratio: 1 / 1;
     width: 290px;
     margin: 10px;
-    @media (max-width: 929px) {
-      //여기서 꺠짐. 수정필요!!!
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    object-fit: fill;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    @media (max-width: ${TABLET_STANDARD}px) {
+      width: 250px;
+      margin: 3px;
+      box-shadow: none;
     }
-    @media (max-width: 599px) {
-      width: 166px;
-      margin: ${props => `${10 - ((600 - props.windowWidth) * 0.097)}px`};
+    @media (max-width: ${MOBILE_STANDARD}px) {
+      width: 33%;
+      margin: 0.16666666%;
+      box-shadow: none;
     }
-  }//전체적으로 Masonry안의 중앙정렬이 안됨. 수정필요!!
+  }
 `
 export const Image = styled('img')`
-
+  width: 155%;
 `
-// width: ${
-//   props =>
-//   props.windowWidth >= 930
-//     ? '290px'
-//     : `${(29 / 93) * props.windowWidth}px`
-// };
-// height: ${
-//   props =>
-//   props.windowWidth >= 930
-//     ? '290px'
-//     : `${(29 / 93) * props.windowWidth}px`
-// };
-// margin: ${
-//   props =>
-//   props.windowWidth >= 930
-//     ? '10px'
-//     : `${((props.windowWidth / 3) - ((29 / 93) * props.windowWidth)) / 2}px`
-// };
+export const Hover = styled('div')`
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+  position: absolute;
+`
+// props.windowWidth >= TABLET_STANDARD
+//   ? '930px'
+//   : props.windowWidth >= MOBILE_STANDARD
+//     ? `${MOBILE_STANDARD}px`
+//     : `${props.windowWidth}px`
