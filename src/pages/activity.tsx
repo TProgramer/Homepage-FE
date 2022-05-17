@@ -1,5 +1,10 @@
 import { Wrapper } from '../styles/activity/activity';
-import MasonryBox from '../components/activity/Masonry';
+import dynamic from 'next/dynamic';
+
+const MasonryBox = dynamic(
+  () => import('../components/activity/Masonry'),
+  { ssr: false }
+);
 
 const Activity = () => {
   return (

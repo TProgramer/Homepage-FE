@@ -1,67 +1,53 @@
 import styled from "@emotion/styled";
-const REACTIVE_MASONRY_PIXEL = '550px';
+import { MOBILE_STANDARD, TABLET_STANDARD } from "../Global";
 
 export const Wrapper = styled('div')`
   width: 100vw;
-  min-width: 550px;
   min-height: 100vh;
-  height: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
-`//임시 LAYOUT
-export const Masonry = styled('div')`
-  width: 800px;
-  padding: 10px;
-  display: grid;
-  grid-template-rows: repeat(3,210px);
-  grid-template-columns: repeat(3,1fr);
-  grid-auto-rows: 100px;
-  @media(max-width: ${REACTIVE_MASONRY_PIXEL}) {
+`//임시
+export const Masonry = styled('div') <{ windowWidth: number }>`
+  width: ${props =>
+    props.windowWidth <= MOBILE_STANDARD
+      ? `${props.windowWidth}px`
+      : props.windowWidth <= TABLET_STANDARD && props.windowWidth > MOBILE_STANDARD
+        ? `${MOBILE_STANDARD}px`
+        : '930px'
+  };
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  div {
+    aspect-ratio: 1 / 1;
+    width: 290px;
+    margin: 10px;
+    position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-`
-export const Block = styled('div')`
-  margin: 5px;
-  border-radius: 10px;
-  background-position: center;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  color: rgba(0,0,0,0);
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  transition: all 0.2s linear;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.7;
-    color: whitesmoke;
-    &:nth-of-type(4) {
-      color: #04E148;
+    overflow: hidden;
+    object-fit: fill;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    @media (max-width: ${TABLET_STANDARD}px) {
+      width: 250px;
+      margin: 3px;
+      box-shadow: none;
+    }
+    @media (max-width: ${MOBILE_STANDARD}px) {
+      width: 33%;
+      margin: 0.16666666%;
+      box-shadow: none;
     }
   }
-  &:nth-of-type(1) {
-    grid-column: span 2;
-  }
-  &:nth-of-type(7) {
-    grid-column: span 2;
-  }
-  @media(max-width: ${REACTIVE_MASONRY_PIXEL}) {
-    width: 400px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 `
-export const Img = styled('img')`
-  width: 150%;
+export const Image = styled('img')`
+  width: 155%;
 `
-export const Description = styled('h2')`
+export const Hover = styled('div')`
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
   position: absolute;
-  font-size: 27px;
 `
