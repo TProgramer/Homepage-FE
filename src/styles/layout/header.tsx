@@ -6,12 +6,12 @@ import Typography from "@mui/material/Typography";
 export const StyledHeader = styled("header")`
   width: 100%;
   height: 100px;
-  border-bottom: 1px solid black;
 `;
 
 export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
-  background: lightblue;
   width: calc(100% - 320px);
+  border-bottom: 1px solid black;
+  background: #f2f0f0;
   @media (max-width: 800px) {
     width: 100%;
   }
@@ -31,7 +31,7 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
     position: absolute;
     left: 0;
     display: inline-block;
-    border: 1px solid black;
+    //border: 1px solid black;
     height: 100%;
     width: 10%;
     min-width: 100px;
@@ -40,7 +40,6 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
     position: absolute;
     right: 10%;
     display: inline-block;
-    background: lightgreen;
     height: 100%;
     width: 60%;
     display: inline-flex;
@@ -48,17 +47,14 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
       display: none;
     }
     .navBoxItem {
-      border: 1px solid black;
       height: 100%;
       flex-grow: 1;
     }
   }
   .register {
     position: absolute;
-    background: lightcoral;
     right: 0;
     display: inline-block;
-    border: 1px solid black;
     height: 100%;
     width: 10%;
     @media (max-width: 600px) {
@@ -162,26 +158,22 @@ export const StyledSideBlock = styled("div")<{ isSide: boolean }>`
   position: absolute;
   right: 0;
   height: 100%;
-  background: lightgreen;
+  background: white;
   @media (min-width: 600px) {
     display: none;
   }
   .reserve {
-    margin-top: 8px;
-    background: white;
-    padding: 16px 0 16px 16px;
-    border-bottom: 1px solid black;
-    &:hover {
-      cursor: pointer;
-    }
+    background: rgba(0, 0, 0, 0.03);
+    padding: 12px 0 12px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    cursor: pointer;
   }
   .signin {
     padding: 0 16px;
-    background: white;
-    padding: 16px 0 16px 16px;
-    &:hover {
-      cursor: pointer;
-    }
+    background: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 12px 0 12px 16px;
+    cursor: pointer;
   }
 `;
 

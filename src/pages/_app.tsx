@@ -4,6 +4,8 @@ import Link from "next/link";
 import reset from "../styles/Global";
 import { Global, css } from "@emotion/react";
 import Header from "../components/common/header/Header";
+import CssBaseline from "@mui/material/CssBaseline";
+import Footer from "../components/common/Footer";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -16,8 +18,10 @@ export default function App({ Component, pageProps }: AppProps) {
           ${reset}
         `}
       />
+      <CssBaseline />
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }
