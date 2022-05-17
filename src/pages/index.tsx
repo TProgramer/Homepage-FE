@@ -1,10 +1,11 @@
 import { Wrapper } from '../styles/start';
+import ActivityGallery from "../components/home/ActivityGallery";
 import YoutubePlayer from '../components/home/YoutubePlayer';
 import H1 from '../components/common/H1';
 import P from '../components/common/P';
 
 const Home = () => (
-  <Wrapper>
+  <>
     <YoutubePlayer videoID='sqgxcCjD04s' autoplay mute loop disableKeyboard>
       <H1 center>NL 세상의 중심이 되다.</H1>
       <P>
@@ -15,7 +16,8 @@ const Home = () => (
         bibendum. Integer tristique imperdiet accumsan. Cras et accumsan lorem.
       </P>
     </YoutubePlayer>
-  </Wrapper>
+    <ActivityGallery />
+  </>
 );
 
 export default Home;
