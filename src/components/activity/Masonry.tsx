@@ -16,7 +16,7 @@ const MasonryBox = () => {
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   useEffect(() => {
     (async () => {
-      const res = await (await fetch('http://localhost:3000/api/images/active?limit=18')).json();
+      const res = await (await fetch('/api/images/active?limit=18')).json();
       setImage(res);
     })();
   }, [])
@@ -26,9 +26,7 @@ const MasonryBox = () => {
         setWindowWidth(window.innerWidth);
       });
       (() => {
-        () => {
-          setWindowWidth(window.innerWidth);
-        }
+        setWindowWidth(window.innerWidth);
       })();
       return () => window.removeEventListener('resize', () => { setWindowWidth(window.innerWidth); });
     }
