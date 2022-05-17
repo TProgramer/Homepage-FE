@@ -51,8 +51,3 @@ export const Hover = styled('div')`
   background-color: rgba(0,0,0,0.3);
   position: absolute;
 `
-// props.windowWidth >= TABLET_STANDARD
-//   ? '930px'
-//   : props.windowWidth >= MOBILE_STANDARD
-//     ? `${MOBILE_STANDARD}px`
-//     : `${props.windowWidth}px`
