@@ -5,7 +5,7 @@ import H1 from '../components/common/H1';
 import P from '../components/common/P';
 
 const Home = () => (
-  <Wrapper>
+  <>
     <YoutubePlayer videoID='sqgxcCjD04s' autoplay mute loop disableKeyboard>
       <H1 center>NL 세상의 중심이 되다.</H1>
       <P>
@@ -17,7 +17,7 @@ const Home = () => (
       </P>
     </YoutubePlayer>
     <ActivityGallery />
-  </Wrapper>
+  </>
 );
 
 export default Home;
