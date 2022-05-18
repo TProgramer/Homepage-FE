@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+import { SportsRugbySharp } from "@mui/icons-material";
 import { MOBILE_STANDARD, TABLET_STANDARD } from "../Global";
 
 export const Wrapper = styled('div')`
@@ -47,11 +48,22 @@ export const ImageBox = styled('div')`
 export const Img = styled('img')`
   width: 155%;
 `
-export const Hover = styled('div')`
+const SKELETON = keyframes`
+    0% {
+      background-color: #DDDDDD;
+    }
+    50% {
+      background-color: #CDCDCD;
+    }
+    100% {
+      background-color: #DDDDDD;
+    }
+  `
+export const Hover = styled('div') <{ load: boolean }>`
   width: 100%;
   height: 100%;
-  background-color: black;
-  background-color: rgba(0,0,0,0);
+  animation: ${props => props.load ? SKELETON : 'none'} 0.7s linear infinite;
+  background-color: rgba(0,0,0,${props => props.load ? 1 : 0});
   position: absolute;
   display: flex;
   justify-content: center;
@@ -66,21 +78,4 @@ export const Hover = styled('div')`
     background-color: rgba(0,0,0,0.5);
     color: rgba(255,255,255,1);
   }
-`
-const SKELETON = keyframes`
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.27;
-  }
-  100% {
-    opacity: 0.2;
-  }
-`
-export const Skeleton = styled('div')`
-  width: 100%;
-  height: 100%;
-  background-color: #5D6164;
-  animation: ${SKELETON} 0.8s linear infinite;
-`
+  `

@@ -3,8 +3,7 @@ import {
   Masonry,
   Img,
   Hover,
-  ImageBox,
-  Skeleton
+  ImageBox
 } from '../../styles/activity/activity';
 
 interface IImageSrc {
@@ -21,8 +20,8 @@ const MasonryBox = () => {
     (async () => {
       const res = await (await fetch('/api/images/active?limit=18')).json();
       setImage(res);
-      setImgLoad(false);
     })();
+    setImgLoad(false);
   }, [])
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -40,19 +39,11 @@ const MasonryBox = () => {
       {
         image?.map((item, index) => (
           <ImageBox key={index}>
-            {
-              !imgLoad
-                ? <Skeleton />
-                : (
-                  <>
-                    {/* <Hover>{item.title}</Hover>
-                    <Img
-                      src={item.img}
-                      alt={item.title}
-                    /> */}
-                  </>
-                )
-            }
+            <Hover load={imgLoad}>{item.title}</Hover>
+            <Img
+              src={item.img}
+              alt={item.title}
+            />
           </ImageBox>
         ))
       }
