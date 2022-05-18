@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import {
   Masonry,
-  Image,
-  Hover
+  Img,
+  Hover,
+  ImageBox,
+  Skeleton
 } from '../../styles/activity/activity';
 
 interface IImageSrc {
@@ -14,10 +16,12 @@ interface IImageSrc {
 const MasonryBox = () => {
   const [image, setImage] = useState<IImageSrc[]>();
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const [imgLoad, setImgLoad] = useState(true);
   useEffect(() => {
     (async () => {
       const res = await (await fetch('/api/images/active?limit=18')).json();
       setImage(res);
+      setImgLoad(false);
     })();
   }, [])
   useEffect(() => {
@@ -35,13 +39,21 @@ const MasonryBox = () => {
     <Masonry windowWidth={windowWidth} >
       {
         image?.map((item, index) => (
-          <div key={index}>
-            <Hover></Hover>
-            <Image
-              src={item.img}
-              alt={item.title}
-            />
-          </div>
+          <ImageBox key={index}>
+            {
+              !imgLoad
+                ? <Skeleton />
+                : (
+                  <>
+                    {/* <Hover>{item.title}</Hover>
+                    <Img
+                      src={item.img}
+                      alt={item.title}
+                    /> */}
+                  </>
+                )
+            }
+          </ImageBox>
         ))
       }
     </Masonry >
