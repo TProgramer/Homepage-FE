@@ -1,28 +1,21 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Masonry,
   Img,
-  Hover,
+  Skeleton,
   ImageBox
 } from '../../styles/activity/activity';
+import ModalWindow from './MasonryModal';
 
-interface IImageSrc {
+export interface IImageSrc {
+  onoff?: boolean;
   img: string;
   title: string;
   description: string;
 }
 
 const MasonryBox = () => {
-  const [image, setImage] = useState<IImageSrc[]>();
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  const [imgLoad, setImgLoad] = useState(true);
-  useEffect(() => {
-    (async () => {
-      const res = await (await fetch('/api/images/active?limit=18')).json();
-      setImage(res);
-    })();
-    setImgLoad(false);
-  }, [])
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', () => {
@@ -31,23 +24,66 @@ const MasonryBox = () => {
       (() => {
         setWindowWidth(window.innerWidth);
       })();
-      return () => window.removeEventListener('resize', () => { setWindowWidth(window.innerWidth); });
+      return () => window.removeEventListener('resize', () => {
+        setWindowWidth(window.innerWidth);
+      });
     }
   }, [])
-  return (
-    <Masonry windowWidth={windowWidth} >
+  const [image, setImage] = useState<IImageSrc[]>();
+  const [imgLoad, setImgLoad] = useState(false);
+  useEffect(() => {
+    (async () => {
+      const res = await (await fetch('/api/images/active?limit=18')).json();
+      setImage(res);
+    })();
+    setImgLoad(false);
+  }, [])
+  const [modal, setModal] = useState<IImageSrc>({
+    onoff: false,
+    img: '',
+    title: '',
+    description: ''
+  });
+  const modalHandler = (src: IImageSrc) => {
+    setModal(
       {
-        image?.map((item, index) => (
-          <ImageBox key={index}>
-            <Hover load={imgLoad}>{item.title}</Hover>
-            <Img
-              src={item.img}
-              alt={item.title}
-            />
-          </ImageBox>
-        ))
+        onoff: true,
+        img: src.img,
+        title: src.title,
+        description: src.description
       }
-    </Masonry >
+    );
+  };
+  return (
+    <>
+      <Masonry windowWidth={windowWidth} >
+        {
+          image?.map((item, index) => (
+            <ImageBox key={index}>
+              <Skeleton
+                load={imgLoad}
+                onClick={() => { modalHandler(item) }}
+              >
+                {item.title}
+              </Skeleton>
+              <Img
+                src={item.img}
+                alt={item.title}
+              />
+            </ImageBox>
+          ))
+        }
+      </Masonry >
+      {
+        modal?.onoff
+          ? <ModalWindow
+            windowWidth={windowWidth}
+            modal={modal}
+            setModal={setModal}
+          />
+          : null
+      }
+    </>
   )
 }
 export default MasonryBox;
