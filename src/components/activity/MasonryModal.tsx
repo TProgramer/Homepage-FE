@@ -20,7 +20,7 @@ const ModalWindow = (
     modal: IImageSrc,
     setModal: (src?: IImageSrc) => IImageSrc
   }) => {
-  const closeModalHandler = (src?: IImageSrc) => {
+  const closeModalHandler = () => {
     setModal(
       {
         onoff: false,
@@ -37,7 +37,7 @@ const ModalWindow = (
           <ArrowBackIcon sx={{
             marginRight: '10px'
           }}
-            onClick={() => { closeModalHandler() }}
+            onClick={closeModalHandler}
           />
         </CloseBtn>
         <ThumbNail windowWidth={windowWidth}>
