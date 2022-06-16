@@ -8,6 +8,7 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { StyledTypography } from "../../../styles/layout/header";
+import Link from "next/link";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -66,11 +67,23 @@ const SideBlock = ({ isSide }: navbarProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <StyledTypography isSide={isSide}>
-            동아리원
+            <div className="text">
+              <Link href="#">
+                <a>동아리원</a>
+              </Link>
+            </div>
             <hr />
-            활동사진
+            <div className="text">
+              <Link href="#">
+                <a>활동사진</a>
+              </Link>
+            </div>
             <hr />
-            수상내역
+            <div className="text">
+              <Link href="#">
+                <a>수상내역</a>
+              </Link>
+            </div>
           </StyledTypography>
         </AccordionDetails>
       </Accordion>
@@ -83,15 +96,35 @@ const SideBlock = ({ isSide }: navbarProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <StyledTypography isSide={isSide}>
-            캘린더
+            <div className="text">
+              <Link href="#">
+                <a>캘린더</a>
+              </Link>
+            </div>
             <hr />
-            스터디
+            <div className="text">
+              <Link href="#">
+                <a>스터디</a>
+              </Link>
+            </div>
             <hr />
-            클래스
+            <div className="text">
+              <Link href="#">
+                <a>클래스</a>
+              </Link>
+            </div>
             <hr />
-            프로젝트
+            <div className="text">
+              <Link href="#">
+                <a>프로젝트</a>
+              </Link>
+            </div>
             <hr />
-            특강
+            <div className="text">
+              <Link href="#">
+                <a>특강</a>
+              </Link>
+            </div>
           </StyledTypography>
         </AccordionDetails>
       </Accordion>
@@ -104,8 +137,17 @@ const SideBlock = ({ isSide }: navbarProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <StyledTypography isSide={isSide}>
-            족보
-            <hr /> 스터디자료
+            <div className="text">
+              <Link href="#">
+                <a>족보</a>
+              </Link>
+            </div>
+            <hr />
+            <div className="text">
+              <Link href="#">
+                <a>스터디자료</a>
+              </Link>
+            </div>
           </StyledTypography>
         </AccordionDetails>
       </Accordion>
@@ -118,15 +160,31 @@ const SideBlock = ({ isSide }: navbarProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <StyledTypography isSide={isSide}>
-            QnA
+            <div className="text">
+              <Link href="#">
+                <a>QnA</a>
+              </Link>
+            </div>
             <hr />
-            자유
+            <div className="text">
+              <Link href="#">
+                <a>자유</a>
+              </Link>
+            </div>
           </StyledTypography>
         </AccordionDetails>
       </Accordion>
 
-      <div className="reserve">좌석예약</div>
-      <div className="signin">로그인</div>
+      <div className="side_reserve">
+        <Link href="#">
+          <a>좌석예약</a>
+        </Link>
+      </div>
+      <div className="side_signin">
+        <Link href="#">
+          <a>로그인</a>
+        </Link>
+      </div>
     </StyledSideBlock>
   );
 };

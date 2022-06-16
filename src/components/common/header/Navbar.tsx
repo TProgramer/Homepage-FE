@@ -6,9 +6,10 @@ import {
 } from "../../../styles/layout/header";
 import DropDown from "./DropDown";
 import SideBlock from "./SideBlock";
+import Link from "next/link";
 
 const Navbar = () => {
-  const menus = ["소개", "활동", "자료", "게시판", "좌석예약"];
+  const menus = ["소개", "활동", "자료", "게시판"];
 
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isSide, setIsSide] = useState<boolean>(false);
@@ -19,7 +20,11 @@ const Navbar = () => {
   return (
     <>
       <StyledNavbar isHover={isHover}>
-        <div className="logo">NL</div>
+        <div className="logo">
+          <Link href="/">
+            <a>NL</a>
+          </Link>
+        </div>
         <div
           className="navBox"
           onMouseOver={() => {
@@ -35,7 +40,16 @@ const Navbar = () => {
             </div>
           ))}
         </div>
-        <div className="register">회원가입</div>
+        <div className="reserve">
+          <Link href="#">
+            <a>좌석예약</a>
+          </Link>
+        </div>
+        <div className="register">
+          <Link href="#">
+            <a>로그인</a>
+          </Link>
+        </div>
         <div onClick={onClickHambar}>
           {isSide ? <StyledCancelIcon /> : <StyledMenuIcon />}
         </div>
