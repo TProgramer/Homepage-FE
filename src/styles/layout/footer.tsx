@@ -10,7 +10,7 @@ export const StyledFooter = styled("footer")`
   bottom: 0;
   width: 100%;
   .inner_footer {
-    width: 1024px;
+    width: 1200px;
     height: 100%;
     margin: 0 auto;
     .title {

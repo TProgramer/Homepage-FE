@@ -2,19 +2,20 @@ import styled from "@emotion/styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Typography from "@mui/material/Typography";
-import { TABLET_STANDARD, MOBILE_STANDARD } from "../Global";
+import { CONTENT_WIDTH, TABLET_STANDARD, MOBILE_STANDARD } from "../Global";
 export const StyledHeader = styled("header")`
   width: 100%;
   height: 100px;
 `;
 
 export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
-  width: 1024px;
+  width: ${CONTENT_WIDTH}px;
   border-bottom: 1px solid #e2e2e2;
 
-  @media (max-width: ${TABLET_STANDARD}px) {
+  @media (max-width: ${CONTENT_WIDTH}px) {
     width: 100%;
   }
+
   margin: 0 auto;
   height: 100%;
   position: relative;
@@ -98,7 +99,6 @@ export const StyledMenuIcon = styled(MenuIcon)`
   @media (max-width: ${MOBILE_STANDARD}px) {
     width: 50px;
     height: 100%;
-    border: 1px solid black;
   }
 `;
 
