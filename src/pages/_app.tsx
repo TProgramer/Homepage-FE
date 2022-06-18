@@ -3,7 +3,7 @@ import Head from "next/head";
 import reset from "../styles/global/Global";
 import { Global, css, ThemeProvider } from "@emotion/react";
 import { theme } from "../themes/theme";
-
+import Layout from "../components/common/Layout";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
@@ -16,7 +16,10 @@ export default function App({ Component, pageProps }: AppProps) {
           ${reset}
         `}
       />
-      <Component {...pageProps} />
+
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }
