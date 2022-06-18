@@ -1,50 +1,59 @@
 import { SyntheticEvent, useState } from "react";
 import { StyledSideBlock } from "../../../styles/layout/header";
-import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { StyledTypography } from "../../../styles/layout/header";
 import Link from "next/link";
+import { theme } from "../../../themes/theme";
 
-const Accordion = styled((props: AccordionProps) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: `1px solid ${theme.palette.divider}`,
+const MuiAccordionStyle = {
+  border: `1px solid ${theme.backgroundColor}`,
   "&:not(:last-child)": {
     borderBottom: 0,
   },
   "&:before": {
     display: "none",
   },
-}));
-
-const AccordionSummary = styled((props: AccordionSummaryProps) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "dark"
-      ? "rgba(255, 255, 255, .05)"
-      : "rgba(0, 0, 0, .03)",
+};
+const MuiAccordionSummaryStyle = {
+  backgroundColor: `${theme.backgroundColor}`,
   flexDirection: "row-reverse",
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
     transform: "rotate(90deg)",
   },
   "& .MuiAccordionSummary-content": {
-    marginLeft: theme.spacing(1),
+    marginLeft: "10px",
   },
-}));
+};
 
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
+// const AccordionSummary = styled((props: AccordionSummaryProps) => (
+//   <MuiAccordionSummary
+//     expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+//     {...props}
+//   />
+// ))(({ theme }) => ({
+//   backgroundColor:
+//     theme.palette.mode === "dark"
+//       ? "rgba(255, 255, 255, .05)"
+//       : "rgba(0, 0, 0, .03)",
+//   flexDirection: "row-reverse",
+//   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+//     transform: "rotate(90deg)",
+//   },
+//   "& .MuiAccordionSummary-content": {
+//     marginLeft: theme.spacing(1),
+//   },
+// }));
+const AccordionDetailsStyle = {
+  padding: "20px",
   borderTop: "1px solid rgba(0, 0, 0, .125)",
-}));
+};
+// const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+//   padding: theme.spacing(2),
+//   borderTop: "1px solid rgba(0, 0, 0, .125)",
+// }));
 
 type navbarProps = {
   isSide: boolean;
@@ -58,14 +67,23 @@ const SideBlock = ({ isSide }: navbarProps) => {
     };
   return (
     <StyledSideBlock isSide={isSide}>
-      <Accordion
+      <MuiAccordion
+        sx={MuiAccordionStyle}
+        disableGutters
+        elevation={0}
+        square
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
       >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+        <MuiAccordionSummary
+          sx={MuiAccordionSummaryStyle}
+          expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+          aria-controls="panel1d-content"
+          id="panel1d-header"
+        >
           <StyledTypography isSide={isSide}>소개 </StyledTypography>
-        </AccordionSummary>
-        <AccordionDetails>
+        </MuiAccordionSummary>
+        <MuiAccordionDetails sx={AccordionDetailsStyle}>
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
@@ -85,16 +103,25 @@ const SideBlock = ({ isSide }: navbarProps) => {
               </Link>
             </div>
           </StyledTypography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
+        </MuiAccordionDetails>
+      </MuiAccordion>
+      <MuiAccordion
+        sx={MuiAccordionStyle}
+        disableGutters
+        elevation={0}
+        square
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}
       >
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+        <MuiAccordionSummary
+          sx={MuiAccordionSummaryStyle}
+          expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+          aria-controls="panel2d-content"
+          id="panel2d-header"
+        >
           <StyledTypography isSide={isSide}>활동</StyledTypography>
-        </AccordionSummary>
-        <AccordionDetails>
+        </MuiAccordionSummary>
+        <MuiAccordionDetails sx={AccordionDetailsStyle}>
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
@@ -126,16 +153,25 @@ const SideBlock = ({ isSide }: navbarProps) => {
               </Link>
             </div>
           </StyledTypography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
+        </MuiAccordionDetails>
+      </MuiAccordion>
+      <MuiAccordion
+        sx={MuiAccordionStyle}
+        disableGutters
+        elevation={0}
+        square
         expanded={expanded === "panel3"}
         onChange={handleChange("panel3")}
       >
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+        <MuiAccordionSummary
+          sx={MuiAccordionSummaryStyle}
+          expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+          aria-controls="panel3d-content"
+          id="panel3d-header"
+        >
           <StyledTypography isSide={isSide}>자료</StyledTypography>
-        </AccordionSummary>
-        <AccordionDetails>
+        </MuiAccordionSummary>
+        <MuiAccordionDetails sx={AccordionDetailsStyle}>
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
@@ -149,16 +185,25 @@ const SideBlock = ({ isSide }: navbarProps) => {
               </Link>
             </div>
           </StyledTypography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
+        </MuiAccordionDetails>
+      </MuiAccordion>
+      <MuiAccordion
+        sx={MuiAccordionStyle}
+        disableGutters
+        elevation={0}
+        square
         expanded={expanded === "panel4"}
         onChange={handleChange("panel4")}
       >
-        <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+        <MuiAccordionSummary
+          sx={MuiAccordionSummaryStyle}
+          expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+          aria-controls="panel4d-content"
+          id="panel4d-header"
+        >
           <StyledTypography isSide={isSide}>게시판</StyledTypography>
-        </AccordionSummary>
-        <AccordionDetails>
+        </MuiAccordionSummary>
+        <MuiAccordionDetails sx={AccordionDetailsStyle}>
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
@@ -172,8 +217,8 @@ const SideBlock = ({ isSide }: navbarProps) => {
               </Link>
             </div>
           </StyledTypography>
-        </AccordionDetails>
-      </Accordion>
+        </MuiAccordionDetails>
+      </MuiAccordion>
 
       <div className="side_reserve">
         <Link href="#">

@@ -6,7 +6,7 @@ import { theme } from "../themes/theme";
 import Layout from "../components/common/Layout";
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>boilerplate</title>
@@ -17,8 +17,10 @@ export default function App({ Component, pageProps }: AppProps) {
         `}
       />
       <Layout>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </Layout>
-    </ThemeProvider>
+    </>
   );
 }
