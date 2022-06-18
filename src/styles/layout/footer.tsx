@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { TABLET_STANDARD, MOBILE_STANDARD } from "../Global";
+import { MOBILE_STANDARD, MAX_WIDTH } from "../global/Global";
 export const StyledFooter = styled("footer")`
   @media (max-width: ${MOBILE_STANDARD}px) {
     display: none;
@@ -9,7 +9,7 @@ export const StyledFooter = styled("footer")`
 
   width: 100%;
   .inner_footer {
-    width: 1200px;
+    width: ${MAX_WIDTH};
     height: 100%;
     margin: 0 auto;
     .title {

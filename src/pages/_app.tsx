@@ -16,7 +16,6 @@ export default function App({ Component, pageProps }: AppProps) {
           ${reset}
         `}
       />
-
       <Layout>
         <Component {...pageProps} />
       </Layout>
