@@ -6,6 +6,14 @@ import { CONTENT_WIDTH, TABLET_STANDARD, MOBILE_STANDARD } from "../Global";
 export const StyledHeader = styled("header")`
   width: 100%;
   height: 100px;
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  &:hover {
+    background-color: rgba(255, 255, 255);
+  }
 `;
 
 export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
@@ -74,6 +82,7 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
     }
   }
   .drop_down {
+    z-index: 999;
     position: absolute;
     width: 100%;
     display: block;
@@ -82,6 +91,7 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
     margin-top: 100px;
   }
   .inner_drop_down {
+    z-index: 999;
     height: 100%;
     width: 50%;
     position: absolute;

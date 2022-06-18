@@ -2,9 +2,10 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import reset from "../styles/Global";
 import { Global, css } from "@emotion/react";
-import Header from "../components/common/header/Header";
+//import Header from "../components/common/header/Header";
 import CssBaseline from "@mui/material/CssBaseline";
-import Footer from "../components/common/footer/Footer";
+//import Footer from "../components/common/footer/Footer";
+import Layout from "../components/common/Layout";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -18,9 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
         `}
       />
       <CssBaseline />
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

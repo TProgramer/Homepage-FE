@@ -6,8 +6,7 @@ export const StyledFooter = styled("footer")`
   }
   background-color: #000000;
   height: 500px;
-  position: absolute;
-  bottom: 0;
+
   width: 100%;
   .inner_footer {
     width: 1200px;
@@ -31,7 +30,6 @@ export const StyledFooter = styled("footer")`
     }
     .subtitle {
       position: relative;
-      margin-top: 30px;
       width: 100%;
       height: 300px;
       .info1 {
