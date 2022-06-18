@@ -17,6 +17,17 @@ const Navbar = () => {
   const onClickHambar = () => {
     setIsSide((prev) => !prev);
   };
+
+  const hoverHandler = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (event.type === "mouseenter") {
+      setIsHover(true);
+    } else if (event.type === "mouseleave") {
+      setIsHover(false);
+    }
+  };
+
   return (
     <>
       <StyledNavbar isHover={isHover}>
@@ -27,12 +38,8 @@ const Navbar = () => {
         </div>
         <div
           className="navBox"
-          onMouseOver={() => {
-            setIsHover(true);
-          }}
-          onMouseLeave={() => {
-            setIsHover(false);
-          }}
+          onMouseEnter={hoverHandler}
+          onMouseLeave={hoverHandler}
         >
           {menus.map((menu, index) => (
             <div className="navBoxItem" key={index}>
@@ -55,12 +62,8 @@ const Navbar = () => {
         </div>
         <div
           className="drop_down"
-          onMouseOver={() => {
-            setIsHover(true);
-          }}
-          onMouseLeave={() => {
-            setIsHover(false);
-          }}
+          onMouseEnter={hoverHandler}
+          onMouseLeave={hoverHandler}
         >
           <div className="inner_drop_down">
             <DropDown isHover={isHover} />
