@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Typography from "@mui/material/Typography";
-import { CONTENT_WIDTH, TABLET_STANDARD, MOBILE_STANDARD } from "../Global";
+import { MAX_WIDTH, TABLET_STANDARD, MOBILE_STANDARD } from "../global/Global";
 export const StyledHeader = styled("header")`
   width: 100%;
   height: 100px;
@@ -17,10 +17,10 @@ export const StyledHeader = styled("header")`
 `;
 
 export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
-  width: ${CONTENT_WIDTH}px;
+  width: ${MAX_WIDTH};
   border-bottom: 1px solid #e2e2e2;
 
-  @media (max-width: ${CONTENT_WIDTH}px) {
+  @media (max-width: ${MAX_WIDTH}) {
     width: 100%;
   }
 

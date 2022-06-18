@@ -1,8 +1,29 @@
 import { css } from "@emotion/react";
 
-export const CONTENT_WIDTH = 1200;
 export const TABLET_STANDARD = 1024;
 export const MOBILE_STANDARD = 768;
+export const DEFAULT_FONT = "Noto Sans";
+export const DEFAULT_BORDERRADIUS = "20px";
+export const MAX_WIDTH = "1200px";
+export const FONTWEIGHT_NORMAL = 400;
+export const FONTWEIGHT_BOLD = 700;
+export const FONT_XXXL = "48px";
+export const FONT_XXL = "36px";
+export const FONT_XL = "24px";
+export const FONT_L = "16px";
+export const FONT_M = "12px";
+export const FONT_S = "9px";
+
+export const DEFAULT_BOXSHADOW = css`
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 5px 25px;
+`;
+export const HOVER_BUTTON = css`
+  transition: all 0.1s linear;
+  color: rgba(0, 0, 0, 0.3);
+  &:hover {
+    color: black;
+  }
+`;
 
 const reset = css`
   html,
@@ -136,5 +157,6 @@ const reset = css`
     text-decoration: none;
     color: inherit;
   }
-`; //resetStyle work well
+`;
+
 export default reset;
