@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
-import { MOBILE_STANDARD, TABLET_STANDARD } from "../global/Global";
+import {
+  DEFAULT_BORDERRADIUS,
+  FONTWEIGHT_BOLD,
+  FONT_L,
+  HOVER_BUTTON,
+  MOBILE_STANDARD,
+  TABLET_STANDARD,
+} from "../global/Global";
 
 export const ModalContainer = styled("div")`
   width: 100vw;
@@ -20,9 +27,9 @@ export const Modal = styled("div")<{ windowWidth: number }>`
       : "850px"};
   height: ${(props) =>
     props.windowWidth <= MOBILE_STANDARD ? "100%" : "80vh"};
-  background-color: white;
+  background-color: ${(props) => props.theme.backgroundColor};
   border-radius: ${(props) =>
-    props.windowWidth <= MOBILE_STANDARD ? 0 : "10px"};
+    props.windowWidth <= MOBILE_STANDARD ? 0 : DEFAULT_BORDERRADIUS};
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -34,11 +41,7 @@ export const CloseBtn = styled("div")`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  color: rgba(0, 0, 0, 0.3);
-  transition: all 0.1s linear;
-  &:hover {
-    color: black;
-  }
+  ${HOVER_BUTTON}
 `;
 export const ThumbNail = styled("div")<{ windowWidth: number }>`
   width: auto;
@@ -48,7 +51,7 @@ export const ThumbNail = styled("div")<{ windowWidth: number }>`
   align-items: center;
   overflow: hidden;
   border-radius: ${(props) =>
-    props.windowWidth <= TABLET_STANDARD ? 0 : "20px"};
+    props.windowWidth <= TABLET_STANDARD ? 0 : DEFAULT_BORDERRADIUS};
 `;
 export const Img = styled("img")`
   width: 100%;
@@ -59,8 +62,8 @@ export const Title = styled("h2")`
   height: 50px;
   display: inline-block;
   text-align: center;
-  font-size: 25px;
-  font-weight: 600;
+  font-size: ${FONT_L};
+  font-weight: ${FONTWEIGHT_BOLD};
   margin: 10px 0 0 0;
 `;
 export const Description = styled("p")`

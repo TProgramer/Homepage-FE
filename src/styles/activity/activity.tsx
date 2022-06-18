@@ -1,6 +1,10 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { MOBILE_STANDARD, TABLET_STANDARD } from "../global/Global";
+import {
+  DEFAULT_BOXSHADOW,
+  MOBILE_STANDARD,
+  TABLET_STANDARD,
+} from "../global/Global";
 
 export const Wrapper = styled("div")`
   width: 100vw;
@@ -32,7 +36,7 @@ export const ImageBox = styled("div")`
   overflow: hidden;
   object-fit: fill;
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: ${DEFAULT_BOXSHADOW};
   @media (max-width: ${TABLET_STANDARD}px) {
     width: 250px;
     margin: 3px;
