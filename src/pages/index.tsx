@@ -1,7 +1,7 @@
-import ActivityGallery from "../components/home/ActivityGallery";
 import YoutubePlayer from "../components/home/YoutubePlayer";
 import H1 from "../components/common/H1";
 import P from "../components/common/P";
+import Slider from "../components/home/slider";
 
 const Home = () => (
   <>
@@ -15,7 +15,7 @@ const Home = () => (
         bibendum. Integer tristique imperdiet accumsan. Cras et accumsan lorem.
       </P>
     </YoutubePlayer>
-    <ActivityGallery />
+    <Slider />
   </>
 );
 
