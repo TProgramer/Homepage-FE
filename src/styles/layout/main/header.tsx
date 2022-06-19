@@ -94,12 +94,14 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
     }
   }
   .drop_down {
+    border-radius: 0 0 40px 40px;
     z-index: 999;
     position: absolute;
     width: 100%;
     display: block;
     height: ${(props) => (props.isHover ? 350 : 0)}px;
-    background: lightgrey;
+    background: black;
+    color: white;
     margin-top: 100px;
   }
   .inner_drop_down {
@@ -135,20 +137,30 @@ export const DropDownList = styled("div")<{ isHover: boolean }>`
     width: 24%;
     height: 100%;
     .intro_list {
-      cursor: pointer;
       width: 100%;
       height: 30px;
       margin-bottom: 30px;
+      a {
+        cursor: pointer;
+        &:hover {
+          color: #9989f7;
+        }
+      }
     }
   }
   .act {
     width: 24%;
     height: 100%;
     .act_list {
-      cursor: pointer;
       width: 100%;
       height: 30px;
       margin-bottom: 30px;
+      a {
+        cursor: pointer;
+        &:hover {
+          color: #9989f7;
+        }
+      }
     }
     &:nth-child(1) {
       margin-top: 0px;
@@ -158,20 +170,30 @@ export const DropDownList = styled("div")<{ isHover: boolean }>`
     height: 100%;
     width: 25%;
     .data_list {
-      cursor: pointer;
       width: 100%;
       height: 30px;
       margin-bottom: 30px;
+      a {
+        cursor: pointer;
+        &:hover {
+          color: #9989f7;
+        }
+      }
     }
   }
   .board {
     height: 100%;
     width: 25%;
     .board_list {
-      cursor: pointer;
       width: 100%;
       height: 30px;
       margin-bottom: 30px;
+      a {
+        cursor: pointer;
+        &:hover {
+          color: #9989f7;
+        }
+      }
     }
   }
 `;
