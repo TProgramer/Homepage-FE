@@ -8,8 +8,10 @@ const SignLayout = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <SignContainer>
       <SignBox>
-        <h1 className="logo">NL</h1>
-        {children}
+        <div className="innerContainer">
+          <h1 className="logo">NL</h1>
+          {children}
+        </div>
       </SignBox>
     </SignContainer>
   );
