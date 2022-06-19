@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { DEFAULT_BORDERRADIUS, FONT_XL, MAX_WIDTH } from "../global/Global";
+import { FONT_XL, MAX_WIDTH } from "../global/Global";
 
 export const ApplyBox = styled("div")<{ backgroundImageUrl: string }>`
   width: ${MAX_WIDTH};
