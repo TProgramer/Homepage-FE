@@ -4,8 +4,8 @@ import Link from "next/link";
 function SignIn() {
   return (
     <Form>
-      <input type="text" className="input" placeholder="" />
-      <input type="text" className="input" placeholder="" />
+      <input type="text" className="input" placeholder="Student ID" />
+      <input type="text" className="input" placeholder="Password" />
       <button className="submit">LOG IN</button>
       <p className="toregister">
         <Link href="/signup">
