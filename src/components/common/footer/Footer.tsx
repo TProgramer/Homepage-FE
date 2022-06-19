@@ -1,4 +1,4 @@
-import { StyledFooter } from "../../../styles/layout/footer";
+import { StyledFooter } from "../../../styles/layout/main/footer";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import GitHubIcon from "@mui/icons-material/GitHub";

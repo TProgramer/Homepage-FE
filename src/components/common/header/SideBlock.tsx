@@ -1,10 +1,10 @@
 import { SyntheticEvent, useState } from "react";
-import { StyledSideBlock } from "../../../styles/layout/header";
+import { StyledSideBlock } from "../../../styles/layout/main/header";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import { StyledTypography } from "../../../styles/layout/header";
+import { StyledTypography } from "../../../styles/layout/main/header";
 import Link from "next/link";
 import { theme } from "../../../themes/theme";
 
