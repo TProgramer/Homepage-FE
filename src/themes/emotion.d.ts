@@ -7,7 +7,10 @@ declare module "@emotion/react" {
       sub: string;
     };
     backgroundColor: string;
-    buttonColor: string;
+    buttonColor: {
+      primary: string;
+      onHover: string;
+    };
     accentColor: string;
   }
 }

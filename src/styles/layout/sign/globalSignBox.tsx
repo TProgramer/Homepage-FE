@@ -7,11 +7,8 @@ import {
   FONT_XL,
   MOBILE_STANDARD,
   TABLET_STANDARD,
+  TRANSITION,
 } from "../../global/Global";
-
-const TRANSITION = css`
-  transition: all 0.2s linear;
-`;
 
 export const SignContainer = styled("div")`
   width: 100vw;

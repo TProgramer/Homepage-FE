@@ -24,6 +24,9 @@ export const HOVER_BUTTON = css`
     color: black;
   }
 `;
+export const TRANSITION = css`
+  transition: all 0.2s linear;
+`;
 
 const reset = css`
   html,
