@@ -4,7 +4,11 @@ import reset from "../styles/global/Global";
 import { Global, css, ThemeProvider } from "@emotion/react";
 import { theme } from "../themes/theme";
 import Layout from "../components/common/Layout";
+import { PathMatch, useMatch, useParams } from "react-router-dom";
+import { useRouter } from "next/router";
+import SignLayout from "../components/common/sign/SignLayout";
 export default function App({ Component, pageProps }: AppProps) {
+  const route = useRouter().pathname;
   return (
     <>
       <Head>
@@ -16,11 +20,19 @@ export default function App({ Component, pageProps }: AppProps) {
           ${reset}
         `}
       />
-      <Layout>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </Layout>
+      {route === "/signin" || route === "/signup" ? (
+        <SignLayout>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </SignLayout>
+      ) : (
+        <Layout>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </Layout>
+      )}
     </>
   );
 }

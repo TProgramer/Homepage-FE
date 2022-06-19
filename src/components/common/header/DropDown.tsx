@@ -1,4 +1,4 @@
-import { DropDownList } from "../../../styles/layout/header";
+import { DropDownList } from "../../../styles/layout/main/header";
 import Link from "next/link";
 
 type navbarProps = {

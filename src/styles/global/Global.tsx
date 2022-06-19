@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const TABLET_STANDARD = 1024;
 export const MOBILE_STANDARD = 768;
 export const DEFAULT_FONT = "Noto Sans";
-export const DEFAULT_BORDERRADIUS = "20px";
+export const DEFAULT_BORDERRADIUS = "10px";
 export const MAX_WIDTH = "1200px";
 export const FONTWEIGHT_NORMAL = 400;
 export const FONTWEIGHT_BOLD = 700;
