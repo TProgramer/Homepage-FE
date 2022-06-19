@@ -53,7 +53,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="register">
-          <Link href="#">
+          <Link href="/signin">
             <a>로그인</a>
           </Link>
         </div>

@@ -6,6 +6,7 @@ import { theme } from "../themes/theme";
 import Layout from "../components/common/Layout";
 import { useRouter } from "next/router";
 import SignLayout from "../components/common/sign/SignLayout";
+
 export default function App({ Component, pageProps }: AppProps) {
   const route = useRouter().pathname;
   return (
