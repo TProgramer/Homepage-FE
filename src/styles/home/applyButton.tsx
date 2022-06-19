@@ -1,0 +1,35 @@
+import styled from "@emotion/styled";
+import { FONT_XL, MAX_WIDTH } from "../global/Global";
+
+export const ApplyBox = styled("div")<{ backgroundImageUrl: string }>`
+  width: ${MAX_WIDTH};
+  @media (max-width: ${MAX_WIDTH}) {
+    width: 100%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 0 auto;
+  height: 500px;
+  background-image: url("${(props) => props.backgroundImageUrl}");
+  background-size: cover;
+`;
+
+export const ApplyMessage = styled("div")`
+  width: 100%;
+`;
+
+export const Apply = styled("a")`
+  width: 200px;
+  height: 50px;
+  align-self: center;
+  text-align: center;
+
+  font-size: ${FONT_XL};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
