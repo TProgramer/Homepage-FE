@@ -1,20 +1,11 @@
 import styled from "@emotion/styled";
-import {
-  MOBILE_STANDARD,
-  MAX_WIDTH,
-  FONT_XXXL,
-  FONT_L,
-} from "../../global/Global";
+import { MAX_WIDTH, FONT_XXXL, FONT_XL } from "../../global/Global";
 export const StyledFooter = styled("footer")`
-  @media (max-width: ${MOBILE_STANDARD}px) {
-    display: none;
-  }
   background-color: #000000;
   height: 500px;
-
   width: 100%;
   .contents {
-    width: ${MAX_WIDTH};
+    max-width: ${MAX_WIDTH};
     height: 100%;
     margin: 0 auto;
 
@@ -38,7 +29,7 @@ export const StyledFooter = styled("footer")`
       color: white;
     }
     .NL_detail {
-      font-size: ${FONT_L};
+      font-size: ${FONT_XL};
       color: white;
     }
   }
