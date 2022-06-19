@@ -3,7 +3,7 @@ import {
   StyledNavbar,
   StyledMenuIcon,
   StyledCancelIcon,
-} from "../../../styles/layout/header";
+} from "../../../styles/layout/main/header";
 import DropDown from "./DropDown";
 import SideBlock from "./SideBlock";
 import Link from "next/link";

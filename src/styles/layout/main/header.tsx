@@ -2,7 +2,11 @@ import styled from "@emotion/styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Typography from "@mui/material/Typography";
-import { MAX_WIDTH, TABLET_STANDARD, MOBILE_STANDARD } from "../global/Global";
+import {
+  MAX_WIDTH,
+  TABLET_STANDARD,
+  MOBILE_STANDARD,
+} from "../../global/Global";
 export const StyledHeader = styled("header")`
   width: 100%;
   height: 100px;
