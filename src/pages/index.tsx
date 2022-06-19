@@ -1,4 +1,5 @@
 import YoutubePlayer from "../components/home/YoutubePlayer";
+import ApplyButton from "../components/home/ApplyButton";
 import H1 from "../components/common/H1";
 import P from "../components/common/P";
 import StudyStatus from "../components/home/StudyStatus";
@@ -16,6 +17,9 @@ const Home = () => (
       </P>
     </YoutubePlayer>
     <StudyStatus />
+    <ApplyButton>
+      <H1 center>지금 바로 지원하세요!</H1>
+    </ApplyButton>
   </>
 );
 
