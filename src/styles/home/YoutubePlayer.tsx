@@ -1,22 +1,22 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-export const YoutubeBox = styled('div')`
+export const YoutubeBox = styled("div")`
   width: 100vw;
   height: calc(100vh - 100px);
   overflow: hidden;
+  margin-top: 100px;
 `;
 
-export const YoutubeFrame = styled('iframe')`
+export const YoutubeFrame = styled("iframe")`
   width: 100vw;
   height: max(100%, calc(100vw / 16 * 9));
-
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
 
-export const Contents = styled('div')`
+export const Contents = styled("div")`
   display: flex;
   flex-direction: column;
 

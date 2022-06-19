@@ -204,7 +204,7 @@ const SideBlock = ({ isSide }: navbarProps) => {
         </Link>
       </div>
       <div className="side_signin">
-        <Link href="#">
+        <Link href="/signin">
           <a>로그인</a>
         </Link>
       </div>
