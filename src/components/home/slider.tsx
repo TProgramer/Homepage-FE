@@ -26,6 +26,11 @@ function Slider() {
     })();
   }, []);
 
+  const bgColor = ["#020314", "#5932E6", "#8631E6", "#161370", "#364B92"];
+  const randomDegProducer = () => {
+    const randomDeg: string[] = [];
+  };
+
   const onClickRight = () => {
     setDeg((prev) => prev - 45);
   };
@@ -33,38 +38,12 @@ function Slider() {
     setDeg((prev) => prev + 45);
   };
 
-  const forLoopDeskTop = () => {
+  const forLoopDeskTop = (Z: number) => {
     let loopPseudo = "";
     for (let i = 1; i < 9; i++) {
       loopPseudo += `
         &:nth-of-type(${i}) {
-          transform: rotateY(${i * 45}deg) translateZ(550px);
-        }
-      `;
-    }
-    return css`
-      ${loopPseudo}
-    `;
-  };
-  const forLoopTablet = () => {
-    let loopPseudo = "";
-    for (let i = 1; i < 9; i++) {
-      loopPseudo += `
-        &:nth-of-type(${i}) {
-          transform: rotateY(${i * 45}deg) translateZ(350px);
-        }
-      `;
-    }
-    return css`
-      ${loopPseudo}
-    `;
-  };
-  const forLoopMobile = () => {
-    let loopPseudo = "";
-    for (let i = 1; i < 9; i++) {
-      loopPseudo += `
-        &:nth-of-type(${i}) {
-          transform: rotateY(${i * 45}deg) translateZ(200px);
+          transform: rotateY(${i * 45}deg) translateZ(${Z}px);
         }
       `;
     }
@@ -73,18 +52,14 @@ function Slider() {
     `;
   };
   return (
-    <Container>
+    <Container bgColor={bgColor}>
       <h2 className="title">프로젝트 결과물</h2>
       <RotateContainer>
         <AxisPlane deg={deg}>
           {projects?.map((item, index) => {
             return (
-              <Plane
-                forLoopDeskTop={forLoopDeskTop}
-                forLoopTablet={forLoopTablet}
-                forLoopMobile={forLoopMobile}
-                key={index}
-              >
+              <Plane forLoopDeskTop={forLoopDeskTop} key={index}>
+                <div className="rotate__title">{item.title}</div>
                 <img
                   src={item?.img}
                   alt={`project${index}`}

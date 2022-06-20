@@ -10,10 +10,13 @@ import {
   TRANSITION,
 } from "../global/Global";
 
-export const Container = styled("div")`
+export const Container = styled("div")<{
+  bgColor: string[];
+}>`
   width: 100vw;
   height: 800px;
-  background-color: ${(props) => props.theme.backgroundColor};
+  ${TRANSITION}
+  background-color: ${(props) => props.bgColor[Math.floor(Math.random() * 4)]};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -116,9 +119,7 @@ export const AxisPlane = styled("div")<{ deg: number }>`
   }
 `;
 export const Plane = styled("div")<{
-  forLoopDeskTop: () => SerializedStyles;
-  forLoopTablet: () => SerializedStyles;
-  forLoopMobile: () => SerializedStyles;
+  forLoopDeskTop: (Z: number) => SerializedStyles;
 }>`
   width: 100%;
   height: 100%;
@@ -128,14 +129,26 @@ export const Plane = styled("div")<{
   border-radius: ${DEFAULT_BORDERRADIUS};
   overflow: hidden;
   box-shadow: 0px 0px 55px ${(props) => props.theme.buttonColor.primary};
-  ${(props) => props.forLoopDeskTop()}
+  ${(props) => props.forLoopDeskTop(550)}
   @media (max-width: ${`${TABLET_STANDARD}px`}) {
-    ${(props) => props.forLoopTablet()}
+    ${(props) => props.forLoopDeskTop(350)}
   }
   @media (max-width: ${`${MOBILE_STANDARD}px`}) {
-    ${(props) => props.forLoopMobile()}
+    ${(props) => props.forLoopDeskTop(200)}
   }
   .rotate__img {
     width: 120%;
+  }
+  .rotate__title {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    font-size: ${FONT_XXL};
+    color: ${(props) => props.theme.textColor.sub};
   }
 `;
