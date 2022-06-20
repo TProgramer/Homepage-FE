@@ -104,7 +104,7 @@ export const AxisPlane = styled("div")<{ deg: number }>`
   position: relative;
   border-radius: ${DEFAULT_BORDERRADIUS};
   transform-style: preserve-3d;
-  ${TRANSITION}
+  transition: all 0.5s ease-out;
   transform: rotateY(${(props) => `${props.deg}deg`});
   @media (max-width: ${`${TABLET_STANDARD}px`}) {
     width: 230px;

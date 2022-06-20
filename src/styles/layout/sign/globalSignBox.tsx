@@ -67,7 +67,7 @@ export const Form = styled("form")`
     ${TRANSITION}
     &:focus {
       outline: none;
-      border-bottom: 2px solid ${(props) => props.theme.buttonColor};
+      border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
     }
   }
   .submit {
@@ -80,7 +80,7 @@ export const Form = styled("form")`
     ${TRANSITION}
     &:hover {
       color: ${(props) => props.theme.textColor.sub};
-      background-color: ${(props) => props.theme.buttonColor};
+      background-color: ${(props) => props.theme.buttonColor.primary};
     }
   }
 `;
