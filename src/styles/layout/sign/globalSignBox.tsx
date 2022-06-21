@@ -73,7 +73,7 @@ export const SignBox = styled("div")`
   }
 `;
 
-export const Form = styled("form")<{ show: boolean }>`
+export const Form = styled("form")<{ show?: boolean }>`
   width: 100%;
   height: auto;
   display: flex;
