@@ -14,6 +14,7 @@ import {
 export const SignContainer = styled("div")`
   width: 100vw;
   height: auto;
+  display: flex;
 `;
 
 export const SignBox = styled("div")`
@@ -129,4 +130,10 @@ export const Form = styled("form")<{ show: boolean }>`
       color: ${(props) => props.theme.buttonColor.primary};
     }
   }
+`;
+
+export const SignBgImage = styled("div")<{ imageUrl: string }>`
+  width: calc(100vw - 500px);
+  height: 100vh;
+  background-image: url(${(props) => props.imageUrl});
 `;

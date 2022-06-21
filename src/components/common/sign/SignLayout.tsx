@@ -2,6 +2,7 @@ import React from "react";
 import {
   SignBox,
   SignContainer,
+  SignBgImage,
 } from "../../../styles/layout/sign/globalSignBox";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -48,6 +49,7 @@ const SignLayout = ({ children }: React.PropsWithChildren<{}>) => {
           </div>
         </div>
       </SignBox>
+      <SignBgImage imageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png" />
     </SignContainer>
   );
 };
