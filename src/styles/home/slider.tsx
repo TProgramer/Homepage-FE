@@ -2,6 +2,7 @@ import { SerializedStyles } from "@emotion/react";
 import styled from "@emotion/styled";
 import {
   DEFAULT_BORDERRADIUS,
+  DEFAULT_BOXSHADOW,
   FONT_L,
   FONT_XL,
   FONT_XXL,
@@ -10,10 +11,13 @@ import {
   TRANSITION,
 } from "../global/Global";
 
-export const Container = styled("div")`
+export const Container = styled("div")<{
+  bgColor: string[];
+}>`
   width: 100vw;
   height: 800px;
-  background-color: ${(props) => props.theme.backgroundColor};
+  ${TRANSITION}
+  background-color: ${(props) => props.bgColor[Math.floor(Math.random() * 4)]};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -45,6 +49,7 @@ export const Container = styled("div")`
     font-size: ${FONT_XL};
     border-radius: ${DEFAULT_BORDERRADIUS};
     margin: auto 0;
+    ${DEFAULT_BOXSHADOW}
     color: ${(props) => props.theme.textColor.sub};
     background-color: ${(props) => props.theme.buttonColor.primary};
     cursor: pointer;
@@ -104,7 +109,7 @@ export const AxisPlane = styled("div")<{ deg: number }>`
   position: relative;
   border-radius: ${DEFAULT_BORDERRADIUS};
   transform-style: preserve-3d;
-  ${TRANSITION}
+  transition: all 0.5s ease-out;
   transform: rotateY(${(props) => `${props.deg}deg`});
   @media (max-width: ${`${TABLET_STANDARD}px`}) {
     width: 230px;
@@ -116,10 +121,9 @@ export const AxisPlane = styled("div")<{ deg: number }>`
   }
 `;
 export const Plane = styled("div")<{
-  forLoopDeskTop: () => SerializedStyles;
-  forLoopTablet: () => SerializedStyles;
-  forLoopMobile: () => SerializedStyles;
+  forLoop: (Z: number) => SerializedStyles;
 }>`
+  ${DEFAULT_BOXSHADOW}
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -127,15 +131,27 @@ export const Plane = styled("div")<{
   transform-origin: center;
   border-radius: ${DEFAULT_BORDERRADIUS};
   overflow: hidden;
-  box-shadow: 0px 0px 55px ${(props) => props.theme.buttonColor.primary};
-  ${(props) => props.forLoopDeskTop()}
+  /* box-shadow: 0px 0px 55px ${(props) => props.theme.buttonColor.primary}; */
+  ${(props) => props.forLoop(550)}
   @media (max-width: ${`${TABLET_STANDARD}px`}) {
-    ${(props) => props.forLoopTablet()}
+    ${(props) => props.forLoop(350)}
   }
   @media (max-width: ${`${MOBILE_STANDARD}px`}) {
-    ${(props) => props.forLoopMobile()}
+    ${(props) => props.forLoop(200)}
   }
   .rotate__img {
     width: 120%;
+  }
+  .rotate__title {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    font-size: ${FONT_XXL};
+    color: ${(props) => props.theme.textColor.sub};
   }
 `;

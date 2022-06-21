@@ -1,23 +1,100 @@
 import { Form } from "../styles/layout/sign/globalSignBox";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import { useForm } from "react-hook-form";
+import { ISignType } from "../components/common/sign/SignLayout";
+import { useState } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function SignUp() {
+  const [show, setShow] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<ISignType>();
+  const pwWatch = watch("password");
+  const onSubmit = (data: ISignType) => {
+    console.log(data);
+  };
+
+  const regexPw =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/; //최소길이 6, 1개이상 문자, 1개이상 특수문자
+  const regexEmail =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
   return (
     <>
-      <Form>
-        <input type="text" className="input" placeholder="Student Id" />
-        <input type="text" className="input" placeholder="Password" />
-        <input type="text" className="input" placeholder="Password Confirm" />
-        <input type="text" className="input" placeholder="Birthday" />
-        <input type="text" className="input" placeholder="Email address" />
-        <input type="text" className="input" placeholder="Github address" />
+      <Form onSubmit={handleSubmit(onSubmit)} show={show}>
+        <input
+          {...register("studentId", {
+            required: true,
+            minLength: 8,
+          })}
+          type="text"
+          className="input"
+          placeholder="Student Id"
+        />
+        <div className="pwVisible">
+          <input
+            {...register("password", {
+              required: true,
+              pattern: regexPw,
+            })}
+            type={!show ? "password" : "text"}
+            className="input"
+            placeholder="Password: 최소길이 6, 1개이상 문자, 1개이상 특수문자"
+          />
+          {!show ? (
+            <VisibilityIcon
+              className="visibleIcon"
+              onClick={() => setShow((prev) => !prev)}
+            />
+          ) : (
+            <VisibilityOffIcon
+              className="visibleIcon"
+              onClick={() => setShow((prev) => !prev)}
+            />
+          )}
+        </div>
+        <input
+          {...register("passwordConfirm", {
+            required: true,
+            validate: (value) => value === pwWatch,
+          })}
+          type="password"
+          className="input"
+          placeholder="Password Confirm"
+        />
+        <input
+          {...register("birthDay", { required: true })}
+          type="date"
+          className="input"
+        />
+        <input
+          {...register("email", {
+            required: true,
+            pattern: regexEmail,
+          })}
+          type="email"
+          className="input"
+          placeholder="Email address"
+        />
+        <input
+          {...register("github", {
+            required: true,
+          })}
+          type="text"
+          className="input"
+          placeholder="Github Id"
+        />
         <button className="submit">CREATE ACCOUNT</button>
       </Form>
       <div className="warning">
         <WarningAmberIcon />
         <p className="paragraph">
-          The authentication process is carried out by the administrator, please
-          write down your personal information properly
+          The authentication process is carried out by the administrator, so
+          please write down your personal information properly
         </p>
       </div>
     </>

@@ -72,12 +72,24 @@ export const SignBox = styled("div")`
   }
 `;
 
-export const Form = styled("form")`
+export const Form = styled("form")<{ show: boolean }>`
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  .pwVisible {
+    width: 100%;
+    height: 45px;
+    position: relative;
+    margin-bottom: 20px;
+    .visibleIcon {
+      position: absolute;
+      top: 25%;
+      left: 102%;
+      color: ${(props) => (!props.show ? props.theme.textColor.sub : "red")};
+    }
+  }
   .input {
     width: 100%;
     height: 45px;
