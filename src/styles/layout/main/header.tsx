@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Typography from "@mui/material/Typography";
+
 import {
   MAX_WIDTH,
   TABLET_STANDARD,
@@ -19,7 +20,7 @@ export const StyledHeader = styled("header")`
   width: 100%;
   height: 100px;
   z-index: 999;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 0.8);
@@ -219,22 +220,23 @@ export const StyledSideBlock = styled("div")<{ isSide: boolean }>`
   right: 0;
   height: 100%;
   background: white;
-
   @media (min-width: ${MOBILE_STANDARD}px) {
     display: none;
   }
   .side_reserve {
-    background: rgba(0, 0, 0, 0.03);
+    background: #f2f5f8;
     padding: 12px 0 12px 16px;
     border: 1px solid rgba(0, 0, 0, 0.125);
     cursor: pointer;
+    font-size: ${(props) => (props.isSide ? 16 : 0)}px;
   }
   .side_signin {
     padding: 0 16px;
-    background: rgba(0, 0, 0, 0.03);
+    background: #f2f5f8;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     padding: 12px 0 12px 16px;
     cursor: pointer;
+    font-size: ${(props) => (props.isSide ? 16 : 0)}px;
   }
 `;
 

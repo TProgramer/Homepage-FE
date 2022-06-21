@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+
 import {
   DEFAULT_BORDERRADIUS,
   FONT_L,
@@ -22,17 +23,26 @@ export const SignBox = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   @media (max-width: ${MOBILE_STANDARD}) {
     width: 100%;
     height: 100vh;
   }
   .innerContainer {
     width: 370px;
-    height: auto;
+    height: 100vh;
+    position: relative;
     .logo {
       font-size: 70px;
       color: white;
-      margin: 50px 0;
+      margin: 50px 0 5px 0;
+      cursor: pointer;
+    }
+    .logo-detail {
+      color: white;
+      font-size: 18px;
+      margin-bottom: 10px;
+      cursor: pointer;
     }
     .warning {
       width: 100%;
@@ -43,6 +53,20 @@ export const SignBox = styled("div")`
       color: red;
       .paragraph {
         margin-left: 15px;
+      }
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      @media (max-height: 800px) {
+        display: none;
+      }
+      padding-bottom: 30px;
+      .info-text {
+        color: white;
+        margin-left: 5px;
+        font-size: 14px;
       }
     }
   }
@@ -91,8 +115,18 @@ export const Form = styled("form")<{ show: boolean }>`
     border: none;
     ${TRANSITION}
     &:hover {
+      cursor: pointer;
       color: ${(props) => props.theme.textColor.sub};
       background-color: ${(props) => props.theme.buttonColor.primary};
+    }
+  }
+  .toregister {
+    cursor: pointer;
+    margin-top: 20px;
+    color: white;
+    text-decoration: underline;
+    &:hover {
+      color: ${(props) => props.theme.buttonColor.primary};
     }
   }
 `;

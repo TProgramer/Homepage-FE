@@ -3,10 +3,10 @@ import { MOBILE_STANDARD, TABLET_STANDARD } from "../global/Global";
 
 export const StudyStatusInnerDiv = styled("section")`
   max-width: 1200px;
-  height: 886px;
+  height: auto;
   margin: 0 auto;
   text-align: center;
-  padding-top: 200px;
+  padding: 200px 0 286px 0;
   p {
     font-size: 36px;
     margin-bottom: 50px;
@@ -14,14 +14,18 @@ export const StudyStatusInnerDiv = styled("section")`
   .box {
     display: flex;
     width: 100%;
-    height: 400px;
+    height: auto;
     gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
     .item {
       background-color: transparent;
-      flex-grow: 1;
-      height: 100%;
+      width: 360px;
+      height: 400px;
       perspective: 1000px;
+      
       .item_inner {
+       
         position: relative;
         width: 100%;
         height: 100%;
@@ -30,12 +34,6 @@ export const StudyStatusInnerDiv = styled("section")`
         transform-style: preserve-3d;
       }
       .front {
-        @media (max-width: ${TABLET_STANDARD}px) {
-            font-size: 28px;
-        }
-        @media (max-width: ${MOBILE_STANDARD}px) {
-            font-size: 18px;
-        }
         font-size: 36px;
         line-height: 400px;
         border-radius: 40px;
@@ -48,12 +46,6 @@ export const StudyStatusInnerDiv = styled("section")`
         color: black;
       }
       .back {
-        @media (max-width: ${MOBILE_STANDARD}px) {
-            font-size: 18px;
-        }
-        @media (max-width: ${MOBILE_STANDARD}px) {
-            font-size: 18px;
-        }
         font-size: 36px;
         line-height: 400px;
         border-radius: 40px;

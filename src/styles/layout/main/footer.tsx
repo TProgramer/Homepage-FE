@@ -16,7 +16,6 @@ export const StyledFooter = styled("footer")`
   .title {
     width: 100%;
     height: 200px;
-
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -37,7 +36,6 @@ export const StyledFooter = styled("footer")`
   .about-us {
     display: flex
     flex-direction: column;
-
     width: fit-content;
     align-self: flex-end;
 
