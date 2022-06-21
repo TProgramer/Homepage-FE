@@ -25,12 +25,7 @@ function Slider() {
       setProjects(res);
     })();
   }, []);
-
   const bgColor = ["#020314", "#5932E6", "#8631E6", "#161370", "#364B92"];
-  const randomDegProducer = () => {
-    const randomDeg: string[] = [];
-  };
-
   const onClickRight = () => {
     setDeg((prev) => prev - 45);
   };
@@ -38,7 +33,7 @@ function Slider() {
     setDeg((prev) => prev + 45);
   };
 
-  const forLoopDeskTop = (Z: number) => {
+  const forLoop = (Z: number) => {
     let loopPseudo = "";
     for (let i = 1; i < 9; i++) {
       loopPseudo += `
@@ -58,7 +53,7 @@ function Slider() {
         <AxisPlane deg={deg}>
           {projects?.map((item, index) => {
             return (
-              <Plane forLoopDeskTop={forLoopDeskTop} key={index}>
+              <Plane forLoop={forLoop} key={index}>
                 <div className="rotate__title">{item.title}</div>
                 <img
                   src={item?.img}
