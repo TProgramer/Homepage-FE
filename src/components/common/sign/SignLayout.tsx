@@ -40,7 +40,6 @@ const SignLayout = ({ children }: React.PropsWithChildren<{}>) => {
           </div>
         </div>
       </SignBox>
-      {/* <SignBgImage imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXK69ETJmH30sgr5PoQ75fngQ8zkP0WGZYzQ&usqp=CAU" /> */}
       <SignBgImage imageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png" />
     </SignContainer>
   );
