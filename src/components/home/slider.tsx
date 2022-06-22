@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import { useEffect, useState } from "react";
+import { theme } from "../../themes/theme";
 import {
   AxisPlane,
   ClickBox,
@@ -16,6 +17,7 @@ interface IImage {
 }
 
 function Slider() {
+  const [randomColor, setRandomColor] = useState(theme.backgroundColor);
   const [projects, setProjects] = useState<IImage[]>();
   const [deg, setDeg] = useState(0);
 
@@ -25,12 +27,17 @@ function Slider() {
       setProjects(res);
     })();
   }, []);
-  const bgColor = ["#020314", "#5932E6", "#8631E6", "#161370", "#364B92"];
+  const randomColorProducer = () => {
+    const bgColor = ["#020314", "#5932E6", "#8631E6", "#161370", "#364B92"];
+    setRandomColor(bgColor[Math.floor(Math.random() * 4)]);
+  };
   const onClickRight = () => {
     setDeg((prev) => prev - 45);
+    randomColorProducer();
   };
   const onClickLeft = () => {
     setDeg((prev) => prev + 45);
+    randomColorProducer();
   };
 
   const forLoop = (Z: number) => {
@@ -47,7 +54,7 @@ function Slider() {
     `;
   };
   return (
-    <Container bgColor={bgColor}>
+    <Container bgColor={randomColor}>
       <h2 className="title">프로젝트 결과물</h2>
       <RotateContainer>
         <AxisPlane deg={deg}>

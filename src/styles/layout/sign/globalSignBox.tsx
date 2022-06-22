@@ -1,13 +1,9 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import {
   DEFAULT_BORDERRADIUS,
   FONT_L,
-  FONT_M,
-  FONT_XL,
   MOBILE_STANDARD,
-  TABLET_STANDARD,
   TRANSITION,
 } from "../../global/Global";
 
@@ -78,7 +74,7 @@ export const Form = styled("form")<{ show: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  .pwVisible {
+  .pw {
     width: 100%;
     height: 45px;
     position: relative;
@@ -86,9 +82,14 @@ export const Form = styled("form")<{ show: boolean }>`
     .visibleIcon {
       position: absolute;
       top: 25%;
-      left: 102%;
+      left: 93%;
       color: ${(props) => (!props.show ? props.theme.textColor.sub : "red")};
     }
+  }
+  .errorMessage {
+    position: absolute;
+    color: ${(props) => props.theme.buttonColor.primary};
+    top: 110%;
   }
   .input {
     width: 100%;

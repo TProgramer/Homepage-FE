@@ -20,7 +20,7 @@ function SignUp() {
   };
 
   const regexPw =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/; //최소길이 6, 1개이상 문자, 1개이상 특수문자
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,15}$/; //최소길이 6, 1개이상 문자, 1개이상 특수문자
   const regexEmail =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
   return (
@@ -35,7 +35,7 @@ function SignUp() {
           className="input"
           placeholder="Student Id"
         />
-        <div className="pwVisible">
+        <div className="pw">
           <input
             {...register("password", {
               required: true,
@@ -43,7 +43,7 @@ function SignUp() {
             })}
             type={!show ? "password" : "text"}
             className="input"
-            placeholder="Password: 최소길이 6, 1개이상 문자, 1개이상 특수문자"
+            placeholder="최소길이 6, 1개이상 문자, 1개이상 특수문자"
           />
           {!show ? (
             <VisibilityIcon
@@ -56,16 +56,28 @@ function SignUp() {
               onClick={() => setShow((prev) => !prev)}
             />
           )}
+          {errors.password?.type === "pattern" && (
+            <span className="errorMessage">
+              6~15 Length, 1 more than String and Special Character
+            </span>
+          )}
         </div>
-        <input
-          {...register("passwordConfirm", {
-            required: true,
-            validate: (value) => value === pwWatch,
-          })}
-          type="password"
-          className="input"
-          placeholder="Password Confirm"
-        />
+        <div className="pw">
+          <input
+            {...register("passwordConfirm", {
+              required: true,
+              validate: (value) => value === pwWatch,
+            })}
+            type="password"
+            className="input"
+            placeholder="Password Confirm"
+          />
+          {errors.passwordConfirm?.type === "validate" && (
+            <span className="errorMessage">
+              It's not the same as the password
+            </span>
+          )}
+        </div>
         <input
           {...register("birthDay", { required: true })}
           type="date"
