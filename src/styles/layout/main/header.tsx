@@ -100,7 +100,7 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
     position: absolute;
     width: 100%;
     display: block;
-    height: ${(props) => (props.isHover ? 350 : 0)}px;
+    height: ${(props) => (props.isHover ? 250 : 0)}px;
     background: black;
     color: white;
     margin-top: 100px;
