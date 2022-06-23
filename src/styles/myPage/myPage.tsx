@@ -16,32 +16,172 @@ export const Wrapper = styled("div")`
   display: flex;
 `;
 
-export const ProfileContainer = styled("div")<{
+export const FormContainer = styled("form")<{
   myForm?: boolean;
 }>`
   width: 450px;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 100px 0 0 0;
   position: relative;
+  background-color: white;
   ${DEFAULT_BOXSHADOW}
   overflow: hidden;
-  .form {
-    width: 450px;
-    height: 100vh;
-    display: flex;
+  .submit {
+    width: 50px;
+    height: 50px;
     position: absolute;
-    top: -100px;
-    flex-direction: column;
+    top: 32%;
+    left: 70%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin: 100px 0 0 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    border: none;
+    ${DEFAULT_BOXSHADOW}
+    color: ${(props) => props.theme.textColor.sub};
+    background-color: ${(props) => props.theme.buttonColor.primary};
     ${TRANSITION}
-    transform: translateX(${(props) => (props.myForm ? 0 : "450px")});
-    box-shadow: none;
-    z-index: 2;
+    &:hover {
+      background-color: ${(props) => props.theme.buttonColor.onHover};
+    }
+  }
+`;
+export const AvatarInput = styled("div")`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  z-index: 0;
+  .avatar__input--box {
+    width: 320px;
+    height: 320px;
+    background-color: ${(props) => props.theme.textColor.sub};
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 10px 0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    .avatar__input--label {
+      ${TRANSITION}
+      color: rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      &:hover {
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+    #avatar__input--input {
+      display: none;
+    }
+  }
+  .form__header {
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    .form__name {
+      font-size: ${FONT_XL};
+      color: ${(props) => props.theme.textColor.primary};
+      font-weight: ${FONTWEIGHT_BOLD};
+      margin-right: 5px;
+    }
+    .form__major--grade {
+      font-size: ${FONT_L};
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+  .form__type {
+    margin-left: 10px;
+  }
+`;
+
+export const InputBox = styled("div")`
+  width: 300px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  .form__label {
+    width: 35px;
+    min-height: 40px;
+    font-size: ${FONT_L};
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .form__input {
+    width: 240px;
+    border: none;
+    border-bottom: 2px solid ${(props) => props.theme.backgroundColor};
+    ${TRANSITION}
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
+    }
+  }
+  #bio {
+    height: 150px;
+    border: 2px solid ${(props) => props.theme.backgroundColor};
+    border-radius: ${DEFAULT_BORDERRADIUS};
+    word-break: break-all;
+    &:focus {
+      outline: none;
+      border: 2px solid ${(props) => props.theme.buttonColor.primary};
+    }
+  }
+  &:nth-of-type(4),
+  :nth-of-type(5) {
+    justify-content: flex-start;
+    #grade,
+    #type {
+      margin-left: 20px;
+    }
+  }
+`;
+
+export const ProfileContainer = styled("div")<{
+  myForm?: boolean;
+}>`
+  width: 450px;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  ${DEFAULT_BOXSHADOW}
+  background-color: white;
+  transition: all 0.6s ease-out;
+  transform: translateX(${(props) => (!props.myForm ? 0 : "-450px")});
+  z-index: 2;
+  /* transform: translateX(450px); */
+  overflow: hidden;
+  .edit {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 32%;
+    left: 70%;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    ${DEFAULT_BOXSHADOW}
+    color: ${(props) => props.theme.textColor.sub};
+    background-color: ${(props) => props.theme.buttonColor.primary};
+    ${TRANSITION}
+    &:hover {
+      background-color: ${(props) => props.theme.buttonColor.onHover};
+    }
   }
 `;
 
@@ -67,29 +207,6 @@ export const Avatar = styled("div")`
       rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     .avatar__img {
       width: 100%;
-    }
-    .addIcon {
-      font-size: ${FONT_XXL};
-      color: rgba(0, 0, 0, 0.3);
-    }
-  }
-  .edit {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 34%;
-    left: 70%;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    ${DEFAULT_BOXSHADOW}
-    color: ${(props) => props.theme.textColor.sub};
-    background-color: ${(props) => props.theme.buttonColor.primary};
-    ${TRANSITION}
-    &:hover {
-      background-color: ${(props) => props.theme.buttonColor.onHover};
     }
   }
   .info__header {
