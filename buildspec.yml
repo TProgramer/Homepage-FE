@@ -3,9 +3,11 @@ phases:
    install:
      commands:
        - npm install
+       - npm install -g next
+       - yarn
    build:
      commands:
-       - npm run dev
+       - yarn dev
  # npm 명령어는 정적 파일 생성을 위해 package.json에 작성한 scripts에 맞게 작성합니다.
 artifacts: # CodeBuild의 output artifcats를 지정합니다.
    files:
