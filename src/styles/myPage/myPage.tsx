@@ -33,8 +33,8 @@ export const FormContainer = styled("form")<{
     width: 50px;
     height: 50px;
     position: absolute;
-    top: 32%;
-    left: 70%;
+    top: 270px;
+    left: 320px;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -49,10 +49,23 @@ export const FormContainer = styled("form")<{
       background-color: ${(props) => props.theme.buttonColor.onHover};
     }
   }
+  .selection {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    .select {
+      width: 150px;
+      justify-content: flex-start;
+      #type,
+      #grade {
+        margin-left: 20px;
+      }
+    }
+  }
 `;
 export const AvatarInput = styled("div")`
   width: 100%;
-  height: 100%;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,7 +122,7 @@ export const InputBox = styled("div")`
   height: auto;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   .form__label {
     width: 35px;
     min-height: 40px;
@@ -132,18 +145,10 @@ export const InputBox = styled("div")`
     height: 150px;
     border: 2px solid ${(props) => props.theme.backgroundColor};
     border-radius: ${DEFAULT_BORDERRADIUS};
-    word-break: break-all;
+    margin-left: 20px;
     &:focus {
       outline: none;
       border: 2px solid ${(props) => props.theme.buttonColor.primary};
-    }
-  }
-  &:nth-of-type(4),
-  :nth-of-type(5) {
-    justify-content: flex-start;
-    #grade,
-    #type {
-      margin-left: 20px;
     }
   }
 `;
@@ -168,8 +173,8 @@ export const ProfileContainer = styled("div")<{
     width: 50px;
     height: 50px;
     position: absolute;
-    top: 32%;
-    left: 70%;
+    top: 270px;
+    left: 320px;
     z-index: 3;
     display: flex;
     justify-content: center;

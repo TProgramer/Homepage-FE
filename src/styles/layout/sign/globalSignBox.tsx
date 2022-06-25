@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import {
   DEFAULT_BORDERRADIUS,
   FONT_L,
-  MOBILE_STANDARD,
+  TABLET_STANDARD,
   TRANSITION,
 } from "../../global/Global";
 
@@ -19,13 +19,12 @@ export const SignBox = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media (max-width: ${MOBILE_STANDARD}) {
+  @media (max-width: ${`${TABLET_STANDARD}px`}) {
     width: 100%;
     height: 100vh;
   }
   .innerContainer {
-    width: 370px;
+    width: 350px;
     height: 100vh;
     position: relative;
     .logo {
@@ -68,14 +67,14 @@ export const SignBox = styled("div")`
   }
 `;
 
-export const Form = styled("form")<{ show: boolean }>`
+export const Form = styled("form")<{ show?: boolean }>`
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   .pw {
-    width: 100%;
+    width: 350px;
     height: 45px;
     position: relative;
     margin-bottom: 20px;
@@ -92,7 +91,7 @@ export const Form = styled("form")<{ show: boolean }>`
     top: 110%;
   }
   .input {
-    width: 100%;
+    width: 350px;
     height: 45px;
     margin-bottom: 20px;
     border: none;
@@ -108,7 +107,7 @@ export const Form = styled("form")<{ show: boolean }>`
     }
   }
   .submit {
-    width: 380px;
+    width: 95%;
     height: 60px;
     margin-bottom: 20px;
     border-radius: ${DEFAULT_BORDERRADIUS};
@@ -124,7 +123,7 @@ export const Form = styled("form")<{ show: boolean }>`
   .toregister {
     cursor: pointer;
     margin-top: 20px;
-    color: white;
+    color: ${(props) => props.theme.textColor.sub};
     text-decoration: underline;
     &:hover {
       color: ${(props) => props.theme.buttonColor.primary};

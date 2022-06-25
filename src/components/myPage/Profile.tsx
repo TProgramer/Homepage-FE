@@ -38,34 +38,31 @@ const MyProfile = () => {
   const [move, setMove] = useState(225);
   const [personalData, setPersonalData] = useState<IPersonalType>({
     profileImg: "",
+    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdkVemYyTTjjwW8ax1aJ-kHvwR6aK1VTPKRSbvlnIlMs340p0iFzcs_u878365DmbZvI&usqp=CAU",
     name: "박인재",
     major: "건축공학과",
     grade: "2",
     type: "FrontEnd",
     bio: "안녕하세요 저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요 저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요 저는 건축공학과저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요 저는 건축공학과 2학년 재학중인 박인재입니",
-    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdkVemYyTTjjwW8ax1aJ-kHvwR6aK1VTPKRSbvlnIlMs340p0iFzcs_u878365DmbZvI&usqp=CAU",
     email: "qkrdlswo98@naver.com",
     number: "010-3393-9410",
     github: "https://CWCTBOY.github.com",
     link: "https://wakatime.com",
   });
   const { register, handleSubmit } = useForm<IPersonalType>();
-
+  const onSubmit = (data: IPersonalType) => {
+    setPersonalData(data);
+    setMyForm(false);
+  };
   const onClickLeft = () => {
     setMove((prev) => prev + 450);
   };
   const onClickRight = () => {
     setMove((prev) => prev - 450);
   };
-  console.log(myForm);
   return (
-    <FormContainer myForm={myForm}>
-      <button
-        className="submit"
-        onClick={() => {
-          setMyForm(false);
-        }}
-      >
+    <FormContainer onSubmit={handleSubmit(onSubmit)} myForm={myForm}>
+      <button className="submit" type="submit">
         <CheckIcon />
       </button>
       <AvatarInput>
@@ -77,9 +74,9 @@ const MyProfile = () => {
             <AddBoxIcon />
           </label>
           <input
+            {...register("profileImg")}
             type="file"
             id="avatar__input--input"
-            placeholder={personalData.profileImg}
           />
         </div>
       </AvatarInput>
@@ -88,7 +85,8 @@ const MyProfile = () => {
           이름
         </label>
         <input
-          type="url"
+          {...register("name", { required: true })}
+          type="text"
           className="form__input"
           id="name"
           placeholder={personalData.name}
@@ -99,39 +97,43 @@ const MyProfile = () => {
           전공
         </label>
         <input
-          type="url"
+          {...register("major", { required: true })}
+          type="text"
           className="form__input"
           id="major"
           placeholder={personalData.major}
         />
       </InputBox>
-      <InputBox>
-        <label htmlFor="grade" className="form__label">
-          학년
-        </label>
-        <select name="grade" id="grade">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </InputBox>
-      <InputBox>
-        <label htmlFor="type" className="form__label">
-          Type
-        </label>
-        <select name="type" id="type">
-          <option value="Client">Client</option>
-          <option value="Server">Server</option>
-          <option value="DevOps">DevOps</option>
-        </select>
-      </InputBox>
+      <div className="selection">
+        <InputBox className="select">
+          <label htmlFor="grade" className="form__label">
+            학년
+          </label>
+          <select {...register("grade")} name="grade" id="grade">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </InputBox>
+        <InputBox className="select">
+          <label htmlFor="type" className="form__label">
+            업무
+          </label>
+          <select {...register("type")} name="type" id="type">
+            <option value="FrontEnd">FrontEnd</option>
+            <option value="BackEnd">BackEnd</option>
+            <option value="DevOps">DevOps</option>
+          </select>
+        </InputBox>
+      </div>
       <InputBox>
         <label htmlFor="bio" className="form__label">
-          Bio
+          소개
         </label>
         <input
+          {...register("bio", { required: true, maxLength: 200 })}
           type="text"
           className="form__input"
           id="bio"
@@ -143,6 +145,7 @@ const MyProfile = () => {
           <EmailOutlinedIcon />
         </label>
         <input
+          {...register("email", { required: true })}
           type="email"
           className="form__input"
           id="email"
@@ -154,6 +157,7 @@ const MyProfile = () => {
           <CallOutlinedIcon />
         </label>
         <input
+          {...register("number", { required: true })}
           type="text"
           className="form__input"
           id="number"
@@ -165,6 +169,7 @@ const MyProfile = () => {
           <GitHubIcon />
         </label>
         <input
+          {...register("github", { required: true })}
           type="url"
           className="form__input"
           id="github"
@@ -176,6 +181,7 @@ const MyProfile = () => {
           <InsertLinkOutlinedIcon />
         </label>
         <input
+          {...register("link", { required: true })}
           type="url"
           className="form__input"
           id="link"
