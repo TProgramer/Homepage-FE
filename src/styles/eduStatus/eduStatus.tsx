@@ -63,24 +63,70 @@ export const StyledRadio = styled("input")`
 `;
 
 export const EduStatusBox = styled("div")`
-  width: 1200px;
-  height: 930px;
-  border: 1px solid black;
+  max-width: 1200px;
+  height: auto;
   margin-bottom: 200px;
   position: relative;
+  display: flex;
+  gap: 60px 60px;
+  @media (max-width: 1199px) {
+    justify-content: center;
+  }
+  flex-wrap: wrap;
 `;
 
-export const StyledCard = styled("div")<{ url: string }>`
+export const StyledCard = styled("div")<{ url: string; type: string }>`
   width: 360px;
   height: 270px;
-  border: 1px solid black;
+  border-radius: 10px;
+  background: white;
   .image {
     width: 100%;
     height: 170px;
     background-image: url(${(props) => props.url});
+    border-radius: 10px 10px 0 0;
   }
   .content {
+    position: relative;
     width: 100%;
     height: 100px;
+    padding: 0 30px 0 30px;
+    .left_content {
+      display: inline-block;
+      position: absolute;
+      top: 40px;
+      .content_name {
+        font-size: 18px;
+        margin-bottom: 3px;
+      }
+      .content_tech {
+        color: #e2e2e2;
+      }
+    }
+    .right_content {
+      right: 30px;
+      top: 20px;
+      display: inline-block;
+      position: absolute;
+      .content_degree {
+        text-align: right;
+        margin: 0 10px 6px 0;
+        font-size: 18px;
+      }
+      .content_type {
+        text-align: center;
+        line-height: 36px;
+        width: 80px;
+        height: 36px;
+        background: ${(props) =>
+          props.type === "Web"
+            ? "#ec9b3b"
+            : props.type === "Android"
+            ? "#F24C4C"
+            : "#293462"};
+        border-radius: 25px;
+        color: white;
+      }
+    }
   }
 `;
