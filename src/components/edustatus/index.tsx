@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
+
 import {
   EduStatusRadioGroup,
   EduStatusContainer,
@@ -6,47 +8,65 @@ import {
   StyledLabel,
   StyledRadio,
 } from "../../styles/eduStatus/eduStatus";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import { StyledAddCircleOutlineOutlinedIcon } from "../../styles/eduStatus/eduStatus";
 import EduStatusCard from "./EduStatusCard";
+import EduStatusModal from "./EduStatusModal";
+import { IModalInputType } from "./EduStatusModal";
 
 const EduStatusMain = () => {
   const [eduList, setEduList] = useState([
     {
       imgUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
-      name: "리액트기초",
+      course_name: "리액트기초",
       type: "Web",
       degree: 1,
-      tech: ["JS", "Next.js", "React"],
+      tech1: "JS",
+      tech2: "Next.js",
+      tech3: "React",
     },
     {
       imgUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
-      name: "알고리즘 심화반",
+      course_name: "알고리즘 심화반",
       type: "etc",
       degree: 2,
-      tech: ["C++", "DP", "BFS"],
+      tech1: "C++",
+      tech2: "DP",
+      tech3: "BFS",
     },
     {
       imgUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
-      name: "Nest.js ",
+      course_name: "Nest.js ",
       type: "Web",
       degree: 1,
-      tech: ["JS", "node.js", "express"],
+      tech1: "JS",
+      tech2: "node.js",
+      tech3: "express",
     },
     {
       imgUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
-      name: "안드로이드 스튜디오",
+      course_name: "안드로이드 스튜디오",
       type: "Android",
       degree: 1,
-      tech: ["JAVA", "코틀린", "C++"],
+      tech1: "JAVA",
+      tech2: "코틀린",
+      tech3: "C++",
     },
   ]);
+  const plusCard = (data: any) => {
+    setEduList(eduList.concat(data));
+  };
   const [radioValue, setRadioValue] = useState("all");
   const onChangeRadio = (e: any) => {
     setRadioValue(e.target.value);
+  };
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
   return (
     <EduStatusContainer>
@@ -102,7 +122,35 @@ const EduStatusMain = () => {
           ) : null
         )}
       </EduStatusBox>
-      <AddCircleOutlineOutlinedIcon />
+      <div onClick={() => setModalIsOpen(true)}>
+        <StyledAddCircleOutlineOutlinedIcon />
+      </div>
+      <Modal
+        style={{
+          overlay: {
+            position: "fixed",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: "rgba(255,255,255,0.45)",
+            zIndex: 2000,
+          },
+          content: {
+            margin: "0 auto",
+            marginTop: "50px",
+            width: "300px",
+            height: "500px",
+            zIndex: 20000,
+            padding: 0,
+          },
+        }}
+        ariaHideApp={false}
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+      >
+        <EduStatusModal plusCard={plusCard} closeModal={closeModal} />
+      </Modal>
     </EduStatusContainer>
   );
 };

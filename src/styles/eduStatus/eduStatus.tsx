@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { TABLET_STANDARD, MOBILE_STANDARD } from "../global/Global";
+import { TABLET_STANDARD, MOBILE_STANDARD, TRANSITION } from "../global/Global";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 export const EduStatusContainer = styled("main")`
   background-color: ${(props) => props.theme.backgroundColor};
@@ -129,4 +130,154 @@ export const StyledCard = styled("div")<{ url: string; type: string }>`
       }
     }
   }
+`;
+
+export const StyledAddCircleOutlineOutlinedIcon = styled(
+  AddCircleOutlineOutlinedIcon
+)`
+  position: absolute;
+  bottom: 30px;
+  right: 50px;
+  font-size: 72px;
+  cursor: pointer;
+`;
+
+export const ModalForm = styled("form")<{ count: number }>`
+  position: relative;
+  p {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 40px 0 50px 0;
+  }
+  .image,
+  .course_name {
+    display: block;
+    margin: 0 auto;
+    padding: 3px 43px 3px 10px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 2px solid #e2e2e2;
+    ${TRANSITION}
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
+    }
+  }
+  .degree_type {
+    max-width: 200px;
+    margin: 0 auto;
+    .degree_input {
+      display: inline-block;
+      width: 40px;
+      border: none;
+      border-bottom: 2px solid #e2e2e2;
+      ${TRANSITION}
+      &:focus {
+        outline: none;
+        border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
+      }
+    }
+    span {
+      font-size: 12px;
+      margin-right: 40px;
+    }
+    .type {
+      width: 100px;
+      display: inline-block;
+      padding-left: 10px;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 2px solid #e2e2e2;
+      ${TRANSITION}
+      &:focus {
+        outline: none;
+        border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
+      }
+    }
+  }
+
+  .plusbtn {
+    display: inline-block;
+  }
+  .all_tech {
+    .maintext {
+      display: inline-block;
+      margin-left: 50px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    span {
+      margin-left: 50px;
+    }
+    .tech1,
+    .tech2,
+    .tech3 {
+      display: inline-block;
+      margin: 0 auto;
+      padding: 3px 29px 3px 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-bottom: 2px solid #e2e2e2;
+      ${TRANSITION}
+      &:focus {
+        outline: none;
+        border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
+      }
+    }
+    .techbox1 {
+      display: ${(props) => (props.count > 0 ? "block" : "none")};
+    }
+    .techbox2 {
+      display: ${(props) => (props.count > 1 ? "block" : "none")};
+    }
+    .techbox3 {
+      display: ${(props) => (props.count > 2 ? "block" : "none")};
+    }
+  }
+  .submit {
+    width: 200px;
+    margin-left: 50px;
+    margin-top: 20px;
+    height: 40px;
+    padding: 5px 0 5px 0;
+    cursor: pointer;
+    background-color: ${(props) => props.theme.textColor.sub};
+    border: 1px solid #e2e2e2;
+    ${TRANSITION}
+    &:hover {
+      color: ${(props) => props.theme.textColor.sub};
+      background-color: ${(props) => props.theme.buttonColor.primary};
+    }
+  }
+`;
+
+export const ModalLabel = styled("label")`
+  height: 100%;
+  color: black;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50px;
+  border: 1px solid #e2e2e2;
+  width: 80px;
+  padding: 10px;
+  text-align: center;
+`;
+
+export const ModalRadio = styled("input")`
+  display: none;
+  &:checked + ${ModalLabel} {
+    color: white;
+    height: 100%;
+    background: ${(props) => props.theme.buttonColor.primary};
+  }
+`;
+
+export const ModalAddCircleOutlineOutlinedIcon = styled(
+  AddCircleOutlineOutlinedIcon
+)<{ count: number }>`
+  cursor: pointer;
+  display: ${(props) => props.count === 3 && "none"};
+  font-size: 18px;
+  color: ${(props) => props.theme.buttonColor.primary};
 `;

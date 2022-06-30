@@ -3,10 +3,12 @@ import { StyledCard } from "../../styles/eduStatus/eduStatus";
 interface ListProps {
   list: {
     imgUrl: string;
-    name: string;
+    course_name: string;
     type: string;
-    degree: Number;
-    tech: string[];
+    degree: number;
+    tech1?: string;
+    tech2?: string;
+    tech3?: string;
   };
   select: string;
 }
@@ -16,9 +18,10 @@ const EduStatusCard = ({ list, select }: ListProps) => {
       <div className="image"></div>
       <div className="content">
         <div className="left_content">
-          <div className="content_name">{list.name}</div>
+          <div className="content_name">{list.course_name}</div>
           <div className="content_tech">
-            {list.tech.map((item) => `#${item} `)}
+            {list.tech1 && `#${list.tech1}`} {list.tech2 && `#${list.tech2}`}{" "}
+            {list.tech3 && `#${list.tech3}`}
           </div>
         </div>
         <div className="right_content">
