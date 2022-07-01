@@ -20,7 +20,9 @@ export default function App({ Component, pageProps }: AppProps) {
           ${reset}
         `}
       />
-      {route === "/signin" || route === "/signup" ? (
+      {route === "/calendar" ? (
+        <Component {...pageProps} />
+      ) : route === "/signin" || route === "/signup" ? (
         <SignLayout>
           <ThemeProvider theme={theme}>
             <Component {...pageProps} />
