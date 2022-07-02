@@ -164,10 +164,10 @@ export const ModalForm = styled("form")<{ count: number }>`
       border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
     }
   }
-  .degree_type {
+  .generation_type {
     max-width: 200px;
     margin: 0 auto;
-    .degree_input {
+    .generation_input {
       display: inline-block;
       width: 40px;
       border: none;

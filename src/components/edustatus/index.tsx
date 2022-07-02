@@ -11,7 +11,6 @@ import {
 import { StyledAddCircleOutlineOutlinedIcon } from "../../styles/eduStatus/eduStatus";
 import EduStatusCard from "./EduStatusCard";
 import EduStatusModal from "./EduStatusModal";
-import { IModalInputType } from "./EduStatusModal";
 
 const EduStatusMain = () => {
   const [eduList, setEduList] = useState([
@@ -20,7 +19,7 @@ const EduStatusMain = () => {
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
       course_name: "리액트기초",
       type: "Web",
-      degree: 1,
+      generation: 1,
       tech1: "JS",
       tech2: "Next.js",
       tech3: "React",
@@ -30,7 +29,7 @@ const EduStatusMain = () => {
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
       course_name: "알고리즘 심화반",
       type: "etc",
-      degree: 2,
+      generation: 2,
       tech1: "C++",
       tech2: "DP",
       tech3: "BFS",
@@ -40,7 +39,7 @@ const EduStatusMain = () => {
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
       course_name: "Nest.js ",
       type: "Web",
-      degree: 1,
+      generation: 1,
       tech1: "JS",
       tech2: "node.js",
       tech3: "express",
@@ -50,7 +49,7 @@ const EduStatusMain = () => {
         "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png/250px-IU_for_Chamisul_advertising_campaign_2020_07_%28cropped%29.png",
       course_name: "안드로이드 스튜디오",
       type: "Android",
-      degree: 1,
+      generation: 1,
       tech1: "JAVA",
       tech2: "코틀린",
       tech3: "C++",
@@ -116,9 +115,9 @@ const EduStatusMain = () => {
       <EduStatusBox>
         {eduList.map((list, index: number) =>
           radioValue === "all" ? (
-            <EduStatusCard key={index} list={list} select={radioValue} />
+            <EduStatusCard key={index} list={list} />
           ) : radioValue === list.type ? (
-            <EduStatusCard key={index} list={list} select={radioValue} />
+            <EduStatusCard key={index} list={list} />
           ) : null
         )}
       </EduStatusBox>

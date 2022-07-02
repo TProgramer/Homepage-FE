@@ -13,7 +13,7 @@ const DropDown = ({ isHover }: navbarProps) => {
   ];
   const actList = [
     { text: "캘린더", link: "#" },
-    { text: "활동현황", link: "/edustatus" },
+    { text: "활동현황", link: "/course" },
   ];
   const dataList = [
     { text: "족보", link: "#" },

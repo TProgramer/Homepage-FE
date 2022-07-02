@@ -5,14 +5,13 @@ interface ListProps {
     imgUrl: string;
     course_name: string;
     type: string;
-    degree: number;
+    generation: number;
     tech1?: string;
     tech2?: string;
     tech3?: string;
   };
-  select: string;
 }
-const EduStatusCard = ({ list, select }: ListProps) => {
+const EduStatusCard = ({ list }: ListProps) => {
   return (
     <StyledCard url={list.imgUrl} type={list.type}>
       <div className="image"></div>
@@ -25,7 +24,7 @@ const EduStatusCard = ({ list, select }: ListProps) => {
           </div>
         </div>
         <div className="right_content">
-          <div className="content_degree">{`${list.degree}기`}</div>
+          <div className="content_degree">{`${list.generation}기`}</div>
           <div className="content_type">{list.type}</div>
         </div>
       </div>

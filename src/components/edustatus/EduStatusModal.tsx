@@ -9,7 +9,7 @@ export interface IModalInputType {
   imgUrl: string;
   course_name: string;
   type: string;
-  degree: number;
+  generation: number;
   tech1?: string;
   tech2?: string;
   tech3?: string;
@@ -46,15 +46,15 @@ const EduStatusModal = ({ plusCard, closeModal }: SubmitFunc) => {
         className="course_name"
         placeholder="course name"
       />
-      <div className="degree_type">
+      <div className="generation_type">
         <input
-          {...register("degree", { required: true })}
+          {...register("generation", { required: true })}
           type="number"
-          className="degree_input"
+          className="generation_input"
           placeholder=""
         />
         <span>기</span>
-        <select {...register("type")} className="type">
+        <select {...register("type", { required: true })} className="type">
           <option value="">분류</option>
           <option value="Web">웹</option>
           <option value="Android">안드로이드</option>

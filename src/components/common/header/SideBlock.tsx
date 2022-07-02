@@ -108,7 +108,7 @@ const SideBlock = ({ isSide }: navbarProps) => {
             </div>
             <hr />
             <div className="text">
-              <Link href="/edustatus">
+              <Link href="/course">
                 <a>활동현황</a>
               </Link>
             </div>
