@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { MOBILE_STANDARD } from "../global/Global";
 
 export const StudyStatusDiv = styled("section")`
   width: 100vw;
