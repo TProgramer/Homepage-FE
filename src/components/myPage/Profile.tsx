@@ -1,162 +1,255 @@
-import React, { useState } from 'react';
-import CreateIcon from '@mui/icons-material/Create';
-import CheckIcon from '@mui/icons-material/Check';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined';
-import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import React, { useState } from "react";
+import CreateIcon from "@mui/icons-material/Create";
+import CheckIcon from "@mui/icons-material/Check";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InsertLinkOutlinedIcon from "@mui/icons-material/InsertLinkOutlined";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import {
-  ProfileBox,
-  Profile,
-  ProfileImg,
-  TypeText,
-  Information,
-  ProfileHeader,
-  Name,
-  Info,
-  NameBox,
-  ProfileImg_unset,
+  Another,
+  Arrow,
+  Avatar,
+  AvatarInput,
   Bio,
-  Contact,
-  Input,
-  BioInput,
-  ContactBox,
-  Button
-} from '../../styles/myPage/header';
+  Contents,
+  FormContainer,
+  InputBox,
+  ProfileContainer,
+} from "../../styles/myPage/myPage";
+import { useForm } from "react-hook-form";
 
 interface IPersonalType {
-  readonly id: number;
+  profileImg: string;
   readonly name: string;
   readonly major: string;
-  type: 'FrontEnd' | 'BackEnd' | 'DevOps'
-  grade: number;
-  profileImg: string;
+  grade: string;
+  type: "FrontEnd" | "BackEnd" | "DevOps";
+  bio: string;
+  email: string;
+  number: string;
+  github: string;
+  link: string;
 }
-const personalData: IPersonalType[] = [
-  {
-    id: 0,
-    name: '박인재',
-    major: '건축공학과',
-    type: 'FrontEnd',
-    grade: 2,
-    profileImg: '',//https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdkVemYyTTjjwW8ax1aJ-kHvwR6aK1VTPKRSbvlnIlMs340p0iFzcs_u878365DmbZvI&usqp=CAU
-  },
-]
-const iconStyle: {
-  fontSize: number;
-  marginRight: number;
-} = {
-  fontSize: 20,
-  marginRight: 1
-};
 
 const MyProfile = () => {
-  const [onoff, setOnoff] = useState<boolean>(false);
-  const onClick = () => {
-    setOnoff(!onoff);
+  const [myForm, setMyForm] = useState(false);
+  const [move, setMove] = useState(225);
+  const [personalData, setPersonalData] = useState<IPersonalType>({
+    profileImg: "",
+    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdkVemYyTTjjwW8ax1aJ-kHvwR6aK1VTPKRSbvlnIlMs340p0iFzcs_u878365DmbZvI&usqp=CAU",
+    name: "박인재",
+    major: "건축공학과",
+    grade: "2",
+    type: "FrontEnd",
+    bio: "안녕하세요 저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요 저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요 저는 건축공학과저는 건축공학과 2학년 재학중인 박인재입니다 안녕하세요 저는 건축공학과 2학년 재학중인 박인재입니",
+    email: "qkrdlswo98@naver.com",
+    number: "010-3393-9410",
+    github: "https://CWCTBOY.github.com",
+    link: "https://wakatime.com",
+  });
+  const { register, handleSubmit } = useForm<IPersonalType>();
+  const onSubmit = (data: IPersonalType) => {
+    setPersonalData(data);
+    setMyForm(false);
   };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  }
-  const [bio, setBio] = useState<string>('This is Bio Container\nThis is Bio Container\nThis is Bio Container\nThis is Bio Container\nThis is Bio Container');
-  const [mail, setMail] = useState<string>('qkrdlswo98@gmail.com');
-  const [number, setNumber] = useState<string>('010-3393-9410');
-  const [link, setLink] = useState<string>('https://wakatime.com/dashboard');
-  const [team, setTeam] = useState<string>('NL Homepage-FE Team');
-  const changeBio = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBio(e.target.value);
+  const onClickLeft = () => {
+    setMove((prev) => prev + 450);
   };
-  const changeMail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMail(e.target.value);
-  };
-  const changeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNumber(e.target.value);
-  };
-  const changeLink = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLink(e.target.value);
-  };
-  const changeTeam = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTeam(e.target.value);
+  const onClickRight = () => {
+    setMove((prev) => prev - 450);
   };
   return (
-    <>
-      <ProfileBox onoff={onoff}>
-        <Profile>
-          {
-            onoff
-              ? <ProfileImg_unset><AddBoxIcon sx={{ fontSize: 35, color: 'black', opacity: 0.3, cursor: 'pointer' }} /></ProfileImg_unset>
-              : (personalData[0].profileImg !== ''
-                ? <ProfileImg src={personalData[0].profileImg} />
-                : <ProfileImg_unset>Add your Avatar</ProfileImg_unset>)
-          }
-          <TypeText>{`<\ ${personalData[0]?.type} / >`}</TypeText>
-        </Profile>
-        <Information>
-          <ProfileHeader>
-            <NameBox>
-              <Name>{personalData[0].name}</Name>
-              <Info>{`${personalData[0].major} ${personalData[0].grade}학년`}</Info>
-            </NameBox>
-          </ProfileHeader>
-          <ContactBox onSubmit={onSubmit}>
-            <Bio>
-              {
-                onoff
-                  ? (
-                    <BioInput type='textarea' onChange={changeBio} value={bio} />
-                  )
-                  : bio
-              }
-            </Bio>
-            <Contact><EmailOutlinedIcon sx={iconStyle} />
-              {
-                onoff
-                  ? (
-                    <Input type='email' onChange={changeMail} value={mail} />
-                  )
-                  : mail
-              }
-            </Contact>
-            <Contact><CallOutlinedIcon sx={iconStyle} />
-              {
-                onoff
-                  ? (
-                    <Input type='text' onChange={changeNumber} value={number} />
-                  )
-                  : number
-              }
-            </Contact>
-            <Contact><InsertLinkOutlinedIcon sx={iconStyle} />
-              {
-                onoff
-                  ? (
-                    <Input type='url' onChange={changeLink} value={link} />
-                  )
-                  : <a href={link} target='_blank'>{link}</a>
-              }
-            </Contact>
-            <Contact><GroupsOutlinedIcon sx={iconStyle} />
-              {
-                onoff
-                  ? (
-                    <Input type='text' onChange={changeTeam} value={team} />
-                  )
-                  : team
-              }
-            </Contact>
-            <Button
-              onClick={onClick}
-              type={!onoff ? 'button' : 'submit'}
-            >
-              {
-                !onoff ? <CreateIcon /> : <CheckIcon />
-              }
-            </Button>
-          </ContactBox>
-        </Information>
-      </ProfileBox >
-    </>
-  )
-}
+    <FormContainer onSubmit={handleSubmit(onSubmit)} myForm={myForm}>
+      <button className="submit" type="submit">
+        <CheckIcon />
+      </button>
+      <AvatarInput>
+        <div className="avatar__input--box">
+          <label
+            htmlFor="avatar__input--input"
+            className="avatar__input--label"
+          >
+            <AddBoxIcon />
+          </label>
+          <input
+            {...register("profileImg")}
+            type="file"
+            id="avatar__input--input"
+          />
+        </div>
+      </AvatarInput>
+      <InputBox>
+        <label htmlFor="name" className="form__label">
+          이름
+        </label>
+        <input
+          {...register("name", { required: true })}
+          type="text"
+          className="form__input"
+          id="name"
+          placeholder={personalData.name}
+        />
+      </InputBox>
+      <InputBox>
+        <label htmlFor="major" className="form__label">
+          전공
+        </label>
+        <input
+          {...register("major", { required: true })}
+          type="text"
+          className="form__input"
+          id="major"
+          placeholder={personalData.major}
+        />
+      </InputBox>
+      <div className="selection">
+        <InputBox className="select">
+          <label htmlFor="grade" className="form__label">
+            학년
+          </label>
+          <select {...register("grade")} name="grade" id="grade">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </InputBox>
+        <InputBox className="select">
+          <label htmlFor="type" className="form__label">
+            업무
+          </label>
+          <select {...register("type")} name="type" id="type">
+            <option value="FrontEnd">FrontEnd</option>
+            <option value="BackEnd">BackEnd</option>
+            <option value="DevOps">DevOps</option>
+          </select>
+        </InputBox>
+      </div>
+      <InputBox>
+        <label htmlFor="bio" className="form__label">
+          소개
+        </label>
+        <input
+          {...register("bio", { required: true, maxLength: 200 })}
+          type="text"
+          className="form__input"
+          id="bio"
+          placeholder={personalData.bio}
+        />
+      </InputBox>
+      <InputBox>
+        <label htmlFor="email" className="form__label">
+          <EmailOutlinedIcon />
+        </label>
+        <input
+          {...register("email", { required: true })}
+          type="email"
+          className="form__input"
+          id="email"
+          placeholder={personalData.email}
+        />
+      </InputBox>
+      <InputBox>
+        <label htmlFor="number" className="form__label">
+          <CallOutlinedIcon />
+        </label>
+        <input
+          {...register("number", { required: true })}
+          type="text"
+          className="form__input"
+          id="number"
+          placeholder={personalData.number}
+        />
+      </InputBox>
+      <InputBox>
+        <label htmlFor="github" className="form__label">
+          <GitHubIcon />
+        </label>
+        <input
+          {...register("github", { required: true })}
+          type="url"
+          className="form__input"
+          id="github"
+          placeholder={personalData.github}
+        />
+      </InputBox>
+      <InputBox>
+        <label htmlFor="link" className="form__label">
+          <InsertLinkOutlinedIcon />
+        </label>
+        <input
+          {...register("link", { required: true })}
+          type="url"
+          className="form__input"
+          id="link"
+          placeholder={personalData.link}
+        />
+      </InputBox>
+      <ProfileContainer myForm={myForm}>
+        <div
+          className="edit"
+          onClick={() => {
+            setMyForm(true);
+          }}
+        >
+          <CreateIcon />
+        </div>
+        <Avatar>
+          <div className="avatar">
+            {personalData.profileImg === "" ? (
+              "Add your Avatar"
+            ) : (
+              <img
+                src={personalData.profileImg}
+                alt="avatar"
+                className="avatar__img"
+              />
+            )}
+          </div>
+          <div className="info__header">
+            <h2 className="name">{personalData.name}</h2>
+            <h3 className="major--grade">{`${personalData.major} ${personalData.grade}학년`}</h3>
+          </div>
+          <span className="type">{`<${personalData.type}/>`}</span>
+        </Avatar>
+        <Contents move={move}>
+          <Bio>
+            <p className="paragraph">{personalData.bio}</p>
+          </Bio>
+          <Another>
+            <div className="infoBox">
+              <EmailOutlinedIcon />
+              <span className="info">{personalData.email}</span>
+            </div>
+            <div className="infoBox">
+              <CallOutlinedIcon />
+              <span className="info">{personalData.number}</span>
+            </div>
+            <div className="infoBox">
+              <GitHubIcon />
+              <span className="info">{personalData.github}</span>
+            </div>
+            <div className="infoBox">
+              <InsertLinkOutlinedIcon />
+              <span className="info">{personalData.link}</span>
+            </div>
+          </Another>
+        </Contents>
+        <Arrow>
+          {move === 225 ? (
+            <DoubleArrowIcon
+              className="arrow arrow__r"
+              onClick={onClickRight}
+            />
+          ) : (
+            <DoubleArrowIcon className="arrow arrow__l" onClick={onClickLeft} />
+          )}
+        </Arrow>
+      </ProfileContainer>
+    </FormContainer>
+  );
+};
 export default MyProfile;

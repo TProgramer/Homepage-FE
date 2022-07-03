@@ -1,12 +1,8 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import {
   DEFAULT_BORDERRADIUS,
   FONT_L,
-  FONT_M,
-  FONT_XL,
-  MOBILE_STANDARD,
   TABLET_STANDARD,
   TRANSITION,
 } from "../../global/Global";
@@ -24,13 +20,12 @@ export const SignBox = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media (max-width: ${MOBILE_STANDARD}) {
+  @media (max-width: ${`${TABLET_STANDARD}px`}) {
     width: 100%;
     height: 100vh;
   }
   .innerContainer {
-    width: 370px;
+    width: 350px;
     height: 100vh;
     position: relative;
     .logo {
@@ -79,20 +74,25 @@ export const Form = styled("form")<{ show?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  .pwVisible {
-    width: 100%;
+  .pw {
+    width: 350px;
     height: 45px;
     position: relative;
     margin-bottom: 20px;
     .visibleIcon {
       position: absolute;
       top: 25%;
-      left: 102%;
+      left: 93%;
       color: ${(props) => (!props.show ? props.theme.textColor.sub : "red")};
     }
   }
+  .errorMessage {
+    position: absolute;
+    color: ${(props) => props.theme.buttonColor.primary};
+    top: 110%;
+  }
   .input {
-    width: 100%;
+    width: 350px;
     height: 45px;
     margin-bottom: 20px;
     border: none;
@@ -108,7 +108,7 @@ export const Form = styled("form")<{ show?: boolean }>`
     }
   }
   .submit {
-    width: 380px;
+    width: 95%;
     height: 60px;
     margin-bottom: 20px;
     border-radius: ${DEFAULT_BORDERRADIUS};
@@ -124,7 +124,7 @@ export const Form = styled("form")<{ show?: boolean }>`
   .toregister {
     cursor: pointer;
     margin-top: 20px;
-    color: white;
+    color: ${(props) => props.theme.textColor.sub};
     text-decoration: underline;
     &:hover {
       color: ${(props) => props.theme.buttonColor.primary};

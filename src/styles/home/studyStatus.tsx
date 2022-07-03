@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MOBILE_STANDARD, TABLET_STANDARD } from "../global/Global";
+import { MOBILE_STANDARD } from "../global/Global";
 
 export const StudyStatusDiv = styled("section")`
   width: 100vw;
@@ -13,6 +13,7 @@ export const StudyStatusInnerDiv = styled("div")`
   margin: 0 auto;
   text-align: center;
   padding: 200px 0 286px 0;
+  background-color: ${(props) => props.theme.backgroundColor};
   @media (max-width: ${MOBILE_STANDARD}px) {
     padding: 120px 0 194px 0;
   }
@@ -40,7 +41,6 @@ export const StudyStatusInnerDiv = styled("div")`
         height: 320px;
       }
       .item_inner {
-       
         position: relative;
         width: 100%;
         height: 100%;
@@ -83,4 +83,5 @@ export const StudyStatusInnerDiv = styled("div")`
     .item:hover .item_inner {
       transform: rotateY(180deg);
     }
+  }
 `;
