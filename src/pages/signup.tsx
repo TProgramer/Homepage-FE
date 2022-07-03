@@ -43,7 +43,7 @@ function SignUp() {
             })}
             type={!show ? "password" : "text"}
             className="input"
-            placeholder="최소길이 6, 1개이상 문자, 1개이상 특수문자"
+            placeholder="길이 6~15, 1개이상 문자, 1개이상 특수문자"
           />
           {!show ? (
             <VisibilityIcon
