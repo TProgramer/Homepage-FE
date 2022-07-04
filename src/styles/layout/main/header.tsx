@@ -31,7 +31,7 @@ export const StyledHeader = styled("header")`
   }
 `;
 
-export const StyledNavbar = styled("nav")<{ isHover: boolean; show: boolean }>`
+export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
   width: ${MAX_WIDTH};
   border-bottom: 1px solid #e2e2e2;
 
@@ -114,41 +114,12 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean; show: boolean }>`
     position: absolute;
     right: 20%;
   }
-  .user {
-    cursor: pointer;
-    position: relative;
+  .userInfo {
+    position: absolute;
     right: 0;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 10%;
     @media (max-width: ${MOBILE_STANDARD}px) {
       display: none;
     }
-    .user__avatar {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      ${TRANSITION}
-      &:hover {
-        ${DEFAULT_BOXSHADOW}
-      }
-      .user__avatar--img {
-        width: 100%;
-      }
-    }
-  }
-  .dropUser {
-    width: 60px;
-    height: 100px;
-    position: absolute;
-    top: 20px;
-    background-color: black;
   }
 `;
 

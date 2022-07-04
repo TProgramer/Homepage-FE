@@ -6,12 +6,16 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useTokenContext } from "../../../context/tokenState";
 
 export default function User() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
-
+  const router = useRouter();
+  const { setAccessToken } = useTokenContext();
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -26,7 +30,29 @@ export default function User() {
 
     setOpen(false);
   };
-
+  const onClickLogout = async () => {
+    const res = await fetch(
+      "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/auth/logout",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          refresh_token: localStorage.getItem("refresh_token"),
+        }),
+      }
+    );
+    if (res.ok) {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      setAccessToken("");
+      alert("로그아웃 성공");
+      router.push("/");
+    } else {
+      alert("로그아웃 실패");
+    }
+  };
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -47,52 +73,53 @@ export default function User() {
   }, [open]);
 
   return (
-    <Stack className="user">
-      <div>
-        <Button
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? "composition-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-        >
-          Dashboard
-        </Button>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
-                  >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
-    </Stack>
+    <div className="userInfo">
+      <Button
+        ref={anchorRef}
+        id="composition-button"
+        aria-controls={open ? "composition-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
+        aria-haspopup="true"
+        onClick={handleToggle}
+      >
+        <Avatar src="/broken-image.jpg" sx={{ width: 48, height: 48 }} />
+      </Button>
+      <Popper
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        placement="bottom-start"
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === "bottom-start" ? "left top" : "left bottom",
+            }}
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList
+                  autoFocusItem={open}
+                  id="composition-menu"
+                  aria-labelledby="composition-button"
+                  onKeyDown={handleListKeyDown}
+                >
+                  <Link href="/mypage">
+                    <a>
+                      <MenuItem onClick={handleClose}>My Page</MenuItem>
+                    </a>
+                  </Link>
+                  <MenuItem onClick={onClickLogout}>Logout</MenuItem>
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+    </div>
   );
 }

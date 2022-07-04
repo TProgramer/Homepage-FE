@@ -13,7 +13,6 @@ import User from "./user";
 const Navbar = () => {
   const menus = ["소개", "활동", "자료", "게시판"];
 
-  const [show, setShow] = useState(false);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isSide, setIsSide] = useState<boolean>(false);
 
@@ -30,11 +29,12 @@ const Navbar = () => {
       setIsHover(false);
     }
   };
+
   const { accessToken } = useTokenContext();
 
   return (
     <>
-      <StyledNavbar isHover={isHover} show={show}>
+      <StyledNavbar isHover={isHover}>
         <div className="logo">
           <Link href="/">
             <a>NL</a>
@@ -57,7 +57,7 @@ const Navbar = () => {
           </Link>
         </div>
         {accessToken ? (
-          <User show={show} setShow={setShow} />
+          <User />
         ) : (
           <div className="register">
             <Link href="/signin">

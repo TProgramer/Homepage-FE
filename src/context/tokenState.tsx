@@ -20,7 +20,7 @@ export const TokenWrapper = ({ children }: { children: ReactNode }) => {
     if (accessToken !== null) {
       setAccessToken(accessToken);
     }
-  }, []);
+  }, [accessToken]);
   return (
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       {children}

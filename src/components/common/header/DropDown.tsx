@@ -8,12 +8,12 @@ type navbarProps = {
 const DropDown = ({ isHover }: navbarProps) => {
   const introList = [
     { text: "동아리원", link: "#" },
-    { text: "활동사진", link: "#" },
-    { text: "수상내역", link: "#" },
+    { text: "활동사진", link: "/activity" },
+    { text: "결과물", link: "#" },
   ];
   const actList = [
-    { text: "캘린더", link: "#" },
-    { text: "활동현황", link: "/course" },
+    { text: "캘린더", link: "/calendar", target: "_blank" },
+    { text: "활동현황", link: "/course", target: "" },
   ];
   const dataList = [
     { text: "족보", link: "#" },
@@ -38,7 +38,7 @@ const DropDown = ({ isHover }: navbarProps) => {
         {actList.map((list, index) => (
           <div key={index} className="act_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a target={list.target}>{list.text}</a>
             </Link>
           </div>
         ))}
