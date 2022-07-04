@@ -46,15 +46,13 @@ export default function VerifyEmailForm({
           }),
         }
       );
+      setIsDisabled(false);
+      setTextValue("Send Verify Code");
       if (res.ok) {
         alert("Email send");
-        setIsDisabled(false);
-        setTextValue("Send Verify Code");
         setIsRequested(true);
       } else {
         alert("Failed");
-        setIsDisabled(false);
-        setTextValue("Send Verify Code");
       }
     }
   };
