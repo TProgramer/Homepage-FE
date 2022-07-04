@@ -6,11 +6,15 @@ declare module "@emotion/react" {
       primary: string;
       sub: string;
     };
-    backgroundColor: string;
     buttonColor: {
       primary: string;
       onHover: string;
     };
+    validation: {
+      resolve: string;
+      error: string;
+    };
     accentColor: string;
+    backgroundColor: string;
   }
 }
