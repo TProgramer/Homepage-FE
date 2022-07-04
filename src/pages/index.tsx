@@ -4,7 +4,6 @@ import H1 from "../components/common/H1";
 import P from "../components/common/P";
 import Slider from "../components/home/slider";
 import StudyStatus from "../components/home/StudyStatus";
-
 const Home = () => (
   <>
     <YoutubePlayer videoID="sqgxcCjD04s" autoplay mute loop disableKeyboard>

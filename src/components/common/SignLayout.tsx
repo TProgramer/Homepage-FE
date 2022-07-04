@@ -3,21 +3,12 @@ import {
   SignBox,
   SignContainer,
   SignBgImage,
-} from "../../../styles/layout/sign/globalSignBox";
+} from "../../styles/layout/sign/globalSignBox";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { grey } from "@mui/material/colors";
 import Link from "next/link";
-
-export interface ISignType {
-  studentId: string;
-  password: string;
-  passwordConfirm?: string;
-  birthDay?: string;
-  email?: string;
-  github?: string;
-}
 
 const SignLayout = ({ children }: React.PropsWithChildren<{}>) => {
   return (
