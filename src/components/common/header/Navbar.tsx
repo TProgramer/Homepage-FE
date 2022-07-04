@@ -28,7 +28,7 @@ const Navbar = () => {
     }
   };
   const { accessToken } = useTokenContext();
-  console.log("Context AccessToken", accessToken);
+  
   return (
     <>
       <StyledNavbar isHover={isHover}>
