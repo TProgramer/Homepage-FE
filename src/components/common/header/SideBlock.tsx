@@ -37,9 +37,10 @@ const AccordionDetailsStyle = {
 
 type navbarProps = {
   isSide: boolean;
+  setIsSide: (isSide: boolean) => void;
 };
 
-const SideBlock = ({ isSide }: navbarProps) => {
+const SideBlock = ({ isSide, setIsSide }: navbarProps) => {
   const [expanded, setExpanded] = useState<string | false>("panel1");
   const { accessToken, setAccessToken } = useTokenContext();
   const router = useRouter();
@@ -92,19 +93,19 @@ const SideBlock = ({ isSide }: navbarProps) => {
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
-                <a>동아리원</a>
+                <a onClick={() => setIsSide(false)}>동아리원</a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="/activity">
-                <a>활동사진</a>
+                <a onClick={() => setIsSide(false)}>활동사진</a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="#">
-                <a>결과물</a>
+                <a onClick={() => setIsSide(false)}>결과물</a>
               </Link>
             </div>
           </StyledTypography>
@@ -130,13 +131,15 @@ const SideBlock = ({ isSide }: navbarProps) => {
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="/calendar">
-                <a target="_blank">캘린더</a>
+                <a onClick={() => setIsSide(false)} target="_blank">
+                  캘린더
+                </a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="/course">
-                <a>활동현황</a>
+                <a onClick={() => setIsSide(false)}>활동현황</a>
               </Link>
             </div>
           </StyledTypography>
@@ -162,13 +165,13 @@ const SideBlock = ({ isSide }: navbarProps) => {
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
-                <a>족보</a>
+                <a onClick={() => setIsSide(false)}>족보</a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="#">
-                <a>스터디자료</a>
+                <a onClick={() => setIsSide(false)}>스터디자료</a>
               </Link>
             </div>
           </StyledTypography>
@@ -194,13 +197,13 @@ const SideBlock = ({ isSide }: navbarProps) => {
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
-                <a>QnA</a>
+                <a onClick={() => setIsSide(false)}>QnA</a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="#">
-                <a>자유</a>
+                <a onClick={() => setIsSide(false)}>자유</a>
               </Link>
             </div>
           </StyledTypography>
@@ -209,24 +212,24 @@ const SideBlock = ({ isSide }: navbarProps) => {
 
       <div className="side_reserve">
         <Link href="#">
-          <a>좌석예약</a>
+          <a onClick={() => setIsSide(false)}>좌석예약</a>
         </Link>
       </div>
       {accessToken ? (
         <>
           <div className="side_signin">
             <Link href="/mypage">
-              <a>마이페이지</a>
+              <a onClick={() => setIsSide(false)}>마이페이지</a>
             </Link>
           </div>
           <div className="side_signin" onClick={onClickLogout}>
-            <a>로그아웃</a>
+            <a onClick={() => setIsSide(false)}>로그아웃</a>
           </div>
         </>
       ) : (
         <div className="side_signin">
           <Link href="/signin">
-            <a>로그인</a>
+            <a onClick={() => setIsSide(false)}>로그인</a>
           </Link>
         </div>
       )}

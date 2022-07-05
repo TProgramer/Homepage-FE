@@ -3,9 +3,10 @@ import Link from "next/link";
 
 type navbarProps = {
   isHover: boolean;
+  setIsHover: (isHover: boolean) => void;
 };
 
-const DropDown = ({ isHover }: navbarProps) => {
+const DropDown = ({ isHover, setIsHover }: navbarProps) => {
   const introList = [
     { text: "동아리원", link: "#" },
     { text: "활동사진", link: "/activity" },
@@ -29,7 +30,7 @@ const DropDown = ({ isHover }: navbarProps) => {
         {introList.map((list, index) => (
           <div key={index} className="intro_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a onClick={() => setIsHover(false)}>{list.text}</a>
             </Link>
           </div>
         ))}
@@ -38,7 +39,9 @@ const DropDown = ({ isHover }: navbarProps) => {
         {actList.map((list, index) => (
           <div key={index} className="act_list">
             <Link href={list.link}>
-              <a target={list.target}>{list.text}</a>
+              <a onClick={() => setIsHover(false)} target={list.target}>
+                {list.text}
+              </a>
             </Link>
           </div>
         ))}
@@ -47,7 +50,7 @@ const DropDown = ({ isHover }: navbarProps) => {
         {dataList.map((list, index) => (
           <div key={index} className="data_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a onClick={() => setIsHover(false)}>{list.text}</a>
             </Link>
           </div>
         ))}
@@ -56,7 +59,7 @@ const DropDown = ({ isHover }: navbarProps) => {
         {boardList.map((list, index) => (
           <div key={index} className="board_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a onClick={() => setIsHover(false)}>{list.text}</a>
             </Link>
           </div>
         ))}
