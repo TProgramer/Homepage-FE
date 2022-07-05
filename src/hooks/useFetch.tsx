@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useFetch as useHttpFetch, IncomingOptions, Res } from "use-http";
 
 export default function useFetch<DataType>(
   url: string,
-  options: RequestInit
-): [DataType | undefined, boolean, Error | undefined] {
-  const [data, setData] = useState<DataType>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<any>(null);
+  options?: IncomingOptions
+) {
+  const host = "";
+  const {
+    request: httpRequest,
+    response: httpResponse,
+    loading: httpLoading,
+    data: httpData,
+    error: httpError,
+  } = useHttpFetch<DataType>(`${host}${url}`, options);
+
+  const [response, setResponse] = useState<Res<DataType>>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchfunc = async () => {
-      await fetch(url, options)
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data.data);
-        })
-        .catch((error) => {
-          setError(error);
-        });
-    };
-    fetchfunc();
-  }, []);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [data, error]);
-
-  return [data, loading, error];
+    if (httpResponse.ok === false) {
+      if (httpResponse.status === 401) {
+      } else if (httpResponse.status === 403) {
+      } else {
+      }
+    } else {
+    }
+  }, [httpLoading]);
 }

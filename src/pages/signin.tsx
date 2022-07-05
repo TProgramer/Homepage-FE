@@ -11,11 +11,7 @@ import { useTokenContext } from "../context/tokenState";
 function SignIn() {
   const router = useRouter();
   const [show, setShow] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignType>();
+  const { register, handleSubmit } = useForm<SignType>();
   const { setAccessToken } = useTokenContext();
 
   const onSubmit = async (data: SignType) => {
