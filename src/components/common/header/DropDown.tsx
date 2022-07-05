@@ -3,20 +3,18 @@ import Link from "next/link";
 
 type navbarProps = {
   isHover: boolean;
+  setIsHover: (isHover: boolean) => void;
 };
 
-const DropDown = ({ isHover }: navbarProps) => {
+const DropDown = ({ isHover, setIsHover }: navbarProps) => {
   const introList = [
     { text: "동아리원", link: "#" },
-    { text: "활동사진", link: "#" },
-    { text: "수상내역", link: "#" },
+    { text: "활동사진", link: "/activity" },
+    { text: "결과물", link: "#" },
   ];
   const actList = [
-    { text: "캘린더", link: "#" },
-    { text: "스터디", link: "#" },
-    { text: "클래스", link: "#" },
-    { text: "프로젝트", link: "#" },
-    { text: "특강", link: "#" },
+    { text: "캘린더", link: "/calendar", target: "_blank" },
+    { text: "활동현황", link: "/course", target: "" },
   ];
   const dataList = [
     { text: "족보", link: "#" },
@@ -32,7 +30,7 @@ const DropDown = ({ isHover }: navbarProps) => {
         {introList.map((list, index) => (
           <div key={index} className="intro_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a onClick={() => setIsHover(false)}>{list.text}</a>
             </Link>
           </div>
         ))}
@@ -41,7 +39,9 @@ const DropDown = ({ isHover }: navbarProps) => {
         {actList.map((list, index) => (
           <div key={index} className="act_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a onClick={() => setIsHover(false)} target={list.target}>
+                {list.text}
+              </a>
             </Link>
           </div>
         ))}
@@ -50,7 +50,7 @@ const DropDown = ({ isHover }: navbarProps) => {
         {dataList.map((list, index) => (
           <div key={index} className="data_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a onClick={() => setIsHover(false)}>{list.text}</a>
             </Link>
           </div>
         ))}
@@ -59,7 +59,7 @@ const DropDown = ({ isHover }: navbarProps) => {
         {boardList.map((list, index) => (
           <div key={index} className="board_list">
             <Link href={list.link}>
-              <a>{list.text}</a>
+              <a onClick={() => setIsHover(false)}>{list.text}</a>
             </Link>
           </div>
         ))}

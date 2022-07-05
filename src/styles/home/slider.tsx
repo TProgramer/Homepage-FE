@@ -12,12 +12,12 @@ import {
 } from "../global/Global";
 
 export const Container = styled("div")<{
-  bgColor: string[];
+  bgColor: string;
 }>`
   width: 100vw;
   height: 800px;
   ${TRANSITION}
-  background-color: ${(props) => props.bgColor[Math.floor(Math.random() * 4)]};
+  background-color: ${(props) => props.bgColor};
   position: relative;
   display: flex;
   flex-direction: column;
