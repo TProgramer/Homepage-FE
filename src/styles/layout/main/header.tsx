@@ -7,8 +7,6 @@ import {
   MAX_WIDTH,
   TABLET_STANDARD,
   MOBILE_STANDARD,
-  DEFAULT_BOXSHADOW,
-  TRANSITION,
 } from "../../global/Global";
 
 export const Container = styled("div")`
