@@ -74,11 +74,11 @@ const Navbar = () => {
           onMouseLeave={hoverHandler}
         >
           <div className="inner_drop_down">
-            <DropDown isHover={isHover} />
+            <DropDown isHover={isHover} setIsHover={setIsHover} />
           </div>
         </div>
       </StyledNavbar>
-      <SideBlock isSide={isSide} />
+      <SideBlock isSide={isSide} setIsSide={setIsSide} />
     </>
   );
 };
