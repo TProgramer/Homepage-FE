@@ -112,6 +112,13 @@ export const StyledNavbar = styled("nav")<{ isHover: boolean }>`
     position: absolute;
     right: 20%;
   }
+  .userInfo {
+    position: absolute;
+    right: 0;
+    @media (max-width: ${MOBILE_STANDARD}px) {
+      display: none;
+    }
+  }
 `;
 
 export const StyledMenuIcon = styled(MenuIcon)`

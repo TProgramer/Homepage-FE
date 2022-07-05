@@ -8,6 +8,8 @@ import DropDown from "./DropDown";
 import SideBlock from "./SideBlock";
 import Link from "next/link";
 import { useTokenContext } from "../../../context/tokenState";
+import User from "./user";
+
 const Navbar = () => {
   const menus = ["소개", "활동", "자료", "게시판"];
 
@@ -27,8 +29,9 @@ const Navbar = () => {
       setIsHover(false);
     }
   };
+
   const { accessToken } = useTokenContext();
-  
+
   return (
     <>
       <StyledNavbar isHover={isHover}>
@@ -53,7 +56,9 @@ const Navbar = () => {
             <a>좌석예약</a>
           </Link>
         </div>
-        {accessToken ? null : (
+        {accessToken ? (
+          <User />
+        ) : (
           <div className="register">
             <Link href="/signin">
               <a>로그인</a>
@@ -73,7 +78,6 @@ const Navbar = () => {
           </div>
         </div>
       </StyledNavbar>
-
       <SideBlock isSide={isSide} />
     </>
   );
