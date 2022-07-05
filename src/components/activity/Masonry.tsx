@@ -5,7 +5,6 @@ import {
   Skeleton,
   ImageBox,
 } from "../../styles/activity/activity";
-import P from "../common/P";
 import ModalWindow from "./MasonryModal";
 
 export interface IImageSrc {
