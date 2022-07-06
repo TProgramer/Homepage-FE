@@ -6,10 +6,19 @@ import { theme } from "../themes/theme";
 import Layout from "../components/common/Layout";
 import { useRouter } from "next/router";
 import SignLayout from "../components/common/SignLayout";
-import { TokenWrapper } from "../context/tokenState";
+import { TokenWrapper, useTokenContext } from "../context/tokenState";
 import { useEffect } from "react";
 
+interface InterceptorRequestType {
+  options: RequestInit;
+  url?: string;
+  path?: string;
+  route?: string;
+}
+
 export default function App({ Component, pageProps }: AppProps) {
+  const { accessToken } = useTokenContext();
+
   const route = useRouter().pathname;
   return (
     <>

@@ -1,29 +1,52 @@
 import { useState, useEffect } from "react";
-import { useFetch as useHttpFetch, IncomingOptions, Res } from "use-http";
+import { useTokenContext } from "../context/tokenState";
 
-export default function useFetch<DataType>(
-  url: string,
-  options?: IncomingOptions
-) {
-  const host = "";
-  const {
-    request: httpRequest,
-    response: httpResponse,
-    loading: httpLoading,
-    data: httpData,
-    error: httpError,
-  } = useHttpFetch<DataType>(`${host}${url}`, options);
+type HTTPMethod = "GET" | "POST" | "PUT" | "DELETE";
 
-  const [response, setResponse] = useState<Res<DataType>>();
-  const [loading, setLoading] = useState(false);
+interface Request<DataType> {
+  get: (path: string) => Promise<DataType>;
+  post: (path: string, body: Object) => Promise<DataType>;
+  put: (path: string, body: Object) => Promise<DataType>;
+  del: (path: string) => Promise<DataType>;
+}
 
-  useEffect(() => {
-    if (httpResponse.ok === false) {
-      if (httpResponse.status === 401) {
-      } else if (httpResponse.status === 403) {
-      } else {
-      }
-    } else {
-    }
-  }, [httpLoading]);
+interface Result<DataType> {
+  data: DataType | null;
+  loading: boolean;
+  error: any;
+}
+
+export default function useFetch<DataType>(host: string) {
+  const { accessToken } = useTokenContext();
+
+  function makeFetch(
+    method: HTTPMethod
+  ): (path: string, body?: Object) => Promise<DataType> {
+    return (path: string, body?: Object) =>
+      fetch(`${host}${path}`, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(body),
+      })
+        .then((res) => res.json())
+        .then((res) => res as DataType);
+  }
+
+  const [{ get, post, put, del }, setRequest] = useState<Request<DataType>>({
+    get: makeFetch("GET"),
+    post: makeFetch("POST"),
+    put: makeFetch("PUT"),
+    del: makeFetch("DELETE"),
+  });
+
+  const [{ loading, data, error }, setResult] = useState<Result<DataType>>({
+    data: null,
+    loading: true,
+    error: null,
+  });
+
+  return { get, post, put, del, data, loading, error };
 }
