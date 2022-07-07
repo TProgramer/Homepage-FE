@@ -12,18 +12,18 @@ import "tui-time-picker/dist/tui-time-picker.css";
 import useFetch from "../hooks/useFetch";
 
 export default function Calendar() {
-  const [calendars, loadingCalendar, errorCalendar] = useFetch<ICalendarInfo[]>(
-    "/api/calendar/calendars",
-    {
-      method: "GET",
-    }
-  );
-  const [schedules, loadingSchedule, errorSchedule] = useFetch<ISchedule[]>(
-    "/api/calendar/schedules",
-    {
-      method: "GET",
-    }
-  );
+  const {
+    data: calendars,
+    loading: loadingCalendar,
+    error: errorCalendar,
+  } = useFetch("", "/api/calendar/calendars");
+
+  const {
+    data: schedules,
+    loading: loadingSchedule,
+    error: errorSchedule,
+  } = useFetch("", "/api/calendar/schedules");
+
   const [calendarView, setCalendarView] = useState<string>("month");
   const viewOptions = [
     { key: "day", value: "day", text: "Daily" },

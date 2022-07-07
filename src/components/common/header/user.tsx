@@ -10,12 +10,19 @@ import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTokenContext } from "../../../context/tokenState";
+import useFetch from "../../../hooks/useFetch";
+
+interface LogoutDto {}
 
 export default function User() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const router = useRouter();
-  const { setAccessToken } = useTokenContext();
+  const { refreshToken, setToken } = useTokenContext();
+  const { post } = useFetch(
+    "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000"
+  );
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -31,26 +38,16 @@ export default function User() {
     setOpen(false);
   };
   const onClickLogout = async () => {
-    const res = await fetch(
-      "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/auth/logout",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          refresh_token: localStorage.getItem("refresh_token"),
-        }),
-      }
-    );
-    if (res.ok) {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
-      setAccessToken("");
+    const { error } = await post<LogoutDto>("/auth/logout", {
+      refresh_token: refreshToken,
+    });
+
+    if (error) {
+      alert("로그아웃 실패");
+    } else {
+      setToken(null, null);
       alert("로그아웃 성공");
       router.push("/");
-    } else {
-      alert("로그아웃 실패");
     }
   };
   function handleListKeyDown(event: React.KeyboardEvent) {

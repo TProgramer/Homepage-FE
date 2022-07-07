@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch";
 import {
   Masonry,
   Img,
@@ -15,21 +16,18 @@ export interface IImageSrc {
 }
 
 const MasonryBox = ({ windowWidth }: { windowWidth: number }) => {
-  const [image, setImage] = useState<IImageSrc[]>();
-  const [imgLoad, setImgLoad] = useState(false);
-  useEffect(() => {
-    (async () => {
-      const res = await (await fetch("/api/images/active?limit=18")).json();
-      setImage(res);
-    })();
-    setImgLoad(false);
-  }, []);
+  const { data: images, loading: loadingImages } = useFetch(
+    "",
+    "/api/activity/images"
+  );
+
   const [modal, setModal] = useState<IImageSrc>({
     onoff: false,
     img: "",
     title: "",
     description: "",
   });
+
   const modalHandler = (src: IImageSrc) => {
     setModal({
       onoff: true,
@@ -38,23 +36,28 @@ const MasonryBox = ({ windowWidth }: { windowWidth: number }) => {
       description: src.description,
     });
   };
+
   return (
     <>
-      <Masonry windowWidth={windowWidth}>
-        {image?.map((item, index) => (
-          <ImageBox key={index}>
-            <Skeleton
-              load={imgLoad}
-              onClick={() => {
-                modalHandler(item);
-              }}
-            >
-              {item.title}
-            </Skeleton>
-            <Img src={item.img} alt={item.title} />
-          </ImageBox>
-        ))}
-      </Masonry>
+      {loadingImages ? (
+        "Loading..."
+      ) : (
+        <Masonry windowWidth={windowWidth}>
+          {images?.map((item: IImageSrc, index: number) => (
+            <ImageBox key={index}>
+              <Skeleton
+                load={loadingImages}
+                onClick={() => {
+                  modalHandler(item);
+                }}
+              >
+                {item.title}
+              </Skeleton>
+              <Img src={item.img} alt={item.title} />
+            </ImageBox>
+          ))}
+        </Masonry>
+      )}
       {modal?.onoff ? (
         <ModalWindow
           windowWidth={windowWidth}

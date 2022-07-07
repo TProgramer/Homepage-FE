@@ -9,6 +9,7 @@ import Link from "next/link";
 import { theme } from "../../../themes/theme";
 import { useTokenContext } from "../../../context/tokenState";
 import { useRouter } from "next/router";
+import useFetch from "../../../hooks/useFetch";
 
 const MuiAccordionStyle = {
   border: `1px solid ${theme.backgroundColor}`,
@@ -40,35 +41,31 @@ type navbarProps = {
   setIsSide: (isSide: boolean) => void;
 };
 
+interface LogoutDto {}
+
 const SideBlock = ({ isSide, setIsSide }: navbarProps) => {
   const [expanded, setExpanded] = useState<string | false>("panel1");
-  const { accessToken, setAccessToken } = useTokenContext();
+  const { accessToken, refreshToken, setToken } = useTokenContext();
   const router = useRouter();
+  const { post } = useFetch(
+    "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000"
+  );
+
   const handleChange =
     (panel: string) => (event: SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
   const onClickLogout = async () => {
-    const res = await fetch(
-      "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/auth/logout",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          refresh_token: localStorage.getItem("refresh_token"),
-        }),
-      }
-    );
-    if (res.ok) {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
-      setAccessToken("");
+    const { error } = await post<LogoutDto>("/auth/logout", {
+      refresh_token: refreshToken,
+    });
+
+    if (error) {
+      alert("로그아웃 실패");
+    } else {
+      setToken(null, null);
       alert("로그아웃 성공");
       router.push("/");
-    } else {
-      alert("로그아웃 실패");
     }
   };
   return (

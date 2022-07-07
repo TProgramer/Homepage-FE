@@ -7,34 +7,33 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useRouter } from "next/router";
 import { useTokenContext } from "../context/tokenState";
+import useFetch from "../hooks/useFetch";
+
+interface LoginDto {
+  access_token: string;
+  refresh_token: string;
+}
 
 function SignIn() {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const { register, handleSubmit } = useForm<SignType>();
-  const { setAccessToken } = useTokenContext();
+  const { setToken } = useTokenContext();
+  const { post } = useFetch(
+    "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000"
+  );
 
   const onSubmit = async (data: SignType) => {
-    const res = await fetch(
-      "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/auth/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
+    const { access_token, refresh_token, error } = await post<LoginDto>(
+      "/auth/login",
+      data
     );
-    if (res.ok) {
-      const json = await res.json();
-      const { access_token, refresh_token } = json;
-      setAccessToken(access_token);
-      localStorage.setItem("access_token", access_token);
-      localStorage.setItem("refresh_token", refresh_token);
+    if (error) {
+      alert("로그인실패");
+    } else {
+      setToken(access_token, refresh_token);
       alert("로그인성공");
       router.push("/");
-    } else {
-      alert("로그인실패");
     }
   };
   return (
