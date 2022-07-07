@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTokenContext } from "../context/tokenState";
 
 type HTTPMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -54,6 +54,10 @@ export default function useFetch(host: string, path?: string) {
     error: null,
   });
 
+  if (host === "") {
+    host = "http://localhost:3000";
+  }
+
   function makeFetch(
     method: HTTPMethod
   ): <DataType>(
@@ -72,7 +76,7 @@ export default function useFetch(host: string, path?: string) {
       });
       if (res.ok) {
         const json = await res.json();
-        setResult({ loading: false, data: json, error: null });
+        setResult({ loading: false, data: json.data, error: null });
         return { ...data };
       } else if (res.status === 401) {
         try {
@@ -100,9 +104,11 @@ export default function useFetch(host: string, path?: string) {
     del: makeFetch("DELETE"),
   };
 
-  if (path) {
-    get(path);
-  }
+  useEffect(() => {
+    if (path) {
+      get(path);
+    }
+  }, []);
 
   return { get, post, put, patch, del, data, loading, error };
 }
