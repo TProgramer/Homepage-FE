@@ -1,28 +1,55 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
+
 interface TokenContextType {
-  accessToken: string | null | undefined;
-  setAccessToken: (token: string) => void;
+  accessToken: string | null;
+  refreshToken: string | null;
+  setToken: (accessToken: string | null, refreshToken: string | null) => void;
+}
+
+interface JWT {
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
 const TokenContext = createContext<TokenContextType>({
   accessToken: null,
-  setAccessToken: (token) => {
-    console.error(`TokenProvider does not exists, token: ${token}`);
+  refreshToken: null,
+  setToken: (accessToken, refreshToken) => {
+    console.error(
+      `TokenProvider does not exists, accessToken: ${accessToken}, refreshToken: ${refreshToken}`
+    );
   },
 });
 
 export const TokenWrapper = ({ children }: { children: ReactNode }) => {
-  const [accessToken, setAccessToken] = useState<string | null>();
+  const [{ accessToken, refreshToken }, setJWT] = useState<JWT>({
+    accessToken: null,
+    refreshToken: null,
+  });
+
+  function setToken(accessToken: string | null, refreshToken: string | null) {
+    if (accessToken === null) {
+      localStorage.removeItem("access_token");
+    } else {
+      localStorage.setItem("access_token", accessToken);
+    }
+    if (refreshToken === null) {
+      localStorage.removeItem("refresh_token");
+    } else {
+      localStorage.setItem("refresh_token", refreshToken);
+    }
+    setJWT({ accessToken, refreshToken });
+  }
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
-    if (accessToken !== null) {
-      setAccessToken(accessToken);
-    }
+    const refreshToken = localStorage.getItem("refresh_token");
+    setJWT({ accessToken, refreshToken });
   }, []);
+
   return (
-    <TokenContext.Provider value={{ accessToken, setAccessToken }}>
+    <TokenContext.Provider value={{ accessToken, refreshToken, setToken }}>
       {children}
     </TokenContext.Provider>
   );
