@@ -28,7 +28,7 @@ const SignUp = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<SignType>({ criteriaMode: "all" });
+  } = useForm<SignType>({ mode: "onBlur", criteriaMode: "all" });
   const watchPassword = watch("password");
   const watchConfirmPassword = watch("password_confirm");
 

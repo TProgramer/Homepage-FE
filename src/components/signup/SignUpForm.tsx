@@ -66,6 +66,7 @@ export default function SignUpForm({
       <input
         {...register("password_confirm", {
           required: true,
+          validate: (pw) => pw === watch('password'),
         })}
         type="password"
         className="input"
