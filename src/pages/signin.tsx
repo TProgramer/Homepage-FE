@@ -3,11 +3,10 @@ import { Form } from "../styles/layout/sign/globalSignBox";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { SignType } from "../components/signup/SignUp";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useRouter } from "next/router";
 import { useTokenContext } from "../context/tokenState";
-
+import { StyledVisibilityIcon } from "../styles/layout/sign/globalSignBox";
+import { StyledVisibilityOffIcon } from "../styles/layout/sign/globalSignBox";
 function SignIn() {
   const router = useRouter();
   const [show, setShow] = useState(false);
@@ -57,13 +56,13 @@ function SignIn() {
           placeholder="Password"
         />
         {!show ? (
-          <VisibilityIcon
-            className="visibleIcon"
+          <StyledVisibilityIcon
+            show={show}
             onClick={() => setShow((prev) => !prev)}
           />
         ) : (
-          <VisibilityOffIcon
-            className="visibleIcon"
+          <StyledVisibilityOffIcon
+            show={show}
             onClick={() => setShow((prev) => !prev)}
           />
         )}
