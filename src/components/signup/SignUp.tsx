@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form } from "../../styles/layout/sign/globalSignBox";
 import SignUpForm from "./SignUpForm";
@@ -28,7 +28,7 @@ const SignUp = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<SignType>();
+  } = useForm<SignType>({ criteriaMode: "all" });
   const watchPassword = watch("password");
   const watchConfirmPassword = watch("password_confirm");
 
@@ -61,6 +61,36 @@ const SignUp = () => {
       alert("오류가 발생했습니다.");
     }
   };
+
+  useEffect(() => {
+    const dummyObject: SignType = {
+      student_id: "",
+      password: "",
+      password_confirm: "",
+      name: "",
+      phone: "",
+      birthday: "",
+      email: "",
+      github: "",
+    };
+
+    const signTypeKeys = Object.keys(dummyObject);
+    const errorKeys = Object.keys(errors);
+    const okList = signTypeKeys.filter((key) => !errorKeys.includes(key));
+    const koList = signTypeKeys.filter((key) => errorKeys.includes(key));
+    for (const okName of okList) {
+      const input = document.getElementsByName(okName);
+      if (input.length !== 0) {
+        input[0].classList.remove("error");
+      }
+    }
+    for (const koName of koList) {
+      const input = document.getElementsByName(koName);
+      if (input.length !== 0) {
+        input[0].classList.add("error");
+      }
+    }
+  }, [Object.keys(errors)]);
 
   return (
     <>

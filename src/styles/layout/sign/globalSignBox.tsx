@@ -129,6 +129,14 @@ export const Form = styled("form")<{ show?: boolean }>`
     background-color: white;
   }
 
+  .error {
+    outline: none;
+    border-bottom: 2px solid red;
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid red;
+    }
+  }
   .submit {
     width: 95%;
     height: 60px;
