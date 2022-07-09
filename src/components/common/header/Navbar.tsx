@@ -7,7 +7,7 @@ import {
 import DropDown from "./DropDown";
 import SideBlock from "./SideBlock";
 import Link from "next/link";
-import { useTokenContext } from "../../../context/tokenState";
+import { useTokenContext } from "../../../context/TokenState";
 import User from "./user";
 
 const Navbar = () => {

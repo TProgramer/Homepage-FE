@@ -9,7 +9,7 @@ import MenuList from "@mui/material/MenuList";
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useTokenContext } from "../../../context/tokenState";
+import { useTokenContext } from "../../../context/TokenState";
 import useFetch from "../../../hooks/useFetch";
 
 interface LogoutDto {}
@@ -18,7 +18,7 @@ export default function User() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const router = useRouter();
-  const { refreshToken, setToken } = useTokenContext();
+  const { refreshToken, setTokens } = useTokenContext();
   const { post } = useFetch(
     "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000"
   );
@@ -45,7 +45,7 @@ export default function User() {
     if (error) {
       alert("로그아웃 실패");
     } else {
-      setToken(null, null);
+      setTokens({ accessToken: null, refreshToken: null });
       alert("로그아웃 성공");
       router.push("/");
     }

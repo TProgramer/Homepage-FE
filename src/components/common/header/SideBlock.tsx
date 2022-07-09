@@ -7,7 +7,7 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { StyledTypography } from "../../../styles/layout/main/header";
 import Link from "next/link";
 import { theme } from "../../../themes/theme";
-import { useTokenContext } from "../../../context/tokenState";
+import { useTokenContext } from "../../../context/TokenState";
 import { useRouter } from "next/router";
 import useFetch from "../../../hooks/useFetch";
 
@@ -45,7 +45,7 @@ interface LogoutDto {}
 
 const SideBlock = ({ isSide, setIsSide }: navbarProps) => {
   const [expanded, setExpanded] = useState<string | false>("panel1");
-  const { accessToken, refreshToken, setToken } = useTokenContext();
+  const { accessToken, refreshToken, setTokens } = useTokenContext();
   const router = useRouter();
   const { post } = useFetch(
     "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000"
@@ -63,7 +63,7 @@ const SideBlock = ({ isSide, setIsSide }: navbarProps) => {
     if (error) {
       alert("로그아웃 실패");
     } else {
-      setToken(null, null);
+      setTokens({ accessToken: null, refreshToken: null });
       alert("로그아웃 성공");
       router.push("/");
     }
