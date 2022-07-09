@@ -5,7 +5,8 @@ import SignUpForm from "./SignUpForm";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import VerifyEmailForm from "./VerifyEmailForm";
 import { useRouter } from "next/router";
-import { useTokenContext } from "../../context/tokenState";
+import { useTokenContext } from "../../context/TokenState";
+import useFetch from "../../hooks/useFetch";
 
 export interface SignType {
   student_id: string;
@@ -18,48 +19,49 @@ export interface SignType {
   github: string;
 }
 
+interface CreateUserReturnDto {
+  access_token: string;
+  refresh_token: string;
+}
+
 const SignUp = () => {
   const router = useRouter();
-  const [verifiedToken, setVerifiedToken] = useState("");
   const [show, setShow] = useState(false);
-  const { setAccessToken } = useTokenContext();
+  const { accessToken, setTokens } = useTokenContext();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<SignType>();
+  const { post } = useFetch(
+    "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000"
+  );
 
   const onSubmit = async (data: SignType) => {
-    const { password_confirm, ...dto } = data;
-    const dtoWithImageUri = { image_uri: "", admin: true, ...dto };
-    const res = await fetch(
-      "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/users",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${verifiedToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dtoWithImageUri),
-      }
-    );
-    if (res.ok) {
-      alert("회원가입 성공!");
-      const { user, token } = await res.json();
-      setAccessToken(token.access_token);
-      localStorage.setItem("access_token", token.access_token);
-      localStorage.setItem("refresh_token", token.refresh_token);
-      router.push("/");
-    } else {
+    const { password_confirm, ...formData } = data;
+    const formDataWithImageUri = {
+      image_uri:
+        "https://w.namu.la/s/426bf4c3324155e1b82e0e046c4e61042676dc0fd5fd75cb78897be9bd4175637a5c9613642fde68a30929743919cd17c121bbb40a61245667c9a4b14c53cb0da144e87c6a24a730463570f010ed578045eebe6d522a97ba8852128209a57d9bdf3c25fc4797d128772fed2a175ee778",
+      admin: true,
+      ...formData,
+    };
+    const { access_token, refresh_token, error } =
+      await post<CreateUserReturnDto>("/users", formDataWithImageUri);
+    console.log(formDataWithImageUri);
+    if (error) {
       alert("오류가 발생했습니다.");
+    } else {
+      setTokens({ accessToken: access_token, refreshToken: refresh_token });
+      alert("회원가입 성공!");
+      router.push("/");
     }
   };
 
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)} show={show}>
-        {verifiedToken ? (
+        {accessToken ? (
           <SignUpForm
             register={register}
             watch={watch}
@@ -70,7 +72,9 @@ const SignUp = () => {
           <VerifyEmailForm
             register={register}
             watch={watch}
-            setVerifiedToken={setVerifiedToken}
+            setVerifiedToken={(verifiedToken) =>
+              setTokens({ accessToken: verifiedToken, refreshToken: null })
+            }
           />
         )}
       </Form>

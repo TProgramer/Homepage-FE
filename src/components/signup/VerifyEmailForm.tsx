@@ -30,62 +30,49 @@ export default function VerifyEmailForm({
   const [stopTimer, setStopTimer] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [textValue, setTextValue] = useState("Send Verify Code");
+  const { post, data, loading, error } = useFetch(
+    "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000"
+  );
+
   const sendCode = async () => {
     if (!isRequested) {
       setTextValue("...");
       setIsDisabled(true);
-      const res = await fetch(
-        "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/auth/send-code",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-          }),
-        }
-      );
+      const { error } = await post<null>("/auth/send-code", { email });
       setIsDisabled(false);
       setTextValue("Send Verify Code");
-      if (res.ok) {
+      if (error) {
+        alert("Failed");
+      } else {
         alert("Email send");
         setIsRequested(true);
-      } else {
-        alert("Failed");
       }
     }
   };
+
   useEffect(() => {
-    (async () => {
-      if (code.length === 6) {
-        const res = await fetch(
-          "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/auth/check-code",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${code}`,
-            },
-            body: JSON.stringify({
-              code,
-              email,
-            }),
-          }
-        );
-        if (res.ok) {
-          const json = await res.json();
-          const verifiedToken = json.disposable_access_token;
-          setExpired(true);
-          setStopTimer(true);
-          setVerifiedToken(verifiedToken);
-        } else {
-          alert("🚨🚨🚨 잘못된 코드입니다 🚨🚨🚨");
-          setCode("");
-        }
+    if (code.length === 6) {
+      post("/auth/check-code", {
+        code,
+        email,
+      });
+    }
+  }, [code.length === 6]);
+
+  useEffect(() => {
+    if (loading === false && code.length === 6) {
+      if (error) {
+        setCode("");
+        alert("🚨🚨🚨 잘못된 코드입니다 🚨🚨🚨");
+      } else {
+        const { disposable_access_token: verifiedToken } = data;
+        setExpired(true);
+        setStopTimer(true);
+        setVerifiedToken(verifiedToken);
       }
-    })();
-  }, [code]);
+    }
+  }, [loading]);
+
   return (
     <>
       <span className="step">Step 1. 이메일 인증</span>

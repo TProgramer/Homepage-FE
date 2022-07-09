@@ -1,5 +1,6 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useTokenContext } from "../context/tokenState";
+import { useTokenContext } from "../context/TokenState";
 
 type HTTPMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -31,30 +32,30 @@ interface Result {
 }
 
 async function refreshJWT(
-  setToken: (accessToken: string, refreshToken: string) => void
+  refreshToken: string,
+  setTokens: (tokens: { accessToken: string; refreshToken: string }) => void
 ) {
-  const refreshToken = localStorage.getItem("refreshToken");
   const response = await fetch("/api/refresh", {
     method: "POST",
     body: JSON.stringify({ refreshToken }),
   });
   if (response.ok) {
     const { access_token, refresh_token } = await response.json();
-    setToken(access_token, refresh_token);
-  } else {
-    throw response.status;
+    setTokens({ accessToken: access_token, refreshToken: refresh_token });
   }
+  return response.status;
 }
 
-export default function useFetch(host: string, path?: string) {
-  const { accessToken, setToken } = useTokenContext();
+export default function useFetch(host?: string, path?: string) {
+  const { accessToken, refreshToken, setTokens } = useTokenContext();
   const [{ loading, data, error }, setResult] = useState<Result>({
     data: null,
     loading: true,
     error: null,
   });
+  const router = useRouter();
 
-  if (host === "") {
+  if (!host) {
     host = "http://localhost:3000";
   }
 
@@ -65,7 +66,7 @@ export default function useFetch(host: string, path?: string) {
     body?: Object
   ) => Promise<{ error: number | undefined } & DataType> {
     return async (path: string, body?: Object) => {
-      setResult({ data: null, loading: true, error: null });
+      setResult({ loading: true, data: null, error: null });
       const res = await fetch(`${host}${path}`, {
         method,
         headers: {
@@ -75,23 +76,34 @@ export default function useFetch(host: string, path?: string) {
         body: JSON.stringify(body),
       });
       if (res.ok) {
-        const json = await res.json();
-        setResult({ loading: false, data: json.data, error: null });
-        return { ...data };
-      } else if (res.status === 401) {
-        try {
-          await refreshJWT(setToken);
-        } catch (error) {
-          if (typeof error === "number") {
-            setResult({ loading: false, data: null, error });
+        if (res.status === 204) {
+          setResult({ loading: false, data: null, error: null });
+          return {};
+        } else {
+          const json = await res.json();
+          if (json.data) {
+            setResult({ loading: false, data: json.data, error: null });
           } else {
-            console.error(error);
+            setResult({ loading: false, data: json, error: null });
           }
+          return { ...json };
         }
-        return makeFetch(method)(path, body);
+      } else if (res.status === 401) {
+        if (refreshToken) {
+          const refreshStatus = await refreshJWT(refreshToken, setTokens);
+          if (refreshStatus === 200) {
+            return makeFetch(method)(path, body);
+          } else if (refreshStatus === 400) {
+            setResult({ loading: false, data: null, error: refreshStatus });
+          }
+        } else {
+          alert("로그인이 필요합니다.");
+          router.push("/signin");
+        }
+        return { error: 401 };
       } else {
         setResult({ loading: false, data: null, error: res.status });
-        return { error };
+        return { error: res.status };
       }
     };
   }

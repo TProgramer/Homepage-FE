@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { theme } from "../../themes/theme";
 import {
   AxisPlane,
@@ -9,6 +9,7 @@ import {
   Plane,
   RotateContainer,
 } from "../../styles/home/slider";
+import useFetch from "../../hooks/useFetch";
 
 interface IImage {
   img: string;
@@ -18,15 +19,13 @@ interface IImage {
 
 function Slider() {
   const [randomColor, setRandomColor] = useState(theme.backgroundColor);
-  const [projects, setProjects] = useState<IImage[]>();
   const [deg, setDeg] = useState(0);
+  const {
+    data: projects,
+    loading: loadingProjects,
+    error: errorProjects,
+  } = useFetch("", "/api/images/active?limit=8");
 
-  useEffect(() => {
-    (async () => {
-      const res = await (await fetch("api/images/active?limit=8")).json();
-      setProjects(res);
-    })();
-  }, []);
   const randomColorProducer = () => {
     const bgColor = ["#020314", "#5932E6", "#8631E6", "#161370", "#364B92"];
     setRandomColor(bgColor[Math.floor(Math.random() * 4)]);
@@ -57,9 +56,13 @@ function Slider() {
     <Container bgColor={randomColor}>
       <h2 className="title">프로젝트 결과물</h2>
       <RotateContainer>
-        <AxisPlane deg={deg}>
-          {projects?.map((item, index) => {
-            return (
+        {loadingProjects ? (
+          <div>로딩중...</div>
+        ) : errorProjects ? (
+          <div>{errorProjects} 에러가 발생했습니다.</div>
+        ) : (
+          <AxisPlane deg={deg}>
+            {projects?.map((item: IImage, index: number) => (
               <Plane forLoop={forLoop} key={index}>
                 <div className="rotate__title">{item.title}</div>
                 <img
@@ -68,9 +71,9 @@ function Slider() {
                   className="rotate__img"
                 />
               </Plane>
-            );
-          })}
-        </AxisPlane>
+            ))}
+          </AxisPlane>
+        )}
       </RotateContainer>
       <ClickBox>
         <div onClick={onClickLeft} className="click">
