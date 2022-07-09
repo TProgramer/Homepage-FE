@@ -29,8 +29,16 @@ const SignUp = () => {
     watch,
     formState: { errors },
   } = useForm<SignType>();
+  const watchPassword = watch("password");
+  const watchConfirmPassword = watch("password_confirm");
 
   const onSubmit = async (data: SignType) => {
+    const { password_confirm, ...dto } = data;
+
+    if (watchPassword !== watchConfirmPassword) {
+      alert("비밀번호가 서로 다릅니다.");
+      return;
+    }
     const res = await fetch(
       "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/users",
       {
@@ -39,7 +47,7 @@ const SignUp = () => {
           Authorization: `Bearer ${verifiedToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dto),
       }
     );
     if (res.ok) {

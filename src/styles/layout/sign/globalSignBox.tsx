@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import {
   DEFAULT_BORDERRADIUS,
@@ -10,6 +12,7 @@ import {
 export const SignContainer = styled("div")`
   width: 100vw;
   height: auto;
+  min-height: 800px;
   display: flex;
 `;
 
@@ -107,6 +110,25 @@ export const Form = styled("form")<{ show?: boolean }>`
       border-bottom: 2px solid ${(props) => props.theme.buttonColor.primary};
     }
   }
+  .labelBirth {
+    color: grey;
+    width: 340px;
+    margin: 20px 0 20px 0;
+  }
+  .inputBirth {
+    height: 45px;
+    font-size: ${FONT_L};
+    margin-left: 30px;
+    border: none;
+    width: 180px;
+    border-bottom: 2px solid ${(props) => props.theme.textColor.sub};
+    background-color: ${(props) => props.theme.textColor.primary};
+    color: ${(props) => props.theme.textColor.sub};
+  }
+  .inputBirth::-webkit-calendar-picker-indicator {
+    background-color: white;
+  }
+
   .submit {
     width: 95%;
     height: 60px;
@@ -135,5 +157,23 @@ export const Form = styled("form")<{ show?: boolean }>`
 export const SignBgImage = styled("div")<{ imageUrl: string }>`
   width: calc(100vw - 500px);
   height: 100vh;
+  min-height: 800px;
   background-image: url(${(props) => props.imageUrl});
+`;
+
+export const StyledVisibilityIcon = styled(VisibilityIcon)<{ show: boolean }>`
+  position: absolute;
+  top: 240px;
+  left: 320px;
+
+  color: ${(props) => (!props.show ? props.theme.textColor.sub : "red")};
+`;
+
+export const StyledVisibilityOffIcon = styled(VisibilityOffIcon)<{
+  show: boolean;
+}>`
+  position: absolute;
+  top: 240px;
+  left: 320px;
+  color: ${(props) => (!props.show ? props.theme.textColor.sub : "red")};
 `;
