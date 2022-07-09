@@ -55,7 +55,7 @@ export default function SignUpForm({
           })}
           type={!show ? "password" : "text"}
           className="input"
-          placeholder="비밀번호: 길이 6~15, 1개이상 문자, 특수문자"
+          placeholder="비밀번호: 길이 6~15, 1개이상의 문자와 특수문자"
         />
         {!show ? (
           <StyledVisibilityIcon show={show} onClick={() => setShow(true)} />
