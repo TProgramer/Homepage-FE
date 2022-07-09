@@ -14,22 +14,7 @@ export interface IImageSrc {
   description: string;
 }
 
-const MasonryBox = () => {
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", () => {
-        setWindowWidth(window.innerWidth);
-      });
-      (() => {
-        setWindowWidth(window.innerWidth);
-      })();
-      return () =>
-        window.removeEventListener("resize", () => {
-          setWindowWidth(window.innerWidth);
-        });
-    }
-  }, []);
+const MasonryBox = ({ windowWidth }: { windowWidth: number }) => {
   const [image, setImage] = useState<IImageSrc[]>();
   const [imgLoad, setImgLoad] = useState(false);
   useEffect(() => {

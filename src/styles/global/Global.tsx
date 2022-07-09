@@ -25,7 +25,7 @@ export const HOVER_BUTTON = css`
   }
 `;
 export const TRANSITION = css`
-  transition: all 0.2s linear;
+  transition: all 0.2s ease-in-out;
 `;
 
 const reset = css`

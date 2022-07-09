@@ -7,6 +7,8 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { StyledTypography } from "../../../styles/layout/main/header";
 import Link from "next/link";
 import { theme } from "../../../themes/theme";
+import { useTokenContext } from "../../../context/tokenState";
+import { useRouter } from "next/router";
 
 const MuiAccordionStyle = {
   border: `1px solid ${theme.backgroundColor}`,
@@ -35,14 +37,40 @@ const AccordionDetailsStyle = {
 
 type navbarProps = {
   isSide: boolean;
+  setIsSide: (isSide: boolean) => void;
 };
 
-const SideBlock = ({ isSide }: navbarProps) => {
+const SideBlock = ({ isSide, setIsSide }: navbarProps) => {
   const [expanded, setExpanded] = useState<string | false>("panel1");
+  const { accessToken, setAccessToken } = useTokenContext();
+  const router = useRouter();
   const handleChange =
     (panel: string) => (event: SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
+  const onClickLogout = async () => {
+    const res = await fetch(
+      "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/auth/logout",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          refresh_token: localStorage.getItem("refresh_token"),
+        }),
+      }
+    );
+    if (res.ok) {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      setAccessToken("");
+      alert("로그아웃 성공");
+      router.push("/");
+    } else {
+      alert("로그아웃 실패");
+    }
+  };
   return (
     <StyledSideBlock isSide={isSide}>
       <MuiAccordion
@@ -65,19 +93,19 @@ const SideBlock = ({ isSide }: navbarProps) => {
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
-                <a>동아리원</a>
+                <a onClick={() => setIsSide(false)}>동아리원</a>
+              </Link>
+            </div>
+            <hr />
+            <div className="text">
+              <Link href="/activity">
+                <a onClick={() => setIsSide(false)}>활동사진</a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="#">
-                <a>활동사진</a>
-              </Link>
-            </div>
-            <hr />
-            <div className="text">
-              <Link href="#">
-                <a>수상내역</a>
+                <a onClick={() => setIsSide(false)}>결과물</a>
               </Link>
             </div>
           </StyledTypography>
@@ -102,32 +130,16 @@ const SideBlock = ({ isSide }: navbarProps) => {
         <MuiAccordionDetails sx={AccordionDetailsStyle}>
           <StyledTypography isSide={isSide}>
             <div className="text">
-              <Link href="#">
-                <a>캘린더</a>
+              <Link href="/calendar">
+                <a onClick={() => setIsSide(false)} target="_blank">
+                  캘린더
+                </a>
               </Link>
             </div>
             <hr />
             <div className="text">
-              <Link href="#">
-                <a>스터디</a>
-              </Link>
-            </div>
-            <hr />
-            <div className="text">
-              <Link href="#">
-                <a>클래스</a>
-              </Link>
-            </div>
-            <hr />
-            <div className="text">
-              <Link href="#">
-                <a>프로젝트</a>
-              </Link>
-            </div>
-            <hr />
-            <div className="text">
-              <Link href="#">
-                <a>특강</a>
+              <Link href="/course">
+                <a onClick={() => setIsSide(false)}>활동현황</a>
               </Link>
             </div>
           </StyledTypography>
@@ -153,13 +165,13 @@ const SideBlock = ({ isSide }: navbarProps) => {
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
-                <a>족보</a>
+                <a onClick={() => setIsSide(false)}>족보</a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="#">
-                <a>스터디자료</a>
+                <a onClick={() => setIsSide(false)}>스터디자료</a>
               </Link>
             </div>
           </StyledTypography>
@@ -185,13 +197,13 @@ const SideBlock = ({ isSide }: navbarProps) => {
           <StyledTypography isSide={isSide}>
             <div className="text">
               <Link href="#">
-                <a>QnA</a>
+                <a onClick={() => setIsSide(false)}>QnA</a>
               </Link>
             </div>
             <hr />
             <div className="text">
               <Link href="#">
-                <a>자유</a>
+                <a onClick={() => setIsSide(false)}>자유</a>
               </Link>
             </div>
           </StyledTypography>
@@ -200,14 +212,27 @@ const SideBlock = ({ isSide }: navbarProps) => {
 
       <div className="side_reserve">
         <Link href="#">
-          <a>좌석예약</a>
+          <a onClick={() => setIsSide(false)}>좌석예약</a>
         </Link>
       </div>
-      <div className="side_signin">
-        <Link href="/signin">
-          <a>로그인</a>
-        </Link>
-      </div>
+      {accessToken ? (
+        <>
+          <div className="side_signin">
+            <Link href="/mypage">
+              <a onClick={() => setIsSide(false)}>마이페이지</a>
+            </Link>
+          </div>
+          <div className="side_signin" onClick={onClickLogout}>
+            <a onClick={() => setIsSide(false)}>로그아웃</a>
+          </div>
+        </>
+      ) : (
+        <div className="side_signin">
+          <Link href="/signin">
+            <a onClick={() => setIsSide(false)}>로그인</a>
+          </Link>
+        </div>
+      )}
     </StyledSideBlock>
   );
 };

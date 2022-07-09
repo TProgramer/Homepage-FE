@@ -2,6 +2,7 @@ import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import {
   DEFAULT_BOXSHADOW,
+  FONT_XXXL,
   MOBILE_STANDARD,
   TABLET_STANDARD,
 } from "../global/Global";
@@ -10,8 +11,49 @@ export const Wrapper = styled("div")`
   width: 100vw;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-`; //임시
+  flex-direction: column;
+`;
+export const ActivityHeader = styled("header")<{ windowWidth: number }>`
+  width: ${(props) =>
+    props.windowWidth <= MOBILE_STANDARD
+      ? `${props.windowWidth}px`
+      : props.windowWidth <= TABLET_STANDARD &&
+        props.windowWidth > MOBILE_STANDARD
+      ? `${MOBILE_STANDARD}px`
+      : "915px"};
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100px auto 10px auto;
+  border-bottom: 1px solid ${(props) => props.theme.accentColor};
+  .flexBox {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    .flexBox__title {
+      width: auto;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .h1 {
+        font-size: ${FONT_XXXL};
+        margin-left: 10px;
+      }
+    }
+    .flexBox__title2 {
+      width: 80%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+  .flexBox__sub {
+    width: 100%;
+    .subTitle {
+    }
+  }
+`;
 export const Masonry = styled("div")<{ windowWidth: number }>`
   width: ${(props) =>
     props.windowWidth <= MOBILE_STANDARD
@@ -21,7 +63,7 @@ export const Masonry = styled("div")<{ windowWidth: number }>`
       ? `${MOBILE_STANDARD}px`
       : "930px"};
   height: auto;
-  margin: 100px auto auto auto;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
 `;
