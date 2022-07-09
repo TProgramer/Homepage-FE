@@ -31,8 +31,6 @@ const SignUp = () => {
   } = useForm<SignType>();
 
   const onSubmit = async (data: SignType) => {
-    const { password_confirm, ...dto } = data;
-    const dtoWithImageUri = { image_uri: "", admin: true, ...dto };
     const res = await fetch(
       "http://ec2-3-35-104-193.ap-northeast-2.compute.amazonaws.com:8000/users",
       {
@@ -41,7 +39,7 @@ const SignUp = () => {
           Authorization: `Bearer ${verifiedToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dtoWithImageUri),
+        body: JSON.stringify(data),
       }
     );
     if (res.ok) {
