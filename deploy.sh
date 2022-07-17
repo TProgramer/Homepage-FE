@@ -3,9 +3,8 @@
 REPOSITORY=/home/ec2-user/FE
 cd $REPOSITORY
 
-sudo npm install pm2 -g
-sudo npm install --legacy-peer-deps
-sudo npm run build
-sudo pm2 kill
-sudo pm2 start npm --name "dev" -- start
-sudo pm2 list
+npm install pm2 -g
+npm install --legacy-peer-deps
+npm run build
+pm2 start npm --name "dev" -- start
+pm2 list
