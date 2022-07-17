@@ -52,14 +52,9 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload to S3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws s3 cp --region ap-northeast-2 ./NL-FE-build.zip s3://jongho-todo-s3/FE/NL-FE-build.zip
+        run: aws s3 cp --region ap-northeast-2 ./NL-FE-build.zip s3://jongho-todo-s3/FE/NL-FE-build.zip
           
       - name: Deploy to EC2
         run: aws deploy create-deployment
