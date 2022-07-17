@@ -59,11 +59,11 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 cp --region ap-northeast-2 ./NL-FE-build.zip s3://nl-fe-s3/FE/NL-FE-build.zip
+          aws s3 cp --region ap-northeast-2 ./NL-FE-build.zip s3://jongho-todo-s3/FE/NL-FE-build.zip
           
       - name: Deploy to EC2
         run: aws deploy create-deployment
-          --application-name NL-CodeDeploy-FE
+          --application-name Jongho-todo-deploy
           --deployment-config-name CodeDeployDefault.AllAtOnce
-          --deployment-group-name NL_FE_Server
-          --s3-location bucket=nl-fe-s3,key=FE/NL-FE-build.zip,bundleType=zip
+          --deployment-group-name Jongho-todo-server
+          --s3-location bucket=jongho-todo-s3,key=FE/NL-FE-build.zip,bundleType=zip
