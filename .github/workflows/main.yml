@@ -44,7 +44,7 @@ jobs:
         run: npm run build
 
       - name: Create ZIP File 
-        run: zip -qq -r ./NL-FE-build.zip .
+        run: zip -qq -r ./NL-FE-build.zip . -x node_modules
       
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
