@@ -54,11 +54,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./NL-FE-build.zip s3://jongho-practice-s3/FE/NL-FE-build.zip
+        run: aws s3 cp --region ap-northeast-2 ./NL-FE-build.zip s3://jongho-practice-s3/NL-FE-build.zip
           
       - name: Deploy to EC2
         run: aws deploy create-deployment
           --application-name Jongho-Practice-Deploy
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name Jongho-Practice-Server
-          --s3-location bucket=jongho-practice-s3,key=FE/NL-FE-build.zip,bundleType=zip
+          --s3-location bucket=jongho-practice-s3,key=NL-FE-build.zip,bundleType=zip
