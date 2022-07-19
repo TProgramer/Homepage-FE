@@ -17,4 +17,4 @@ hooks:
     # 필요 없을 경우 안 적어도 되는 것 같습니다(테스트 필요).
     - location: scripts/deploy.sh
       timeout: 300
-      runas: root
+      runas: ubuntu
