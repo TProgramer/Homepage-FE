@@ -1,5 +1,4 @@
 #!/bin/bash
-su ubuntu
 REPOSITORY=/home/ubuntu/FE
 cd $REPOSITORY
 npm install --legacy-peer-deps
