@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-REPOSITORY=/home/ec2-user/FE
+REPOSITORY=/home/ubuntu/FE
 cd $REPOSITORY
 
 #sudo rm -rf node-moduels
