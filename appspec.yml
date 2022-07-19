@@ -6,8 +6,9 @@ files:
     destination: /home/ubuntu/FE
     overwrite: yes
 permissions:
-  - object: /home/ubuntu/FE
+  - object: /
     owner: ubuntu
+    group: ubuntu
     mode: 755
 hooks:
   AfterInstall:
